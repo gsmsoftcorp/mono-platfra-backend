@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: local
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: gsmsoftcorp@gmail.com
+#    password: jxxklqkabtgicflr
+#mail:
+#  debug: false
+#  transport:
+#    protocol: smtp
+#  smtp:
+#    auth: true
+#    starttls:
+#      enable: true
+
+server:
+  port: 8080
+
+#jwt:
+#  token:
+#    key: raondanmi
+#
+#restApiKey: adc470e1945ce26d54c2c1052d0a36ba

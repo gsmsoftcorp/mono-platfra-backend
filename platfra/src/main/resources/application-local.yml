@@ -1,0 +1,44 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+  datasource:
+    url: jdbc:mariadb://flatfra-dev.c1ks6uyqk5sj.ap-northeast-2.rds.amazonaws.com:3306/platfradev
+    username: admin
+    password: platfradev
+    driver-class-name: org.mariadb.jdbc.Driver
+
+logging:
+  level:
+    com.gsmcorp: DEBUG
+
+#cloud:
+#  aws:
+#    credentials:
+#      accessKey: AKIAUWND6NY7NCZQF75P
+#      secretKey: 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
+#    s3:
+#      bucket:
+#        name: gsm-bucket-root
+#        url: https://gsm-bucket-root.s3.ap-northeast-2.amazonaws.com/
+#        folders:
+#          master: master/
+#          board: board/
+#          account: account/
+#          account-profile: account/profile/
+#    region:
+#      static: ap-northeast-2
+#    stack:
+#      auto: false
