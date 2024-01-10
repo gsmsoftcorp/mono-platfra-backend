@@ -33,6 +33,33 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
+	// QueryDSL Implementation
+	implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta")
+	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+}
+/**
+ * QueryDSL Build Options
+ */
+val querydslDir = "src/main/generated"
+
+sourceSets {
+	getByName("main").java.srcDirs(querydslDir)
+}
+
+tasks.withType<JavaCompile> {
+	options.generatedSourceOutputDirectory = file(querydslDir)
+
+	// 위의 설정이 안되면 아래 설정 사용
+	// options.generatedSourceOutputDirectory.set(file(querydslDir))
+}
+
+tasks.named("clean") {
+	doLast {
+		file(querydslDir).deleteRecursively()
+	}
 }
 
 tasks.withType<Test> {
