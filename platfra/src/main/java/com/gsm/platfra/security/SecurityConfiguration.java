@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,25 +39,28 @@ public class SecurityConfiguration {
     private final TokenService tokenService;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManagerBuilder auth) throws Exception {
+        AuthenticationManager authenticationManager = auth.build();
+
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, tokenService);
+        jwtAuthenticationFilter.setFilterProcessesUrl("/tAccounts/login");
+        jwtAuthenticationFilter.setAuthenticationSuccessHandler(new TAccountAuthenticationSuccessHandler());
+        jwtAuthenticationFilter.setAuthenticationFailureHandler(new TAccountAuthenticationFailureHandler());
+
+        JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
+
         http
-                .csrf().disable()
-                .cors(withDefaults())
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(new TAccountAuthenticationEntryPoint())
-                .accessDeniedHandler(new TAccountAccessDeniedHandler())
-                .and()
-                .apply(new CustomFilterConfigurer())
-                .and()
-                .authorizeHttpRequests(authorize -> authorize
-                                .anyRequest().permitAll()
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new TAccountAuthenticationEntryPoint())
+                        .accessDeniedHandler(new TAccountAccessDeniedHandler())
                 )
-                .oauth2Login()
-                .successHandler(oAuth2TAccountSuccessHandler);
+                .oauth2Login(oauth2 -> oauth2.successHandler(oAuth2TAccountSuccessHandler))
+                .addFilter(jwtAuthenticationFilter)
+                .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
+
         return http.build();
     }
 
@@ -79,24 +83,5 @@ public class SecurityConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
-
-    // Custom Configurer 클래스 (JwtAuthenticationFilter를 등록하는 역할)
-    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
-        @Override
-        public void configure(HttpSecurity builder) throws Exception {
-            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, tokenService);
-            jwtAuthenticationFilter.setFilterProcessesUrl("/tAccounts/login");
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new TAccountAuthenticationSuccessHandler());
-            jwtAuthenticationFilter.setAuthenticationFailureHandler(new TAccountAuthenticationFailureHandler());
-
-            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
-
-            builder.addFilter(jwtAuthenticationFilter)
-                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class)
-                    .addFilterAfter(jwtVerificationFilter, OAuth2LoginAuthenticationFilter.class);
-        }
     }
 }
