@@ -7,6 +7,9 @@ import com.gsm.platfra.exception.ExceptionCode;
 import com.gsm.platfra.security.jwt.JwtTokenizer;
 import com.gsm.platfra.security.token.TokenService;
 import com.gsm.platfra.security.utils.CustomAuthorityUtils;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -17,9 +20,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
@@ -132,7 +132,7 @@ public class OAuth2TAccountSuccessHandler extends SimpleUrlAuthenticationSuccess
         return UriComponentsBuilder
                 .newInstance()
                 .scheme("https")
-                .host("www.edusync.site")
+                .host("*")
                 .path("/oauth/redirect")
                 .queryParams(queryParams)
                 .build()

@@ -27,7 +27,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.security:spring-security-config:6.0.5")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	compileOnly("org.projectlombok:lombok")
@@ -47,7 +46,7 @@ dependencies {
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
-	implementation("javax.servlet:javax.servlet-api:4.0.1")
+	implementation("jakarta.servlet:jakarta.servlet-api")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
 	implementation("org.mapstruct:mapstruct:1.5.2.Final") // mapstruct
