@@ -6,7 +6,7 @@ spring:
       filter:
         enabled: true
   datasource:
-    url: jdbc:mysql://localhost:3306/edusync?serverTimezone=Asia/Seoul
+    url: jdbc:mariadb://localhost:3306/edusync?serverTimezone=Asia/Seoul
     username: root
     password: ${localDBPassword}
   data:
