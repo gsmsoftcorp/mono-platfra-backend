@@ -93,8 +93,8 @@ public class TAccount {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    public TAccount(String userId, String email, String nickName, String profileImage) {
-        this.userId = userId;
+    public TAccount(Long id, String email, String nickName, String profileImage) {
+        this.id = id;
         this.email = email;
         this.nickName = nickName;
         this.profileImage = profileImage;
