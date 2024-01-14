@@ -14,10 +14,16 @@
 
 package com.gsm.platfra.api.services.platfra.service;
 
+import com.gsm.platfra.api.services.platfra.dto.PlatfraResultDto;
+import com.gsm.platfra.api.services.platfra.dto.PlatfraSearchDto;
+import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;
+import com.gsm.platfra.api.services.platfra.repository.query.PlatfraQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  *
@@ -27,7 +33,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @Slf4j
 public class PlatfraService {
-//    private final PlatfraRepository queryRepository;
-
-
+    private final TPlatfraRepository tPlatfraRepository;
+    private final PlatfraQueryRepository platfraQueryRepository;
+    
+    public List<PlatfraResultDto> getList(PlatfraSearchDto platfraSearchDto) {
+        return platfraQueryRepository.getList(platfraSearchDto);
+    }
 }
