@@ -43,7 +43,7 @@ dependencies {
 /**
  * QueryDSL Build Options
  */
-val querydslDir = "src/main/generated"
+val querydslDir = "$buildDir/generated/querydsl"
 
 sourceSets {
 	getByName("main").java.srcDirs(querydslDir)
