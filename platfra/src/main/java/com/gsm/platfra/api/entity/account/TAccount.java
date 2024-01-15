@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -72,5 +73,19 @@ public class TAccount {
     @NotNull
     @Column(name = "MOD_DATE", nullable = false)
     private Instant modDate;
+
+    protected TAccount() {}
+
+    @Builder
+    private TAccount(String userId, String email, String phone, String password, String userNm, Integer age, Character gender, LocalDate birthday) {
+        this.userId = userId;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.userNm = userNm;
+        this.age = age;
+        this.gender = gender;
+        this.birthday = birthday;
+    }
     
 }
