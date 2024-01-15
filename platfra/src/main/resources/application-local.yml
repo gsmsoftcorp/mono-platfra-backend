@@ -46,3 +46,4 @@ logging:
 jwt:
   secret-key: platfralocaltestjwtsecretkeyineedlongstringformypassword12v3jr9ck2j5fbdvb2sdf24hdffg34g3g
   access-token-expired-time-ms: 1000000
+

@@ -5,6 +5,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  config:
+    import:
+      - ./application-local-oauth.yml
 #  mail:
 #    host: smtp.gmail.com
 #    port: 587
