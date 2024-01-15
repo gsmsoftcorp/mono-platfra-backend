@@ -1,8 +1,8 @@
-package com.gsm.platfra.api.services.platfra.rest;
+package com.gsm.platfra.api.services.account.rest;
 
-import com.gsm.platfra.api.services.platfra.dto.account.LoginDto;
-import com.gsm.platfra.api.services.platfra.dto.account.SignupDto;
-import com.gsm.platfra.api.services.platfra.service.AccountService;
+import com.gsm.platfra.api.services.account.dto.LoginDto;
+import com.gsm.platfra.api.services.account.dto.SignupDto;
+import com.gsm.platfra.api.services.account.service.AccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

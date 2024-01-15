@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.services.platfra.dto.account;
+package com.gsm.platfra.api.services.account.dto;
 
 import com.gsm.platfra.api.entity.account.TAccount;
 import com.gsm.platfra.common.util.DateUtils;

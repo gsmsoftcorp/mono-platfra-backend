@@ -1,9 +1,9 @@
-package com.gsm.platfra.api.services.platfra.service;
+package com.gsm.platfra.api.services.account.service;
 
 import com.gsm.platfra.api.entity.account.TAccount;
-import com.gsm.platfra.api.services.platfra.dto.account.LoginDto;
-import com.gsm.platfra.api.services.platfra.dto.account.SignupDto;
-import com.gsm.platfra.api.services.platfra.repository.AccountRepository;
+import com.gsm.platfra.api.services.account.dto.LoginDto;
+import com.gsm.platfra.api.services.account.dto.SignupDto;
+import com.gsm.platfra.api.services.account.repository.AccountRepository;
 import com.gsm.platfra.config.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,4 +48,9 @@ public class AccountService {
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         });
     }
+
+//    public String googleLogin(@NotNull String token) {
+//
+//
+//    }
 }
