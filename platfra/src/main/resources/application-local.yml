@@ -22,7 +22,7 @@ spring:
 
 logging:
   level:
-    com.gsmcorp: DEBUG
+    com.gsm.platfra: DEBUG
 
 #cloud:
 #  aws:
@@ -42,3 +42,7 @@ logging:
 #      static: ap-northeast-2
 #    stack:
 #      auto: false
+
+jwt:
+  secret-key: platfralocaltestjwtsecretkeyineedlongstringformypassword12v3jr9ck2j5fbdvb2sdf24hdffg34g3g
+  access-token-expired-time-ms: 1000000
