@@ -1,0 +1,6 @@
+google:
+  client-id: 221752687568-1ps13unhrqnvj6v5h5up05lb41vikmi7.apps.googleusercontent.com
+  client-secret: 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
+  scope:
+    - email
+    - profile

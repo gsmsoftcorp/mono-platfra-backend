@@ -9,5 +9,7 @@ public interface AccountRepository extends JpaRepository<TAccount, String> {
 
     Optional<TAccount> findByUserId(String userId);
 
-    Optional<Object> findByEmail(String email);
+    Optional<TAccount> findByEmail(String email);
+
+    Optional<TAccount> findByUserNm(String username);
 }
