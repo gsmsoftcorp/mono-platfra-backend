@@ -4,7 +4,7 @@ import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.service.AccountService;
-import com.gsm.platfra.common.api.openfeign.GoogleLogin;
+import com.gsm.platfra.api.services.account.openfeign.GoogleLogin;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

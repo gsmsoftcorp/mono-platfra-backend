@@ -1,4 +1,4 @@
-package com.gsm.platfra.common.api.openfeign;
+package com.gsm.platfra.api.services.account.openfeign;
 
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.config.security.GoogleConfig;
