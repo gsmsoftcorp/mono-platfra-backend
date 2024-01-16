@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.services.platfra.dto.account;
+package com.gsm.platfra.api.services.account.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

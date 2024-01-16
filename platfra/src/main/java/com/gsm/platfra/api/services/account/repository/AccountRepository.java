@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.services.platfra.repository;
+package com.gsm.platfra.api.services.account.repository;
 
 import com.gsm.platfra.api.entity.account.TAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +9,7 @@ public interface AccountRepository extends JpaRepository<TAccount, String> {
 
     Optional<TAccount> findByUserId(String userId);
 
-    Optional<Object> findByEmail(String email);
+    Optional<TAccount> findByEmail(String email);
+
+    Optional<TAccount> findByUserNm(String username);
 }
