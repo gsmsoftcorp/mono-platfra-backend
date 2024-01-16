@@ -8,13 +8,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "T_ACCOUNT")
 public class TAccount {
