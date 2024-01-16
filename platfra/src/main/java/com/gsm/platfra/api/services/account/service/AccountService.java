@@ -7,9 +7,11 @@ import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.repository.AccountRepository;
 import com.gsm.platfra.config.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class AccountService {
@@ -23,7 +25,8 @@ public class AccountService {
         TAccount tAccount = accountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
         if (!tAccount.getPassword().equals(loginDto.password())) {
             // Todo: 예외 처리
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            log.debug("비밀번호가 일치하지 않습니다.");
+            return "비밀번호 불일치"; // Todo: 상수 클래스에 final로 정의
         }
 
         String token = tokenProvider.generateAccessToken(tAccount);
@@ -34,19 +37,19 @@ public class AccountService {
     public void signup(SignupDto signupDto) {
         isDuplicatedUserInfo(signupDto);
 
-        TAccount entity = SignupDto.toEntity(signupDto);
-        entity.setPassword(passwordEncoder.encode(signupDto.password()));
+        TAccount entity = SignupDto.toEntity(signupDto, passwordEncoder);
 
         accountRepository.save(entity);
     }
 
     private void isDuplicatedUserInfo(SignupDto signupDto) {
+        // todo: 예외 처리가 아닌 메세지만 던진다.
         accountRepository.findByUserId(signupDto.userId()).ifPresent(tAccount -> {
-            throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+            log.debug("이미 존재하는 아이디입니다.");
         });
 
         accountRepository.findByEmail(signupDto.email()).ifPresent(tAccount -> {
-            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+            log.debug("이미 존재하는 이메일입니다.");
         });
     }
 
