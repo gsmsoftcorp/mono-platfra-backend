@@ -1,13 +1,9 @@
 package com.gsm.platfra.api.entity.common;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -15,9 +11,13 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "T_COMMON_FILE")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TCommonFile {
     @Id
     @Column(name = "FILE_SEQ", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Size(max = 16)
@@ -55,12 +55,9 @@ public class TCommonFile {
     private String fileSize;
     
     @NotNull
-    @Column(name = "`ORDER`", nullable = false)
-    private Integer order;
-    
-    @NotNull
     @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Builder.Default
+    private Character delYn = 'N';
     
     @Size(max = 64)
     @NotNull
@@ -70,7 +67,7 @@ public class TCommonFile {
     @NotNull
     @Column(name = "REG_DATE", nullable = false)
     private Instant regDate;
-    
+
     @Size(max = 64)
     @NotNull
     @Column(name = "MOD_USER_ID", nullable = false, length = 64)
@@ -79,5 +76,9 @@ public class TCommonFile {
     @NotNull
     @Column(name = "MOD_DATE", nullable = false)
     private Instant modDate;
-    
+
+    public void setContentsInfo(String contentsCd, long contentsSeq) {
+        this.contentsCd = contentsCd;
+        this.contentsSeq = contentsSeq;
+    }
 }

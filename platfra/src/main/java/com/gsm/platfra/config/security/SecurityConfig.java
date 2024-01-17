@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth ->
                                 // Todo : 테스트용으로 모든 요청 허용
-                                auth.requestMatchers("/login/**").permitAll()
+                                auth.requestMatchers("/login/**", "/file/**").permitAll()
                                                 .anyRequest().authenticated()
 //                                        auth.anyRequest().permitAll()
                 );

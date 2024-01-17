@@ -23,6 +23,18 @@ spring:
 logging:
   level:
     com.gsm.platfra: DEBUG
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+# AWS S3 연결 정보
+cloud:
+  aws:
+    s3:
+      bucket: platfra
+    stack.auto: false     # CloudFormation이 없으면 실행 안되므로 false
+    region.static: ap-northeast-2       # 지역 한국 고정
+    fileLocation: https://%s.s3.%s.amazonaws.com/%s
 
 #cloud:
 #  aws:

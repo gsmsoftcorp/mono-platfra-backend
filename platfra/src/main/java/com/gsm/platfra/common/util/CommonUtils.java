@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -51,4 +52,16 @@ public class CommonUtils {
         return list;
     }
 
+    public static MediaType contentType(String extension) {
+        switch (extension) {
+            case "txt":
+                return MediaType.TEXT_PLAIN;
+            case "png":
+                return MediaType.IMAGE_PNG;
+            case "jpg":
+                return MediaType.IMAGE_JPEG;
+            default:
+                return MediaType.APPLICATION_OCTET_STREAM;
+        }
+    }
 }
