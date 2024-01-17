@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.1"
 	id("io.spring.dependency-management") version "1.1.4"
+
 }
 
 group = "com.gsm"
@@ -20,6 +21,7 @@ configurations {
 repositories {
 	mavenCentral()
 }
+
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -46,6 +48,12 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 	// AWS 연동 추가
 	implementation ("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+
+	// For OAuth2
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+	// For Feign Client
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0")
 
 }
 /**
