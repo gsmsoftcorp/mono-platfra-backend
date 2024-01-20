@@ -13,14 +13,12 @@
  */
 package com.gsm.platfra.api.services.platfra.rest;
 
-import com.gsm.platfra.api.services.platfra.dto.PlatfraResultDto;
-import com.gsm.platfra.api.services.platfra.dto.PlatfraSearchDto;
+import com.gsm.platfra.api.services.platfra.dto.PlatfraMainResDto;
+import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,21 +31,54 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/platfra")
 public class PlatfraController {
-
-    private final PlatfraService platfraService;
     
+    private final PlatfraService platfraService;
+
     /**
-     * 플랫폼 마스터 검색 리스트 조회
-     * @param platfraSearchDto
+     * 플랫폼 리스트 조회
+     * @param platfraDto
      * @return
      */
-    @RequestMapping
-    public List<PlatfraResultDto> getList(@RequestParam PlatfraSearchDto platfraSearchDto) {
-        return platfraService.getList(platfraSearchDto);
+    @GetMapping
+    public List<PlatfraDto> getList(PlatfraDto platfraDto) {
+        return platfraService.getList(platfraDto);
     }
     
-
-
-
+    /**
+     * 플랫폼 메인(상세) 조회
+     * @param platfraSeq
+     * @return
+     */
+    @GetMapping("/{platfraSeq}")
+    public PlatfraMainResDto get(@PathVariable(required = true) Long platfraSeq) {
+        return platfraService.get(platfraSeq);
+    }
+    
+    /**
+     * 플랫폼 등록
+     * @param platfraDto
+     */
+    @PostMapping
+    public void create(@RequestBody PlatfraDto platfraDto) {
+        platfraService.create(platfraDto);
+    }
+    
+    /**
+     * 플랫폼 수정
+     * @param platfraDto
+     */
+    @PutMapping
+    public void update(@RequestBody PlatfraDto platfraDto) {
+        platfraService.update(platfraDto);
+    }
+    
+    /**
+     * 플랫폼 삭제
+     * @param platfraDto
+     */
+    @DeleteMapping
+    public void delete(@RequestBody PlatfraDto platfraDto) {
+        platfraService.delete(platfraDto);
+    }
 }
 

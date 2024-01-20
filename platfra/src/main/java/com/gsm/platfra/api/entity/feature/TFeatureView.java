@@ -18,7 +18,7 @@ import java.time.Instant;
 public class TFeatureView {
     @Id
     @Column(name = "FEATURE_VIEW_SEQ", nullable = false)
-    private Long id;
+    private Long featureViewSeq;
     
     @Size(max = 16)
     @NotNull
@@ -35,8 +35,8 @@ public class TFeatureView {
     private String userId;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull

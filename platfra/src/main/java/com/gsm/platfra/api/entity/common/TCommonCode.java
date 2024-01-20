@@ -34,8 +34,8 @@ public class TCommonCode {
     private String description;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull

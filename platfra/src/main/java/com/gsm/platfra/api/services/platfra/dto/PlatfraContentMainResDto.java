@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.platfra.dto;
 
+import com.gsm.platfra.api.services.platfra.dto.table.PlatfraContentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlatfraSearchDto {
-    private String platfraId;
-    private String subject;
-    private String description;
-    private String introduction;
+public class PlatfraContentMainResDto {
+    private PlatfraContentDto platfraContenDto; // 컨텐츠
 }

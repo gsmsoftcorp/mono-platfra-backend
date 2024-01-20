@@ -28,12 +28,12 @@ public class TPlatfraBoardFeature {
     private String featureCd;
     
     @NotNull
-    @Column(name = "USE_YN", nullable = false)
-    private Character useYn;
+    @Column(name = "USE_YN", nullable = false, length = 1)
+    private Boolean useYn;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull
