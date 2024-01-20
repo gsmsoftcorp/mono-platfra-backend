@@ -12,9 +12,9 @@ public class TPlatfraCategory {
     @EmbeddedId
     private TPlatfraCategoryId id;
     
-    @MapsId("platfraId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "PLATFRA_ID", nullable = false)
-    private TPlatfra platfra;
+//    @MapsId("platfraId")
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "PLATFRA_ID", nullable = false)
+//    private TPlatfra platfra;
     
 }

@@ -24,7 +24,11 @@ spring:
 
 server:
   port: 8080
-
+  servlet:
+    context-path: /api
+  tomcat:
+    mbeanregistry:
+      enabled: true
 #jwt:
 #  token:
 #    key: raondanmi

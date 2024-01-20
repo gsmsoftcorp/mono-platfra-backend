@@ -1,9 +1,6 @@
 package com.gsm.platfra.api.services.file.dto;
 
-import com.gsm.platfra.api.entity.account.TAccount;
 import com.gsm.platfra.api.entity.common.TCommonFile;
-import com.gsm.platfra.api.services.platfra.dto.account.SignupDto;
-import com.gsm.platfra.common.util.DateUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

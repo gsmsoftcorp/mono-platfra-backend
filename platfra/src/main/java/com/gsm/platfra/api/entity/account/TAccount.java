@@ -48,11 +48,11 @@ public class TAccount {
     private LocalDate birthday;
     
     @Column(name = "BANNED_YN")
-    private Integer bannedYn;
+    private Boolean bannedYn;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull

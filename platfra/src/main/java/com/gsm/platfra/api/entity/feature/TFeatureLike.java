@@ -18,7 +18,7 @@ import java.time.Instant;
 public class TFeatureLike {
     @Id
     @Column(name = "FEATURE_LIKE_SEQ", nullable = false)
-    private Long id;
+    private Long featureLikeSeq;
     
     @Size(max = 16)
     @NotNull
@@ -35,8 +35,12 @@ public class TFeatureLike {
     private String userId;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "LIKE_YN", nullable = false, length = 1)
+    private Boolean likeYn;
+    
+    @NotNull
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull

@@ -42,6 +42,9 @@ dependencies {
 	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
 
+	// JPA Logging
+	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0")
+
 	// JWT Token
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")

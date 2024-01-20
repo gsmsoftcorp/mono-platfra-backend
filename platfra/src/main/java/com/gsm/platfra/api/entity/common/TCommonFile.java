@@ -55,9 +55,8 @@ public class TCommonFile {
     private String fileSize;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    @Builder.Default
-    private Character delYn = 'N';
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull

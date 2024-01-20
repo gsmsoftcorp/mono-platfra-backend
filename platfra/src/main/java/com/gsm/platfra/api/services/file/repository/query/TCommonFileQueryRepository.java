@@ -46,7 +46,7 @@ public class TCommonFileQueryRepository {
     public void deleteFile(TCommonFile file) {
         queryFactory
                 .update(tCommonFile)
-                .set(tCommonFile.delYn, 'Y')
+                .set(tCommonFile.delYn, Boolean.TRUE)
                 .where(tCommonFile.id.eq(file.getId()))
                 .execute();
     }

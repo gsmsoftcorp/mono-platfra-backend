@@ -1,23 +1,29 @@
 package com.gsm.platfra.api.entity.platfra;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
-@Setter
 @Entity
 @Table(name = "T_PLATFRA")
 public class TPlatfra {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PLATFRA_SEQ", nullable = false)
+    private Long platfraSeq;
+    
     @Size(max = 64)
+    @NotNull
     @Column(name = "PLATFRA_ID", nullable = false, length = 64)
     private String platfraId;
     
@@ -36,9 +42,17 @@ public class TPlatfra {
     @Column(name = "INTRODUCTION", nullable = false, length = 1024)
     private String introduction;
     
+    @Column(name = "MAIN_CONTENT_SEQ", nullable = false)
+    private Long mainContentSeq;
+    
+    @Size(max = 64)
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "OWNER_ID", nullable = false, length = 64)
+    private String ownerId;
+    
+    @NotNull
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull
@@ -58,4 +72,13 @@ public class TPlatfra {
     @Column(name = "MOD_DATE", nullable = false)
     private Instant modDate;
     
+    @OneToMany(mappedBy = "tPlatfra", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<TPlatfraContent> tPlatfraContentList = new ArrayList<>();
+    
+    public void update(PlatfraDto platfraDto) {
+        this.subject = platfraDto.getSubject();
+        this.description = platfraDto.getDescription();
+        this.introduction = platfraDto.getIntroduction();
+    }
 }
