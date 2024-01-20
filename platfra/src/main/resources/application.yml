@@ -5,6 +5,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  config:
+    import:
+      - ./application-local-oauth.yml
 #  mail:
 #    host: smtp.gmail.com
 #    port: 587
@@ -21,7 +24,11 @@ spring:
 
 server:
   port: 8080
-
+  servlet:
+    context-path: /api
+  tomcat:
+    mbeanregistry:
+      enabled: true
 #jwt:
 #  token:
 #    key: raondanmi

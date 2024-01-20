@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.entity.platfraboard;
 
+import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,13 +15,21 @@ import java.time.Instant;
 @Table(name = "T_PLATFRA_BOARD_CONTENT")
 public class TPlatfraBoardContent {
     @Id
-    @Column(name = "PLATFRA_BOARD_CONTENT_SEQ", nullable = false)
-    private Long id;
+    @Column(name = "CONTENT_SEQ", nullable = false)
+    private Long contentSeq;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "PLATFRA_BOARD_SEQ", referencedColumnName = "PLATFRA_BOARD_SEQ", nullable = false)
+    private TPlatfraBoard tPlatfraBoard;
+    
+    @Size(max = 64)
+    @NotNull
+    @Column(name = "PLATFRA_BOARD_SEQ", nullable = false, length = 64, insertable = false, updatable = false)
+    private Long platfraBoardSeq;
     
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "PLATFRA_BOARD_SEQ", nullable = false)
-    private TPlatfraBoard platfraBoardSeq;
+    @Column(name = "CONTENT_NO", nullable = false)
+    private Long contentNo;
     
     @Size(max = 256)
     @NotNull
@@ -33,8 +42,8 @@ public class TPlatfraBoardContent {
     private String content;
     
     @NotNull
-    @Column(name = "DEL_YN", nullable = false)
-    private Character delYn;
+    @Column(name = "DEL_YN", nullable = false, length = 1)
+    private Boolean delYn;
     
     @Size(max = 64)
     @NotNull

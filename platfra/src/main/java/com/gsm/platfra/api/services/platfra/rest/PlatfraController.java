@@ -13,62 +13,72 @@
  */
 package com.gsm.platfra.api.services.platfra.rest;
 
+import com.gsm.platfra.api.services.platfra.dto.PlatfraMainResDto;
+import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
+import com.gsm.platfra.api.services.platfra.service.PlatfraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
 /**
- *
+ * 플랫프라 마스터 컨트롤러
  */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/attendance/application-inquiry")
+@RequestMapping("/platfra")
 public class PlatfraController {
+    
+    private final PlatfraService platfraService;
 
-//    private final PlatfraService service;
-
-
-//    @GetMapping()
-//    public List<AttendanceApplicationInquiryDto> get(@RequestParam(required = false) String dclzBplcCd,
-//                                                     @RequestParam(required = false) String empNo,
-//                                                     @RequestParam(required = true) @DateTimeFormat(pattern = DateFormatPattern.yyyy_MM_dd) LocalDate sttDate,
-//                                                     @RequestParam(required = true) @DateTimeFormat(pattern = DateFormatPattern.yyyy_MM_dd) LocalDate endDate,
-//                                                     @RequestParam(required = false) List<String> dclzCdList,
-//                                                     @RequestParam(required = false) String orgCd,
-//                                                     @RequestParam(defaultValue = "false") Boolean includeSubOrg,
-//                                                     @RequestParam(required = false) String innerOrgCd,
-//                                                     @RequestParam(required = false) String dclzHnfTyCd,
-//                                                     @RequestParam(required = false) String aprvStatCd,
-//                                                     @RequestParam(required = false) String ofcrAppvlCd,
-//                                                     @RequestParam(required = false) String bassWksyTyCd,
-//                                                     @RequestParam(required = false) String wrkSchdulTyCd,
-//                                                     @RequestParam(required = false) String wrksftCd) {
-//        return service.get(UserContextUtil.getUserContext(),
-//                dclzBplcCd,
-//                empNo,
-//                sttDate,
-//                endDate,
-//                dclzCdList,
-//                orgCd,
-//                includeSubOrg,
-//                innerOrgCd,
-//                dclzHnfTyCd,
-//                aprvStatCd,
-//                ofcrAppvlCd,
-//                bassWksyTyCd,
-//                wrkSchdulTyCd,
-//                wrksftCd);
-//    }
-
-
+    /**
+     * 플랫폼 리스트 조회
+     * @param platfraDto
+     * @return
+     */
+    @GetMapping
+    public List<PlatfraDto> getList(PlatfraDto platfraDto) {
+        return platfraService.getList(platfraDto);
+    }
+    
+    /**
+     * 플랫폼 메인(상세) 조회
+     * @param platfraSeq
+     * @return
+     */
+    @GetMapping("/{platfraSeq}")
+    public PlatfraMainResDto get(@PathVariable(required = true) Long platfraSeq) {
+        return platfraService.get(platfraSeq);
+    }
+    
+    /**
+     * 플랫폼 등록
+     * @param platfraDto
+     */
+    @PostMapping
+    public void create(@RequestBody PlatfraDto platfraDto) {
+        platfraService.create(platfraDto);
+    }
+    
+    /**
+     * 플랫폼 수정
+     * @param platfraDto
+     */
+    @PutMapping
+    public void update(@RequestBody PlatfraDto platfraDto) {
+        platfraService.update(platfraDto);
+    }
+    
+    /**
+     * 플랫폼 삭제
+     * @param platfraDto
+     */
+    @DeleteMapping
+    public void delete(@RequestBody PlatfraDto platfraDto) {
+        platfraService.delete(platfraDto);
+    }
 }
 

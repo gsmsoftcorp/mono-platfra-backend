@@ -1,3 +1,5 @@
 /.idea/
 /platfra/.gradle/
 /platfra/build/
+/platfra/out/
+/platfra/src/main/generated/

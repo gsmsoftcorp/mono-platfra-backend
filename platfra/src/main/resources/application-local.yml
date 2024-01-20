@@ -11,18 +11,35 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        show_sql: true
-        format_sql: true
+        show_sql: false
+        format_sql: false
         default_batch_fetch_size: 100
   datasource:
-    url: jdbc:mariadb://flatfra-dev.c1ks6uyqk5sj.ap-northeast-2.rds.amazonaws.com:3306/platfradev
+    url: jdbc:p6spy:mariadb://flatfra-dev.c1ks6uyqk5sj.ap-northeast-2.rds.amazonaws.com:3306/platfradev
     username: admin
     password: platfradev
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
 
 logging:
   level:
-    com.gsmcorp: DEBUG
+    com.gsm.platfra: DEBUG
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+# AWS S3 연결 정보
+cloud:
+  aws:
+    s3:
+      bucket: platfra
+    stack.auto: false     # CloudFormation이 없으면 실행 안되므로 false
+    region.static: ap-northeast-2       # 지역 한국 고정
+    fileLocation: https://%s.s3.%s.amazonaws.com/%s
 
 #cloud:
 #  aws:
@@ -42,3 +59,8 @@ logging:
 #      static: ap-northeast-2
 #    stack:
 #      auto: false
+
+jwt:
+  secret-key: platfralocaltestjwtsecretkeyineedlongstringformypassword12v3jr9ck2j5fbdvb2sdf24hdffg34g3g
+  access-token-expired-time-ms: 1000000
+
