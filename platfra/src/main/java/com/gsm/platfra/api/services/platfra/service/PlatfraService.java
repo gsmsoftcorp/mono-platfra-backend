@@ -34,7 +34,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional(readOnly = true) // 필수!! 실수방지
 public class PlatfraService {
     private final TPlatfraRepository tPlatfraRepository;
     private final PlatfraQueryRepository platfraQueryRepository;
@@ -72,6 +72,7 @@ public class PlatfraService {
             .subject(platfraDto.getSubject())
             .description(platfraDto.getDescription())
             .introduction(platfraDto.getIntroduction())
+            .ownerId(platfraDto.getOwnerId())
             .build();
         
         tPlatfraRepository.saveAndFlush(tPlatfra);
