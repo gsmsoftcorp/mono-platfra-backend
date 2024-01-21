@@ -144,7 +144,7 @@ public class PlatfraQueryRepository {
     public void delete(Long platfraSeq) {
         queryFactory
             .update(tPlatfra)
-            .set(tPlatfra.delYn, Boolean.FALSE)
+            .set(tPlatfra.delYn, Boolean.TRUE)
             .where(
                 tPlatfra.platfraSeq.eq(platfraSeq)
             )

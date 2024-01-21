@@ -22,6 +22,7 @@ public class PlatfraDto {
     private String subject;
     private String description;
     private String introduction;
+    private String ownerId;
     
     private List<PlatfraContentDto> platfraContentDtoList;
     
@@ -33,6 +34,7 @@ public class PlatfraDto {
             .subject(this.subject)
             .description(this.description)
             .introduction(this.introduction)
+            .introduction(this.ownerId)
             .build();
         
         return tPlatfra;
@@ -45,6 +47,7 @@ public class PlatfraDto {
             .subject(tPlatfra.getSubject())
             .description(tPlatfra.getDescription())
             .introduction(tPlatfra.getIntroduction())
+            .ownerId(tPlatfra.getOwnerId())
 //            .platfraContentDtoList(PlatfraContentDto.listOf(tPlatfra.getTPlatfraContentList()))
             .build();
         

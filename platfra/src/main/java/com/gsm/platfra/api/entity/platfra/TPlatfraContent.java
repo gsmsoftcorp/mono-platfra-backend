@@ -18,12 +18,12 @@ import java.util.Set;
 @Table(name = "T_PLATFRA_CONTENT")
 public class TPlatfraContent {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment 때문에 선언됨
     @Column(name = "CONTENT_SEQ", nullable = false)
     private Long contentSeq;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "PLATFRA_ID", referencedColumnName = "PLATFRA_ID", nullable = false)
+    @JoinColumn(name = "PLATFRA_ID", referencedColumnName = "PLATFRA_ID", nullable = false) // note : 명시적으로라도 referencedColumnName 항상 기술해야 함
     private TPlatfra tPlatfra;
     
     @Size(max = 64)
@@ -45,25 +45,20 @@ public class TPlatfraContent {
     @Column(name = "CONTENT", nullable = false)
     private String content;
     
-    @NotNull
     @Column(name = "DEL_YN", nullable = false, length = 1)
     private Boolean delYn;
     
     @Size(max = 64)
-    @NotNull
     @Column(name = "REG_USER_ID", nullable = false, length = 64)
     private String regUserId;
     
-    @NotNull
     @Column(name = "REG_DATE", nullable = false)
     private Instant regDate;
     
     @Size(max = 64)
-    @NotNull
     @Column(name = "MOD_USER_ID", nullable = false, length = 64)
     private String modUserId;
     
-    @NotNull
     @Column(name = "MOD_DATE", nullable = false)
     private Instant modDate;
     
