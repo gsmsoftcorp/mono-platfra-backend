@@ -46,29 +46,23 @@ public class TPlatfra {
     private Long mainContentSeq;
     
     @Size(max = 64)
-    @NotNull
     @Column(name = "OWNER_ID", nullable = false, length = 64)
     private String ownerId;
     
-    @NotNull
     @Column(name = "DEL_YN", nullable = false, length = 1)
     private Boolean delYn;
     
     @Size(max = 64)
-    @NotNull
     @Column(name = "REG_USER_ID", nullable = false, length = 64)
     private String regUserId;
     
-    @NotNull
     @Column(name = "REG_DATE", nullable = false)
     private Instant regDate;
     
     @Size(max = 64)
-    @NotNull
     @Column(name = "MOD_USER_ID", nullable = false, length = 64)
     private String modUserId;
     
-    @NotNull
     @Column(name = "MOD_DATE", nullable = false)
     private Instant modDate;
     
