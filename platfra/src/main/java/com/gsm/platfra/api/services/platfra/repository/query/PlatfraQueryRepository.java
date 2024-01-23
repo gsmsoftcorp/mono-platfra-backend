@@ -16,8 +16,8 @@
 
 package com.gsm.platfra.api.services.platfra.repository.query;
 
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraContentDto;
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
+import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberPath;

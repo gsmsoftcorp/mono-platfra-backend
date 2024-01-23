@@ -1,13 +1,11 @@
-package com.gsm.platfra.api.services.platfra.dto.table;
+package com.gsm.platfra.api.dto.platfra;
 
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
-import com.gsm.platfra.api.entity.platfra.TPlatfraContent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

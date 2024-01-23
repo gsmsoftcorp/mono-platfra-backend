@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.services.board.dto;
 
-import com.gsm.platfra.api.services.board.dto.table.PlatfraBoardDto;
+import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
 import lombok.Data;
 
 @Data
