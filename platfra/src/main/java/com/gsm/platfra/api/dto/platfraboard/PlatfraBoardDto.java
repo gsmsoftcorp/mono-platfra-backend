@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.services.board.dto.table;
+package com.gsm.platfra.api.dto.platfraboard;
 
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoardContent;

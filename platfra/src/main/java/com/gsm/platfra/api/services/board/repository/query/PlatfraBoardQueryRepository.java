@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.services.board.repository.query;
 
-import com.gsm.platfra.api.services.board.dto.table.PlatfraBoardDto;
+import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

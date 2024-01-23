@@ -1,11 +1,11 @@
 package com.gsm.platfra.api.services.board.service;
 
 import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoard;
-import com.gsm.platfra.api.services.board.dto.table.PlatfraBoardDto;
+import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
 import com.gsm.platfra.api.services.board.mapper.PlatfraBoardMapper;
 import com.gsm.platfra.api.services.board.repository.PlatfraBoardRepository;
 import com.gsm.platfra.api.services.board.repository.query.PlatfraBoardQueryRepository;
-import java.util.ArrayList;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

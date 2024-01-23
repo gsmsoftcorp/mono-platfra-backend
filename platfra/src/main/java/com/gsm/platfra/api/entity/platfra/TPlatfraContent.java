@@ -1,14 +1,12 @@
 package com.gsm.platfra.api.entity.platfra;
 
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraContentDto;
+import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
