@@ -36,6 +36,16 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 
+	// MapStruct
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
+	testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+	implementation("org.mapstruct:mapstruct:1.5.3.Final")
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding
+	implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+
 	// QueryDSL Implementation
 	implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
 	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta")
