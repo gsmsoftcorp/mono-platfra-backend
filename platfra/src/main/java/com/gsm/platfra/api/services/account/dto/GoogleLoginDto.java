@@ -10,6 +10,7 @@ public record GoogleLoginDto(
     public static TAccount toEntity(GoogleLoginDto dto) {
         return TAccount.builder()
                 .userId(dto.email)
+                .email(dto.email)
                 .userNm(dto.username)
                 .build();
     }

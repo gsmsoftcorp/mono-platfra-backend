@@ -5,6 +5,7 @@ import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.repository.AccountRepository;
+import com.gsm.platfra.common.codes.ErrorCode;
 import com.gsm.platfra.config.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +25,8 @@ public class AccountService {
 
         TAccount tAccount = accountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
         if (!tAccount.getPassword().equals(loginDto.password())) {
-            // Todo: 예외 처리
             log.debug("비밀번호가 일치하지 않습니다.");
-            return "비밀번호 불일치"; // Todo: 상수 클래스에 final로 정의
+            return ErrorCode.INVALID_PASSWORD.getMessage();
         }
 
         String token = tokenProvider.generateAccessToken(tAccount);
@@ -53,6 +53,7 @@ public class AccountService {
         });
     }
 
+    // 아이디, 이메일, 전화번호
     public String googleLogin(GoogleLoginDto googleLoginDto) {
         // Todo : 일반 회원으로 가입한 이메일인 경우 -> 예외 처리?
         TAccount tAccount = accountRepository.findByUserId(googleLoginDto.email()).orElseGet(

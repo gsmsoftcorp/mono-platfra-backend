@@ -24,7 +24,7 @@ public class AccountController {
     public String login(@RequestBody @Valid LoginDto loginDto) {
         String token = accountService.login(loginDto);
 //        HttpHeaders httpHeaders = HttpHeaderUtils.addAuthorizationToken(token);
-        // Note: 토큰도 헤더에 안담고 body에 리턴하나요....?
+        // Todo ) 김승동 : 토큰은 헤더에 담아서 보낼까요?
         return token;
     }
 
