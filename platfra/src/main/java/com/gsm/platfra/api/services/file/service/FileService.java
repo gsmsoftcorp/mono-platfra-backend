@@ -1,12 +1,12 @@
 package com.gsm.platfra.api.services.file.service;
 
+import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.entity.common.TCommonFile;
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import com.gsm.platfra.api.services.file.dto.*;
 import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
 import com.gsm.platfra.api.services.file.repository.TCommonFileRepository;
 import com.gsm.platfra.api.services.file.repository.query.TCommonFileQueryRepository;
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
 import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;
 import com.gsm.platfra.common.util.S3FileComponent;
 import lombok.RequiredArgsConstructor;
