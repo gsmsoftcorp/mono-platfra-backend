@@ -1,13 +1,12 @@
 package com.gsm.platfra.api.services.file.rest;
 
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.gsm.platfra.api.services.file.dto.*;
+import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
 import com.gsm.platfra.api.services.file.service.FileService;
 import com.gsm.platfra.common.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,28 +22,25 @@ import java.util.List;
 public class FileController {
     private final FileService fileService;
 
-    @PostMapping(value = "/upload/{contentsCd}/{contentsSeq}", consumes = "multipart/*")
-    public void upload(@RequestPart("files") MultipartFile[] files, @PathVariable("contentsCd") String contentsCd, @PathVariable("contentsSeq") Long contentsSeq) throws IOException {
-        fileService.upload(files, contentsCd, contentsSeq);
+    // TODO: 특정 확장자만 받을 수 있도록 추가 구현
+    @PostMapping(value = "/upload", consumes = "multipart/*")
+    public void upload(@RequestPart("file") List<MultipartFile> file, @RequestPart("dto") CommonFileDto commonFileDto) throws IOException {
+        fileService.upload(file, commonFileDto);
     }
 
-    @GetMapping(value = "/list")
-    public List<FileResultDto> list(@RequestParam("cd") String contentsCd, @RequestParam("seq") Long contentsSeq) {
-
-        return fileService.list(FileListReqDto.builder()
-                .contentsCd(contentsCd)
-                .contentsSeq(contentsSeq)
-                .build());
+    @GetMapping("/{contentsCd}/{contentsSeq}")
+    public List<CommonFileDto> list(@PathVariable String contentsCd, @PathVariable Long contentsSeq) {
+        return fileService.list(contentsCd, contentsSeq);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody FileDeleteReqDto fileDeleteReqDto) {
-        fileService.delete(fileDeleteReqDto);
+    @DeleteMapping
+    public void delete(@RequestBody CommonFileDto commonFileDto) {
+        fileService.delete(commonFileDto);
     }
 
     @GetMapping(value = "/download")
-    public ResponseEntity<InputStreamResource> download(@RequestBody FileDownloadReqDto fileDownloadReqDto) {
-        FileDownloadDto downloadDto = fileService.download(fileDownloadReqDto);
+    public ResponseEntity<InputStreamResource> download(@RequestBody CommonFileDto commonFileDto) {
+        FileDownloadDto downloadDto = fileService.download(commonFileDto);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(CommonUtils.contentType(downloadDto.getFileExtenton()));
         headers.setContentDispositionFormData("attachment", URLEncoder.encode(downloadDto.getFileName(), StandardCharsets.UTF_8));
@@ -54,6 +50,4 @@ public class FileController {
                 .headers(headers)
                 .body(new InputStreamResource(downloadDto.getS3ObjectInputStream()));
     }
-
-
 }

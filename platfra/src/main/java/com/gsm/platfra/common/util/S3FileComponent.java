@@ -2,7 +2,7 @@ package com.gsm.platfra.common.util;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
-import com.gsm.platfra.api.services.file.dto.FileInfoDto;
+import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +24,7 @@ public class S3FileComponent { // S3 연동 - 업로드, 삭제, 다운로드
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public FileInfoDto upload(MultipartFile file) throws IOException { // 객체 업로드
+    public CommonFileDto upload(MultipartFile file) throws IOException { // 객체 업로드
         // 파일의 확장자 추출
         String fileExtension = getFileExtension(file.getOriginalFilename());
 
@@ -45,8 +45,8 @@ public class S3FileComponent { // S3 연동 - 업로드, 삭제, 다운로드
         log.debug("File Size : " + file.getSize());
 
         // TODO: filePath 세팅 필요
-        return FileInfoDto.builder()
-                .filePath("")
+        return CommonFileDto.builder()
+                .filePath("service/board/" + fileEncodingName)
                 .fileSize(String.valueOf(file.getSize()))
                 .fileName(file.getOriginalFilename())
                 .fileEncodingName(fileEncodingName)
