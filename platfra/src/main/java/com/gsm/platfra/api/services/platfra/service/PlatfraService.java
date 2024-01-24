@@ -15,10 +15,9 @@
 package com.gsm.platfra.api.services.platfra.service;
 
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
-import com.gsm.platfra.api.entity.platfra.TPlatfraContent;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraMainResDto;
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraContentDto;
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
+import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;
 import com.gsm.platfra.api.services.platfra.repository.query.PlatfraQueryRepository;
 import lombok.RequiredArgsConstructor;

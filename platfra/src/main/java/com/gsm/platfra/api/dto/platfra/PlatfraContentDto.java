@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.services.platfra.dto.table;
+package com.gsm.platfra.api.dto.platfra;
 
 import com.gsm.platfra.api.entity.platfra.TPlatfraContent;
 import lombok.AllArgsConstructor;

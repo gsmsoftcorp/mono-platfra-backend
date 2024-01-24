@@ -28,8 +28,7 @@ public class TAccount {
     @Size(max = 11)
     @Column(name = "PHONE", length = 11)
     private String phone;
-    
-    @Size(max = 64)
+
     @NotNull
     @Column(name = "PASSWORD", nullable = false, length = 64)
     private String password;

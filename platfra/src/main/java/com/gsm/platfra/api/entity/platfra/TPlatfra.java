@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.entity.platfra;
 
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
+import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

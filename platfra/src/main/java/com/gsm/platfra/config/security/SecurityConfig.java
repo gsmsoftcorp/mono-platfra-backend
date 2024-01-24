@@ -3,16 +3,19 @@ package com.gsm.platfra.config.security;
 import com.gsm.platfra.config.filter.AuthFilter;
 import com.gsm.platfra.config.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
 @Configuration
@@ -37,6 +40,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(new AuthFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+                // 리소스 같은 접근 처리 불가
                 .authorizeHttpRequests(
                         auth ->
                                 // Todo : 테스트용으로 모든 요청 허용
@@ -46,6 +50,19 @@ public class SecurityConfig {
                 );
         
         return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web
+                .ignoring()
+                .requestMatchers(
+                        PathRequest.toStaticResources().atCommonLocations() // 정적 리소스는 무시
+                )
+                // AuthFilter를 적용하지 않을 URL
+                .requestMatchers(
+                        "/login", "/signup"
+                );
     }
 
     @Bean
