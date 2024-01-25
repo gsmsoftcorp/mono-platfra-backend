@@ -18,7 +18,7 @@ public class TCommonFile {
     @Id
     @Column(name = "FILE_SEQ", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long fileSeq;
     
     @Size(max = 16)
     @NotNull
@@ -54,25 +54,20 @@ public class TCommonFile {
     @Column(name = "FILE_SIZE", nullable = false, length = 16)
     private String fileSize;
     
-    @NotNull
     @Column(name = "DEL_YN", nullable = false, length = 1)
     private Boolean delYn;
     
     @Size(max = 64)
-    @NotNull
     @Column(name = "REG_USER_ID", nullable = false, length = 64)
     private String regUserId;
     
-    @NotNull
     @Column(name = "REG_DATE", nullable = false)
     private Instant regDate;
 
     @Size(max = 64)
-    @NotNull
     @Column(name = "MOD_USER_ID", nullable = false, length = 64)
     private String modUserId;
     
-    @NotNull
     @Column(name = "MOD_DATE", nullable = false)
     private Instant modDate;
 

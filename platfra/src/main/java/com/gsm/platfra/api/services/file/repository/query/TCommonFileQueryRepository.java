@@ -1,9 +1,7 @@
 package com.gsm.platfra.api.services.file.repository.query;
 
-import com.gsm.platfra.api.entity.common.QTCommonFile;
-import com.gsm.platfra.api.entity.common.TCommonFile;
-import com.gsm.platfra.api.services.file.dto.FileListReqDto;
 import com.gsm.platfra.api.services.file.dto.FileResultDto;
+import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +16,11 @@ import static com.gsm.platfra.api.entity.common.QTCommonFile.tCommonFile;
 public class TCommonFileQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public List<FileResultDto> getList(FileListReqDto fileListReqDto) {
-        List<FileResultDto> list = queryFactory
+    public List<CommonFileDto> getList(CommonFileDto dto) {
+        List<CommonFileDto> list = queryFactory
                 .select(
                         Projections.fields(
-                                FileResultDto.class,
+                                CommonFileDto.class,
                                 tCommonFile.contentsCd,
                                 tCommonFile.contentsSeq,
                                 tCommonFile.filePath,
@@ -34,8 +32,9 @@ public class TCommonFileQueryRepository {
                 )
                 .from(tCommonFile)
                 .where(
-                        fileListReqDto.getContentsCd().isBlank() ? null : tCommonFile.contentsCd.eq(fileListReqDto.getContentsCd()),
-                        fileListReqDto.getContentsSeq() == null ? null : tCommonFile.contentsSeq.eq(fileListReqDto.getContentsSeq())
+                        dto.getContentsCd().isBlank() ? null : tCommonFile.contentsCd.eq(dto.getContentsCd()),
+                        dto.getContentsSeq() == null ? null : tCommonFile.contentsSeq.eq(dto.getContentsSeq()),
+                        tCommonFile.delYn.eq(Boolean.FALSE)
                 )
                 .fetch()
                 ;
@@ -43,11 +42,35 @@ public class TCommonFileQueryRepository {
         return list;
     }
 
-    public void deleteFile(TCommonFile file) {
+    public void delete(Long fileSeq) {
         queryFactory
                 .update(tCommonFile)
                 .set(tCommonFile.delYn, Boolean.TRUE)
-                .where(tCommonFile.id.eq(file.getId()))
+                .where(tCommonFile.fileSeq.eq(fileSeq))
                 .execute();
+    }
+
+    public CommonFileDto download(CommonFileDto dto) {
+        return queryFactory
+                .select(
+                        Projections.fields(
+                                CommonFileDto.class,
+                                tCommonFile.contentsCd,
+                                tCommonFile.contentsSeq,
+                                tCommonFile.filePath,
+                                tCommonFile.fileName,
+                                tCommonFile.fileEncodingName,
+                                tCommonFile.fileExtension,
+                                tCommonFile.fileSize
+                        )
+                )
+                .from(tCommonFile)
+                .where(
+                        dto.getContentsCd().isBlank() ? null : tCommonFile.contentsCd.eq(dto.getContentsCd()),
+                        dto.getContentsSeq() == null ? null : tCommonFile.contentsSeq.eq(dto.getContentsSeq()),
+                        dto.getFileSeq() == null ? null : tCommonFile.fileSeq.eq(dto.getFileSeq()),
+                        tCommonFile.delYn.eq(Boolean.FALSE)
+                )
+                .fetchOne();
     }
 }
