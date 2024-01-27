@@ -8,7 +8,6 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-
 public interface PlatfraBoardMapper {
     public List<PlatfraBoardDto> boardListToDtoList (List<TPlatfraBoard> boardList);
 

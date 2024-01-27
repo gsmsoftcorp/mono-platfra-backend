@@ -73,5 +73,6 @@ public class TPlatfraBoard {
         this.subject = boardDto.getSubject();
         this.description = boardDto.getDescription();
         this.modUserId = boardDto.getModUserId();
+        this.modDate = Instant.now();
     }
 }
