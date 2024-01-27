@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.entity.platfraboard;
 
+import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "T_PLATFRA_BOARD")
+@ToString
 public class TPlatfraBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,5 +68,10 @@ public class TPlatfraBoard {
     @OneToMany(mappedBy = "tPlatfraBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<TPlatfraBoardContent> tPlatfraBoardContentList = new ArrayList<>();
-    
+
+    public void update(PlatfraBoardDto boardDto){
+        this.subject = boardDto.getSubject();
+        this.description = boardDto.getDescription();
+        this.modUserId = boardDto.getModUserId();
+    }
 }

@@ -1,6 +1,7 @@
 package com.gsm.platfra.api.services.board.repository.query;
 
 import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
+import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoard;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +36,23 @@ public class PlatfraBoardQueryRepository {
                 .leftJoin(tPlatfra).on(tPlatfraBoard.platfraId.eq(tPlatfra.platfraId))
                 .where(
                         platfraBoardDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoard.platfraBoardSeq.eq(platfraBoardDto.getPlatfraBoardSeq()),
-                        platfraBoardDto.getSubject().isBlank() ? null : tPlatfraBoard.subject.eq(platfraBoardDto.getSubject()),
                         platfraBoardDto.getPlatfraId().isBlank() ? null : tPlatfraBoard.platfraId.eq(platfraBoardDto.getPlatfraId()),
-                        platfraBoardDto.getRegUserId().isBlank() ? null : tPlatfraBoard.regUserId.eq(platfraBoardDto.getRegUserId()),
-                        platfraBoardDto.getModUserId().isBlank() ? null : tPlatfraBoard.modUserId.eq(platfraBoardDto.getModUserId()),
-                        platfraBoardDto.getDescription().isBlank() ? null : tPlatfraBoard.description.eq(platfraBoardDto.getDescription()),
+                        platfraBoardDto.getSubject().isBlank() ? null : tPlatfraBoard.subject.like("%"+platfraBoardDto.getSubject()+"%"),
+                        platfraBoardDto.getRegUserId().isBlank() ? null : tPlatfraBoard.regUserId.like("%"+platfraBoardDto.getRegUserId()+"%"),
+                        platfraBoardDto.getModUserId().isBlank() ? null : tPlatfraBoard.modUserId.like("%"+platfraBoardDto.getModUserId()+"%"),
+                        platfraBoardDto.getDescription().isBlank() ? null : tPlatfraBoard.description.like("%"+platfraBoardDto.getDescription()+"%"),
                         tPlatfraBoard.delYn.eq(Boolean.FALSE)
-                ).fetch();
+                )
+            .fetch();
         return list;
+    }
+
+    public long delete(Long platfraBoardSeq){
+      return
+          queryFactory
+          .update(tPlatfraBoard)
+          .set(tPlatfraBoard.delYn,Boolean.TRUE)
+          .where(tPlatfraBoard.platfraBoardSeq.eq(platfraBoardSeq))
+          .execute();
     }
 }
