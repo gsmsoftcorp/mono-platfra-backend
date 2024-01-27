@@ -1,13 +1,17 @@
 package com.gsm.platfra.api.services.board.rest;
 
 import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
+import com.gsm.platfra.api.services.board.dto.PlatfraBoardResDto;
 import com.gsm.platfra.api.services.board.service.PlatfraBoardService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,25 +29,61 @@ public class PlatfraBoardController {
 
     /**
     * 플랫폼 리스트 조회
-z
     * @param platfraBoardDto
-    * @return
+    * @return platfraBoardDtoList
     **/
-    @PostMapping
+    @GetMapping
     public List<PlatfraBoardDto> getList(PlatfraBoardDto platfraBoardDto){
-        log.info("GetAllBoardList start.",platfraBoardDto);
+        log.info("GetAllBoardList start. {}",platfraBoardDto);
+        log.info("Request : {}",platfraBoardDto);
         return platfraBoardService.getList(platfraBoardDto);
     }
 
-    @GetMapping("/{platfraId}")
-    public List<PlatfraBoardDto> getPlatfraBoardList(@PathVariable(value = "platfraId")String platfraId){
-        log.info("GetPlatfraBoardList start. platfraId : {}",platfraId);
-        return platfraBoardService.getPlatfraBoardList(platfraId);
-    }
-
-    @GetMapping("/detail/{platfraBoardSeq}")
-    public PlatfraBoardDto getBoardDetail(@PathVariable(value = "platfraBoardSeq")long platfraBoardSeq){
+    /**
+    * Board 디테일 조회
+    * @param platfraBoardSeq
+    * @return PlatfraBoardResDto
+    * */
+    @GetMapping("/{platfraBoardSeq}")
+    public PlatfraBoardResDto getBoardDetail(@PathVariable(value = "platfraBoardSeq")long platfraBoardSeq){
+        log.info("GetBoardDetail start. {}",platfraBoardSeq);
+        log.info("Path : {}",platfraBoardSeq);
         return platfraBoardService.getPlatfraBoardDetail(platfraBoardSeq);
     }
 
+    /**
+    * Board 등록
+    * @param platfraBoardDto
+    * @return platfraBoardResDto
+    * */
+    @PostMapping
+    public PlatfraBoardResDto create(@RequestBody PlatfraBoardDto platfraBoardDto){
+        log.info("Create board start.");
+        log.info("Request : {}",platfraBoardDto);
+        return platfraBoardService.create(platfraBoardDto);
+    }
+
+    /**
+    * Board 수정
+    * @param platfraBoardDto
+    * @return platfraBoardResDto
+    * */
+    @PatchMapping
+    public PlatfraBoardResDto update(@RequestBody PlatfraBoardDto platfraBoardDto){
+        log.info("Update board start.");
+        log.info("Request : {}",platfraBoardDto);
+        return platfraBoardService.update(platfraBoardDto);
+    }
+
+    /**
+    * Board 삭제
+    * @param
+    * @return
+    * */
+    @DeleteMapping
+    public boolean delete(@RequestBody PlatfraBoardDto platfraBoardDto){
+        log.info("Delete board start.");
+        log.info("Request : {}",platfraBoardDto);
+        return platfraBoardService.delete(platfraBoardDto);
+    }
 }

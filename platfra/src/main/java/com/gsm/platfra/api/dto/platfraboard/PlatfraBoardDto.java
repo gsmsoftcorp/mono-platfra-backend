@@ -4,14 +4,18 @@ import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoardContent;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class PlatfraBoardDto {
 
