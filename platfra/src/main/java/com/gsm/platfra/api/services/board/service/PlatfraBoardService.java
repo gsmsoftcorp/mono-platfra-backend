@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ public class PlatfraBoardService {
     private final PlatfraBoardQueryRepository platfraBoardQueryRepository;
     private final PlatfraBoardRepository platfraBoardRepository;
     private final TPlatfraRepository tPlatfraRepository;
-    private final PlatfraBoardMapper platfraBoardMapper;
+    private PlatfraBoardMapper platfraBoardMapper = Mappers.getMapper(PlatfraBoardMapper.class);
 
     public List<PlatfraBoardDto> getList(PlatfraBoardDto platfraBoardDto){
         return platfraBoardQueryRepository.getList(platfraBoardDto);
@@ -66,10 +67,9 @@ public class PlatfraBoardService {
     public PlatfraBoardResDto update (PlatfraBoardDto platfraBoardDto){
         TPlatfraBoard platfraBoard = platfraBoardRepository.findByPlatfraBoardSeq(platfraBoardDto.getPlatfraBoardSeq());
         platfraBoard.update(platfraBoardDto);
-
         platfraBoardRepository.flush();
+
         PlatfraBoardDto responseDto = platfraBoardMapper.boardToDto(platfraBoard);
-        System.out.println(responseDto);
         return PlatfraBoardResDto.builder().platfraBoardDto(responseDto).build();
     }
 

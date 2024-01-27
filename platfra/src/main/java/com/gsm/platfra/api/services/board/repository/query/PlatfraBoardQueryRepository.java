@@ -17,12 +17,11 @@ public class PlatfraBoardQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<PlatfraBoardDto> getList(PlatfraBoardDto platfraBoardDto){
-        List<PlatfraBoardDto> list = queryFactory
+        return queryFactory
                 .select(
                         Projections.fields(
                                 PlatfraBoardDto.class,
                                 tPlatfraBoard.platfraBoardSeq,
-                                tPlatfra.platfraId,
                                 tPlatfraBoard.subject,
                                 tPlatfraBoard.description,
                                 tPlatfraBoard.delYn,
@@ -33,7 +32,6 @@ public class PlatfraBoardQueryRepository {
                         )
                 )
                 .from(tPlatfraBoard)
-                .leftJoin(tPlatfra).on(tPlatfraBoard.platfraId.eq(tPlatfra.platfraId))
                 .where(
                         platfraBoardDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoard.platfraBoardSeq.eq(platfraBoardDto.getPlatfraBoardSeq()),
                         platfraBoardDto.getPlatfraId().isBlank() ? null : tPlatfraBoard.platfraId.eq(platfraBoardDto.getPlatfraId()),
@@ -44,7 +42,6 @@ public class PlatfraBoardQueryRepository {
                         tPlatfraBoard.delYn.eq(Boolean.FALSE)
                 )
             .fetch();
-        return list;
     }
 
     public long delete(Long platfraBoardSeq){
