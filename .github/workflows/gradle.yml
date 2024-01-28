@@ -18,9 +18,9 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    # tes2
     - name: test2
       run: ls
+      
     # 폴더로 이동
     - name: Enter project
       run: cd platfra
