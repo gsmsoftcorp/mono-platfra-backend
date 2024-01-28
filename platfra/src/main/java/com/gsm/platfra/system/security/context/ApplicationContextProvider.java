@@ -1,4 +1,4 @@
-package com.gsm.platfra.system.security.provider;
+package com.gsm.platfra.system.security.context;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

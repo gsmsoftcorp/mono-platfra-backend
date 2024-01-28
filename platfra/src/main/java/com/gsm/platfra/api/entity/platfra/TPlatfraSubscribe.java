@@ -1,7 +1,7 @@
 package com.gsm.platfra.api.entity.platfra;
 
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "T_PLATFRA_SUBSCRIBE")
-public class TPlatfraSubscribe {
+public class TPlatfraSubscribe extends BaseEntity {
     
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

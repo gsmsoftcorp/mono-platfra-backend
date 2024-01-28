@@ -1,12 +1,11 @@
 package com.gsm.platfra.api.entity.platfra;
 
 import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
-import java.time.Instant;
 
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -14,7 +13,7 @@ import java.time.Instant;
 @Getter
 @Entity
 @Table(name = "T_PLATFRA_CONTENT")
-public class TPlatfraContent {
+public class TPlatfraContent extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment 때문에 선언됨
     @Column(name = "CONTENT_SEQ", nullable = false)
@@ -42,23 +41,6 @@ public class TPlatfraContent {
     @Lob
     @Column(name = "CONTENT", nullable = false)
     private String content;
-    
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Size(max = 64)
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-    
-    @Size(max = 64)
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
     
     public void update(PlatfraContentDto platfraContentDto) {
         this.title = platfraContentDto.getTitle();

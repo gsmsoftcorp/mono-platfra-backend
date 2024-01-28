@@ -1,18 +1,17 @@
 package com.gsm.platfra.api.entity.platfra;
 
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Instant;
-
 @Getter
 @Setter
 @Entity
 @Table(name = "T_PLATFRA_FEATURE")
-public class TPlatfraFeature {
+public class TPlatfraFeature extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PLATFRA_FEATURE_SEQ", nullable = false)
@@ -31,27 +30,5 @@ public class TPlatfraFeature {
     @NotNull
     @Column(name = "USE_YN", nullable = false, length = 1)
     private Boolean useYn;
-    
-    @NotNull
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @NotNull
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @NotNull
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
     
 }

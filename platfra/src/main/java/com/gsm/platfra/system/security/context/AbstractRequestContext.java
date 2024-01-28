@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 
-public abstract class AbstractRequestContext implements Serializable{
+public abstract class AbstractRequestContext implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

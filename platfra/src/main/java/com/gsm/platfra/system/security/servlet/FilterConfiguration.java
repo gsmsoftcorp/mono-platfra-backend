@@ -1,4 +1,4 @@
-package com.gsm.platfra.system.security.filter;
+package com.gsm.platfra.system.security.servlet;
 
 import org.springframework.boot.autoconfigure.web.servlet.ConditionalOnMissingFilterBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

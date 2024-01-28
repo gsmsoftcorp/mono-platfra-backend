@@ -14,13 +14,12 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-@Slf4j
 public class PlatfraBoardService {
     private final PlatfraBoardQueryRepository platfraBoardQueryRepository;
     private final TPlatfraBoardRepository tPlatfraBoardRepository;
@@ -50,11 +49,6 @@ public class PlatfraBoardService {
             .platfraId(platfraBoardDto.getPlatfraId())
             .description(platfraBoardDto.getDescription())
             .subject(platfraBoardDto.getSubject())
-            .modUserId(platfraBoardDto.getModUserId())
-            .regUserId(platfraBoardDto.getRegUserId())
-            .regDate(Instant.now())
-            .modDate(Instant.now())
-            .delYn(Boolean.FALSE)
             .build();
 
         TPlatfraBoard savedBoard = tPlatfraBoardRepository.saveAndFlush(tPlatfraBoard);

@@ -1,4 +1,4 @@
-package com.gsm.platfra.system.security.filter;
+package com.gsm.platfra.system.security.servlet;
 
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;

@@ -1,7 +1,6 @@
 package com.gsm.platfra.api.services.board.repository.query;
 
 import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
-import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoard;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.gsm.platfra.api.entity.platfraboard.QTPlatfraBoard.tPlatfraBoard;
-import static com.gsm.platfra.api.entity.platfra.QTPlatfra.tPlatfra;
 @Repository
 @RequiredArgsConstructor
 public class PlatfraBoardQueryRepository {
@@ -36,10 +34,7 @@ public class PlatfraBoardQueryRepository {
                         platfraBoardDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoard.platfraBoardSeq.eq(platfraBoardDto.getPlatfraBoardSeq()),
                         platfraBoardDto.getPlatfraId().isBlank() ? null : tPlatfraBoard.platfraId.eq(platfraBoardDto.getPlatfraId()),
                         platfraBoardDto.getSubject().isBlank() ? null : tPlatfraBoard.subject.like("%"+platfraBoardDto.getSubject()+"%"),
-                        platfraBoardDto.getRegUserId().isBlank() ? null : tPlatfraBoard.regUserId.like("%"+platfraBoardDto.getRegUserId()+"%"),
-                        platfraBoardDto.getModUserId().isBlank() ? null : tPlatfraBoard.modUserId.like("%"+platfraBoardDto.getModUserId()+"%"),
-                        platfraBoardDto.getDescription().isBlank() ? null : tPlatfraBoard.description.like("%"+platfraBoardDto.getDescription()+"%"),
-                        tPlatfraBoard.delYn.eq(Boolean.FALSE)
+                        platfraBoardDto.getDescription().isBlank() ? null : tPlatfraBoard.description.like("%"+platfraBoardDto.getDescription()+"%")
                 )
             .fetch();
     }
