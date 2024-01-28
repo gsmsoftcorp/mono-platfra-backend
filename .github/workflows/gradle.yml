@@ -17,16 +17,9 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-
-    - name: test2
-      run: ls
       
     # 폴더로 이동
     - name: Enter project
-      run: cd platfra
-
-    # test
-    - name: test
       run: cd platfra
       
     # gradlew 에 권한 부여
