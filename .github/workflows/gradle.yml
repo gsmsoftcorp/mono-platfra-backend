@@ -18,13 +18,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
       
-    # 폴더로 이동
-    - name: Enter project
-      run: cd platfra
       
     # gradlew 에 권한 부여
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x mono-platfra-backend/platfra/gradlew
 
     # build
     - name: Build with Gradle
