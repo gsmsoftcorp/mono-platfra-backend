@@ -1,8 +1,5 @@
 package com.gsm.platfra.config.security;
 
-import com.gsm.platfra.system.security.context.DefaultUserContextHandler;
-import com.gsm.platfra.system.security.context.UserContextFilter;
-import com.gsm.platfra.system.security.context.UserContextHandler;
 import com.gsm.platfra.system.security.filter.AuthFilter;
 import com.gsm.platfra.system.security.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final AuthProvider tokenProvider;
+    private final AuthProvider authProvider;
 
     private final String ROLE_ADMIN = "ADMIN";
     private final String ROLE_USER = "USER";
@@ -44,7 +38,7 @@ public class SecurityConfig {
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .addFilterBefore(new AuthFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new AuthFilter(authProvider), UsernamePasswordAuthenticationFilter.class)
                 // 리소스 같은 접근 처리 불가
                 .authorizeHttpRequests(
                         auth ->
@@ -73,24 +67,6 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-    
-    
-    @Bean
-    public UserContextFilter userContextFilter() {
-        
-        List<UserContextHandler> handlers = new ArrayList();
-        handlers.add(userContextHandler());
-        
-        UserContextFilter userContextFilter = new UserContextFilter();
-        userContextFilter.setHandlers(handlers);
-        
-        return userContextFilter;
-    }
-    
-    @Bean
-    public DefaultUserContextHandler userContextHandler() {
-        return new DefaultUserContextHandler();
     }
     
 }

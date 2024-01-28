@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.entity.platfra;
 
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "T_PLATFRA_CATEGORY")
-public class TPlatfraCategory {
+public class TPlatfraCategory extends BaseEntity {
     @EmbeddedId
     private TPlatfraCategoryId id;
     

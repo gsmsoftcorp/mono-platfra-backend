@@ -16,26 +16,27 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class UserContextFilter extends GenericFilterBean implements InitializingBean {
+public class RequestContextFilter extends GenericFilterBean implements InitializingBean {
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private List<UserContextHandler> handlers;
+	private List<RequestContextHandler> handlers;
 
 	
 	@Override
 	public void afterPropertiesSet() throws ServletException {
-		log.info("[fwk]UserContextFilter init...");
+		log.info("[fwk]RequestContextFilter init...");
 		super.afterPropertiesSet();
 	}
 	
 	
-	public void setHandlers(List<UserContextHandler> handlers) {
+	public void setHandlers(List<RequestContextHandler> handlers) {
 		this.handlers = handlers;
 	}
 	
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+		
 		if(log.isDebugEnabled()) {
 			log.debug("doFilter entered. {}", ((HttpServletRequest) request).getRequestURL());
 		}
@@ -45,15 +46,15 @@ public class UserContextFilter extends GenericFilterBean implements Initializing
 			HttpServletResponse httpResponse = (HttpServletResponse)response;
 			
 			try {			
-				UserContext userContext = UserContextHolder.getUserContext();
+				RequestContext requestContext = RequestContextHolder.getRequestContext();
 		
 				if(log.isDebugEnabled()) {
 					log.debug("get requestContext.");
 				}
 				
-				//UserContextFilter에 등록된 UserContextHadler들을 모두 실행한다.
-				for (UserContextHandler handler : this.handlers) {
-					handler.handle(userContext, httpRequest, httpResponse);
+				//RequestContextFilter에 등록된 RequestContextHadler들을 모두 실행한다.
+				for (RequestContextHandler handler : this.handlers) {
+					handler.handle(requestContext, httpRequest, httpResponse);
 				}
 				
 				if(filterChain != null){
@@ -61,15 +62,20 @@ public class UserContextFilter extends GenericFilterBean implements Initializing
 				}
 	
 			}finally {
-				UserContextHolder.remove();
+				RequestContextHolder.remove();
 				
 				if(log.isDebugEnabled()) {
 					log.debug("requestContext removed.");
 				}
+				
 			}
 		}
+		
 		if(log.isDebugEnabled()) {
 			log.debug("doFilter leave.");
 		}
+		
 	}
-}
+
+
+}                         

@@ -1,8 +1,8 @@
 package com.gsm.platfra.api.services.platfra.service;
 
+import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
 import com.gsm.platfra.api.entity.platfra.TPlatfraContent;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraContentMainResDto;
-import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
 import com.gsm.platfra.api.services.platfra.repository.TPlatfraContentRepository;
 import com.gsm.platfra.api.services.platfra.repository.query.PlatfraContentQueryRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +15,11 @@ import java.util.List;
 /**
  *
  */
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-@Slf4j
 public class PlatfraContentService {
     private final TPlatfraContentRepository tPlatfraContentRepository;
     private final PlatfraContentQueryRepository platfraContentQueryRepository;

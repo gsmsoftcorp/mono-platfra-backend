@@ -1,11 +1,13 @@
 package com.gsm.platfra.api.entity.common;
 
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-
-import java.time.Instant;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
@@ -13,7 +15,7 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TCommonFile {
+public class TCommonFile extends BaseEntity {
     @Id
     @Column(name = "FILE_SEQ", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,23 +55,6 @@ public class TCommonFile {
     @Column(name = "FILE_SIZE", nullable = false, length = 16)
     private String fileSize;
     
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Size(max = 64)
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-
-    @Size(max = 64)
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
-
     public void setContentsInfo(String contentsCd, long contentsSeq) {
         this.contentsCd = contentsCd;
         this.contentsSeq = contentsSeq;

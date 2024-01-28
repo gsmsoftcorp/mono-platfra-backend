@@ -18,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/platfra/content")
 public class PlatfraContentController {
-
     private final PlatfraContentService platfraContentService;
     
     /**

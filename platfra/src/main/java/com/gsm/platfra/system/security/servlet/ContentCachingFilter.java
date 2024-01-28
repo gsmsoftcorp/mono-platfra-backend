@@ -1,4 +1,4 @@
-package com.gsm.platfra.system.security.filter;
+package com.gsm.platfra.system.security.servlet;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

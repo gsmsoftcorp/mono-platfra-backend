@@ -1,12 +1,12 @@
 package com.gsm.platfra.api.entity.platfra;
 
 import com.gsm.platfra.api.dto.platfra.PlatfraDto;
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "T_PLATFRA")
-public class TPlatfra {
+public class TPlatfra extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PLATFRA_SEQ", nullable = false)
@@ -48,21 +48,6 @@ public class TPlatfra {
     @Size(max = 64)
     @Column(name = "OWNER_ID", nullable = false, length = 64)
     private String ownerId;
-    
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-    
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
     
     @OneToMany(mappedBy = "tPlatfra", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default

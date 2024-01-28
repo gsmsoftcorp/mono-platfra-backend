@@ -3,6 +3,8 @@ package com.gsm.platfra.api.services.platfra.rest;
 import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraMainResDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraService;
+import com.gsm.platfra.system.security.context.UserContext;
+import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/platfra")
 public class PlatfraController {
-    
     private final PlatfraService platfraService;
 
     /**
@@ -28,6 +29,8 @@ public class PlatfraController {
      */
     @GetMapping
     public List<PlatfraDto> getList(PlatfraDto platfraDto) {
+        UserContext userContext = UserContextUtil.getUserContext();
+        log.debug("userContext111111 : ", userContext);
         return platfraService.getList(platfraDto);
     }
     

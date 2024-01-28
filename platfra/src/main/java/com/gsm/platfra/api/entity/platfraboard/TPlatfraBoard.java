@@ -1,13 +1,13 @@
 package com.gsm.platfra.api.entity.platfraboard;
 
 import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "T_PLATFRA_BOARD")
 @ToString
-public class TPlatfraBoard {
+public class TPlatfraBoard extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PLATFRA_BOARD_SEQ", nullable = false)
@@ -43,28 +43,6 @@ public class TPlatfraBoard {
     @Column(name = "DESCRIPTION", nullable = false, length = 512)
     private String description;
     
-    @NotNull
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @NotNull
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @NotNull
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
-    
     @OneToMany(mappedBy = "tPlatfraBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<TPlatfraBoardContent> tPlatfraBoardContentList = new ArrayList<>();
@@ -72,7 +50,5 @@ public class TPlatfraBoard {
     public void update(PlatfraBoardDto boardDto){
         this.subject = boardDto.getSubject();
         this.description = boardDto.getDescription();
-        this.modUserId = boardDto.getModUserId();
-        this.modDate = Instant.now();
     }
 }

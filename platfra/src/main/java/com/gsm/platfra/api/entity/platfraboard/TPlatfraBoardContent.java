@@ -1,19 +1,11 @@
 package com.gsm.platfra.api.entity.platfraboard;
 
 import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardContentDto;
-import com.gsm.platfra.api.entity.platfra.TPlatfra;
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.Instant;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Builder
@@ -22,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString
-public class TPlatfraBoardContent {
+public class TPlatfraBoardContent extends BaseEntity {
     @Id
     @Column(name = "CONTENT_SEQ", nullable = false)
     private Long contentSeq;
@@ -49,33 +41,9 @@ public class TPlatfraBoardContent {
     @Column(name = "CONTENT", nullable = false)
     private String content;
     
-    @NotNull
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @NotNull
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @NotNull
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
-
     public void update(PlatfraBoardContentDto platfraBoardContentDto){
         this.content = platfraBoardContentDto.getContent();
         this.title = platfraBoardContentDto.getTitle();
-        this.modUserId = platfraBoardContentDto.getModUserId();
-        this.modDate = Instant.now();
     }
     
 }

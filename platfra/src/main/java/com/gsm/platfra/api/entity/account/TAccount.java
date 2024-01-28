@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.entity.account;
 
+import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,16 +9,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Builder
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "T_ACCOUNT")
-public class TAccount {
+public class TAccount extends BaseEntity {
     @Id
     @Size(max = 64)
     @Column(name = "USER_ID", nullable = false, length = 64)
@@ -51,32 +51,8 @@ public class TAccount {
     @Column(name = "BANNED_YN")
     private Boolean bannedYn;
     
-    @NotNull
-    @Column(name = "DEL_YN", nullable = false, length = 1)
-    private Boolean delYn;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "REG_USER_ID", nullable = false, length = 64)
-    private String regUserId;
-    
-    @NotNull
-    @Column(name = "REG_DATE", nullable = false)
-    private Instant regDate;
-    
-    @Size(max = 64)
-    @NotNull
-    @Column(name = "MOD_USER_ID", nullable = false, length = 64)
-    private String modUserId;
-    
-    @NotNull
-    @Column(name = "MOD_DATE", nullable = false)
-    private Instant modDate;
-
-    protected TAccount() {}
-
     @Builder
-    private TAccount(String userId, String email, String phone, String password, String userNm, Integer age, Character gender, LocalDate birthday) {
+    private void update(String userId, String email, String phone, String password, String userNm, Integer age, Character gender, LocalDate birthday) {
         this.userId = userId;
         this.email = email;
         this.phone = phone;
