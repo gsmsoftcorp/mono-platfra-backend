@@ -21,6 +21,10 @@ jobs:
     # 폴더로 이동
     - name: Enter project
       run: cd platfra
+
+    # test
+    - name: test
+      run: ls 
       
     # gradlew 에 권한 부여
     - name: Grant execute permission for gradlew
