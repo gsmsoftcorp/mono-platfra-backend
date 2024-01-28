@@ -1,6 +1,6 @@
-package com.gsm.platfra.config.filter;
+package com.gsm.platfra.system.security.filter;
 
-import com.gsm.platfra.config.provider.AuthProvider;
+import com.gsm.platfra.system.security.provider.AuthProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class AuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, IOException {
         log.debug(":::::::::::::::: AuthFilter ::::::::::::::::");
 
-        String token = resolveToken(request);
+        String token = this.resolveToken(request);
 
         if (StringUtils.hasText(token) && authProvider.validateToken(token)) {
             Authentication authentication = authProvider.getAuthentication(token);

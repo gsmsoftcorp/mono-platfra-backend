@@ -31,7 +31,6 @@ public class CommonFileDto {
                 .fileEncodingName(dto.fileEncodingName)
                 .fileExtension(dto.fileExtension)
                 .fileSize(dto.fileSize)
-                .delYn(dto.delYn)
                 .build();
     }
 

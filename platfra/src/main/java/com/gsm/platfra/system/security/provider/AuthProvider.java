@@ -1,4 +1,4 @@
-package com.gsm.platfra.config.provider;
+package com.gsm.platfra.system.security.provider;
 
 import com.gsm.platfra.api.entity.account.TAccount;
 import io.jsonwebtoken.*;
@@ -20,10 +20,10 @@ public class AuthProvider implements InitializingBean {
 
     private Key key;
 
-    @Value("${jwt.secret-key}")
+    @Value("${security.jwt.secret-key}")
     private String secretKey;
 
-    @Value("${jwt.access-token-expired-time-ms}")
+    @Value("${security.jwt.access-token-expired-time-ms}")
     private long accessTokenExpiredTimeMs;
 
     private static final String USER_ID = "userId";
@@ -38,7 +38,7 @@ public class AuthProvider implements InitializingBean {
 
         Claims claims = Jwts.claims();
         claims.put(USER_ID, tAccount.getUserId());
-        // Todo : 권한 넣기
+        // TODO : 권한 넣기
 
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.accessTokenExpiredTimeMs);
@@ -61,7 +61,7 @@ public class AuthProvider implements InitializingBean {
 
         Object userId = claims.get(USER_ID);
 
-        // Todo : 권한 추출
+        // TODO : 권한 추출
 //        Collection<? extends GrantedAuthority> authorities =
 //                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
 //                        .map(SimpleGrantedAuthority::new)
@@ -75,16 +75,12 @@ public class AuthProvider implements InitializingBean {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-
             log.debug("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
-
             log.debug("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
-
             log.debug("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
-
             log.debug("JWT 토큰이 잘못되었습니다.");
         }
         return false;

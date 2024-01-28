@@ -1,7 +1,10 @@
 package com.gsm.platfra.config.security;
 
-import com.gsm.platfra.config.filter.AuthFilter;
-import com.gsm.platfra.config.provider.AuthProvider;
+import com.gsm.platfra.system.security.context.DefaultUserContextHandler;
+import com.gsm.platfra.system.security.context.UserContextFilter;
+import com.gsm.platfra.system.security.context.UserContextHandler;
+import com.gsm.platfra.system.security.filter.AuthFilter;
+import com.gsm.platfra.system.security.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Configuration
@@ -69,4 +74,23 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    
+    
+    @Bean
+    public UserContextFilter userContextFilter() {
+        
+        List<UserContextHandler> handlers = new ArrayList();
+        handlers.add(userContextHandler());
+        
+        UserContextFilter userContextFilter = new UserContextFilter();
+        userContextFilter.setHandlers(handlers);
+        
+        return userContextFilter;
+    }
+    
+    @Bean
+    public DefaultUserContextHandler userContextHandler() {
+        return new DefaultUserContextHandler();
+    }
+    
 }

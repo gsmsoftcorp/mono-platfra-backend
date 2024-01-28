@@ -1,4 +1,4 @@
-package com.gsm.platfra.config;
+package com.gsm.platfra.config.storage;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
