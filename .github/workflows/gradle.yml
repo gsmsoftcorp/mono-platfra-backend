@@ -2,9 +2,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "development" ]
+    branches: [ "insung/20240127" ]
   pull_request:
-    branches: [ "development" ]
+    branches: [ "insung/20240127" ]
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
 
     # tes2
     - name: test2
-     run: ls
+      run: ls
     # 폴더로 이동
     - name: Enter project
       run: cd platfra
