@@ -3,7 +3,7 @@ package com.gsm.platfra.api.services.file.service;
 import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.entity.common.TCommonFile;
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
-import com.gsm.platfra.api.services.file.dto.*;
+import com.gsm.platfra.api.services.file.dto.FileDownloadDto;
 import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
 import com.gsm.platfra.api.services.file.repository.TCommonFileRepository;
 import com.gsm.platfra.api.services.file.repository.query.TCommonFileQueryRepository;
@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -44,14 +43,6 @@ public class FileService {
             // contentsCd 수정 필요
             commonFileDto.setContentsInfo(fileDto.getContentsCd(), platfraDto.getPlatfraSeq());
             TCommonFile tCommonFile = CommonFileDto.toEntity(commonFileDto);
-
-            ////////
-            tCommonFile.setDelYn(Boolean.FALSE);
-            tCommonFile.setModDate(Instant.now());
-            tCommonFile.setModUserId("");
-            tCommonFile.setRegDate(Instant.now());
-            tCommonFile.setRegUserId("");
-            ////////
 
             tCommonFileRepository.save(tCommonFile);
         }

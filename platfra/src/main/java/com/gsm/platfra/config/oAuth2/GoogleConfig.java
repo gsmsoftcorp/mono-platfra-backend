@@ -1,4 +1,4 @@
-package com.gsm.platfra.config.security;
+package com.gsm.platfra.config.oAuth2;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
