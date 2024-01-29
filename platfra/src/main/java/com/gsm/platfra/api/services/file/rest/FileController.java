@@ -1,7 +1,7 @@
 package com.gsm.platfra.api.services.file.rest;
 
 import com.gsm.platfra.api.services.file.dto.*;
-import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
+import com.gsm.platfra.api.dto.file.CommonFileDto;
 import com.gsm.platfra.api.services.file.service.FileService;
 import com.gsm.platfra.common.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
