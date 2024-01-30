@@ -24,7 +24,7 @@ public class AccountService {
     public String login(LoginDto loginDto) {
 
         TAccount tAccount = TAccountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
-        if (!tAccount.getPassword().equals(loginDto.password())) {
+        if (!passwordEncoder.matches( loginDto.password(), tAccount.getPassword())) {
             log.debug("비밀번호가 일치하지 않습니다.");
             return ErrorCode.INVALID_PASSWORD.getMessage();
         }

@@ -50,8 +50,7 @@ public class TAccount extends BaseEntity {
     
     @Column(name = "BANNED_YN")
     private Boolean bannedYn;
-    
-    @Builder
+
     private void update(String userId, String email, String phone, String password, String userNm, Integer age, Character gender, LocalDate birthday) {
         this.userId = userId;
         this.email = email;
