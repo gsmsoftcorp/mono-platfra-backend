@@ -3,24 +3,28 @@ package com.gsm.platfra.api.services.features.noti.dto;
 import com.gsm.platfra.api.entity.feature.TFeatureNotification;
 
 public record NotificationDto(
-        Long featureNotificationSeq,
+        Long featureNotiSeq,
         String contentsCd,
         Long contentsSeq,
+        Long featureSeq,
         String notiTargetUserId,
+        String notiTitle,
         String notiDescription,
-        String notiUrl,
-        Boolean readYn
+        String notiUrl
 ) {
 
     public static TFeatureNotification toEntity(NotificationDto dto) {
         return TFeatureNotification.builder()
-                .featureNotificationSeq(dto.featureNotificationSeq())
+                .featureNotiSeq(dto.featureNotiSeq())
                 .contentsCd(dto.contentsCd())
                 .contentsSeq(dto.contentsSeq())
+                .featureSeq(dto.featureSeq())
                 .notiTargetUserId(dto.notiTargetUserId())
+                .notiTitle(dto.notiTitle())
                 .notiDescription(dto.notiDescription())
                 .notiUrl(dto.notiUrl())
-                .readYn(dto.readYn())
+                .readYn(false)
+                .sendYn(false)
                 .build();
     }
 }

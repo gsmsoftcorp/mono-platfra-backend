@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @Entity
-@Table(name = "T_FEATURE_NOTIFICATION")
+@Table(name = "T_FEATURE_NOTI")
 public class TFeatureNotification extends BaseEntity {
 
     @Id
-    @Column(name = "FEATURE_NOTIFICATION_SEQ", nullable = false)
-    private Long featureNotificationSeq;
+    @Column(name = "FEATURE_NOTI_SEQ", nullable = false)
+    private Long featureNotiSeq;
 
     @Size(max = 16)
     @NotNull
@@ -32,6 +32,10 @@ public class TFeatureNotification extends BaseEntity {
     @NotNull
     @Column(name = "CONTENTS_SEQ", nullable = false)
     private Long contentsSeq;
+
+    @NotNull
+    @Column(name = "FEATURE_SEQ", nullable = false)
+    private Long featureSeq;
 
     @Column(name = "NOTI_TARGET_USER_ID", nullable = false, length = 64)
     private String notiTargetUserId;
