@@ -16,6 +16,7 @@ import lombok.Setter;
 @Table(name = "T_FEATURE_LIKE")
 public class TFeatureLike extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FEATURE_LIKE_SEQ", nullable = false)
     private Long featureLikeSeq;
     
@@ -36,5 +37,9 @@ public class TFeatureLike extends BaseEntity {
     @NotNull
     @Column(name = "LIKE_YN", nullable = false, length = 1)
     private Boolean likeYn;
-    
+
+    public void update(){
+        if(this.likeYn) this.likeYn = Boolean.FALSE;
+        else this.likeYn = Boolean.TRUE;
+    }
 }
