@@ -1,19 +1,18 @@
 package com.gsm.platfra.common.codes;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
 
-    INVALID_PASSWORD("비밀번호가 일치하지 않습니다."),
-
+    METHOD_NOT_ALLOWED("E001"),
+    BIND_EXCEPTION("E002"),
+    DATA_INTEGRITY_VIOLATION_EXCEPTION("E003"),
     ;
 
-    private String message;
+    private final String code;
 
-    ErrorCode(String message) {
-        this.message = message;
+    ErrorCode(String code) {
+        this.code = code;
     }
 }
-
