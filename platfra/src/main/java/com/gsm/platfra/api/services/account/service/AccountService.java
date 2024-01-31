@@ -5,7 +5,7 @@ import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.repository.TAccountRepository;
-import com.gsm.platfra.common.codes.ErrorCode;
+import com.gsm.platfra.common.codes.ErrorMessage;
 import com.gsm.platfra.system.security.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class AccountService {
         TAccount tAccount = TAccountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
         if (!passwordEncoder.matches( loginDto.password(), tAccount.getPassword())) {
             log.debug("비밀번호가 일치하지 않습니다.");
-            return ErrorCode.INVALID_PASSWORD.getMessage();
+            return ErrorMessage.INVALID_PASSWORD.getMessage();
         }
 
         String token = tokenProvider.generateAccessToken(tAccount);
