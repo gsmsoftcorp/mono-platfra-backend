@@ -4,7 +4,6 @@ import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -22,22 +21,18 @@ public class TPlatfra extends BaseEntity {
     @Column(name = "PLATFRA_SEQ", nullable = false)
     private Long platfraSeq;
     
-    @Size(max = 64)
     @NotNull
     @Column(name = "PLATFRA_ID", nullable = false, length = 64)
     private String platfraId;
     
-    @Size(max = 64)
     @NotNull
     @Column(name = "SUBJECT", nullable = false, length = 64)
     private String subject;
     
-    @Size(max = 512)
     @NotNull
     @Column(name = "DESCRIPTION", nullable = false, length = 512)
     private String description;
     
-    @Size(max = 1024)
     @NotNull
     @Column(name = "INTRODUCTION", nullable = false, length = 1024)
     private String introduction;
@@ -45,7 +40,6 @@ public class TPlatfra extends BaseEntity {
     @Column(name = "MAIN_CONTENT_SEQ", nullable = false)
     private Long mainContentSeq;
     
-    @Size(max = 64)
     @Column(name = "OWNER_ID", nullable = false, length = 64)
     private String ownerId;
     

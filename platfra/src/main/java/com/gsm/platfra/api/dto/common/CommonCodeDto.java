@@ -1,36 +1,46 @@
 package com.gsm.platfra.api.dto.common;
 
 import com.gsm.platfra.api.entity.common.TCommonCode;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommonCodeDto {
     private String commonCd;
     private String parentCd;
     private String name;
     private String description;
-
-    private static TCommonCode toEntity(CommonCodeDto dto) {
+    private String type;
+    private String order;
+    
+    @Builder.Default
+    private List<CommonCodeDto> childCodeDtoList = new ArrayList<>();
+    
+    public static TCommonCode toEntity(CommonCodeDto dto) {
         return TCommonCode.builder()
-                .commonCd(dto.commonCd)
-                .parentCd(dto.parentCd)
-                .name(dto.name)
-                .description(dto.description)
-                .build();
+            .commonCd(dto.commonCd)
+            .parentCd(dto.parentCd)
+            .name(dto.name)
+            .description(dto.description)
+            .type(dto.type)
+            .order(dto.order)
+            .build();
     }
-
-    private static CommonCodeDto of(TCommonCode tCommonCode) {
+    
+    public static CommonCodeDto of(@NonNull TCommonCode tCommonCode) {
         return CommonCodeDto.builder()
-                .commonCd(tCommonCode.getCommonCd())
-                .parentCd(tCommonCode.getParentCd())
-                .name(tCommonCode.getName())
-                .description(tCommonCode.getDescription())
-                .build();
+            .commonCd(tCommonCode.getCommonCd())
+            .parentCd(tCommonCode.getParentCd())
+            .name(tCommonCode.getName())
+            .description(tCommonCode.getDescription())
+            .type(tCommonCode.getType())
+            .order(tCommonCode.getOrder())
+            .build();
     }
+    
 }

@@ -26,15 +26,11 @@ public class ContextConfig implements InitializingBean {
 		}
 	}
 	
-	
 	@Bean
 	public ApplicationContextProvider applicationContextProvider() {
 		return new ApplicationContextProvider();
 	}
 	
-	
-	
-
 	@Bean
 	public RequestContextFilter fwkRequestContextFilter() {
 		List<RequestContextHandler> handlers = new ArrayList();
@@ -44,14 +40,11 @@ public class ContextConfig implements InitializingBean {
 		requestContextFilter.setHandlers(handlers);
 		
 		return requestContextFilter;
-		
 	}
-	
 	
 	@Bean
 	public DefaultRequestContextHandler requestContextHandler() {
 		return new DefaultRequestContextHandler();
 	}
-	
 	
 }
