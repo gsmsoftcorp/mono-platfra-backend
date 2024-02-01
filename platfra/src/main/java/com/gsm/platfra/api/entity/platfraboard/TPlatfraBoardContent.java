@@ -16,9 +16,10 @@ import lombok.*;
 @ToString
 public class TPlatfraBoardContent extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CONTENT_SEQ", nullable = false)
     private Long contentSeq;
-    
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PLATFRA_BOARD_SEQ", referencedColumnName = "PLATFRA_BOARD_SEQ", nullable = false)
     private TPlatfraBoard tPlatfraBoard;
@@ -40,6 +41,10 @@ public class TPlatfraBoardContent extends BaseEntity {
     @Lob
     @Column(name = "CONTENT", nullable = false)
     private String content;
+
+    @NotNull
+    @Column(name = "VIEW", nullable = false)
+    private Long view;
     
     public void update(PlatfraBoardContentDto platfraBoardContentDto){
         this.content = platfraBoardContentDto.getContent();

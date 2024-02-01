@@ -1,7 +1,6 @@
 package com.gsm.platfra.api.services.file.repository.query;
 
-import com.gsm.platfra.api.services.file.dto.FileResultDto;
-import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
+import com.gsm.platfra.api.dto.common.CommonFileDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

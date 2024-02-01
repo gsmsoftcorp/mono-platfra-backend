@@ -4,7 +4,7 @@ import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.entity.common.TCommonFile;
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import com.gsm.platfra.api.services.file.dto.FileDownloadDto;
-import com.gsm.platfra.api.services.file.dto.table.CommonFileDto;
+import com.gsm.platfra.api.dto.common.CommonFileDto;
 import com.gsm.platfra.api.services.file.repository.TCommonFileRepository;
 import com.gsm.platfra.api.services.file.repository.query.TCommonFileQueryRepository;
 import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;
@@ -32,7 +32,6 @@ public class FileService {
     @Transactional
     public void upload(List<MultipartFile> files, CommonFileDto fileDto) throws IOException { // 객체 업로드
 
-        // TODO: content cd, seq 검증 로직 추가 필요
         // contentsCd 를 확인해서 어떤 테이블을 읽어올지 알아야되는데, 어떤식으로 확인해야 되는지?
         TPlatfra tPlatfra = tPlatfraRepository.findById(fileDto.getContentsSeq()).orElseThrow(/*DataNotFoundException::new*/);
         PlatfraDto platfraDto = PlatfraDto.of(tPlatfra);
