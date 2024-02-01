@@ -1,7 +1,7 @@
 package com.gsm.platfra.api.services.platfra.rest;
 
 import com.gsm.platfra.api.dto.platfra.PlatfraDto;
-import com.gsm.platfra.api.services.platfra.dto.PlatfraMainResDto;
+import com.gsm.platfra.api.services.platfra.dto.PlatfraMainDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraService;
 import com.gsm.platfra.system.security.context.UserContext;
 import com.gsm.platfra.system.security.context.UserContextUtil;
@@ -40,7 +40,7 @@ public class PlatfraController {
      * @return
      */
     @GetMapping("/{platfraSeq}")
-    public PlatfraMainResDto get(@PathVariable(required = true) Long platfraSeq) {
+    public PlatfraMainDto get(@PathVariable(required = true) Long platfraSeq) {
         return platfraService.get(platfraSeq);
     }
     
