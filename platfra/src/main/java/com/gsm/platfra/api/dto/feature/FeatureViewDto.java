@@ -15,7 +15,7 @@ public class FeatureViewDto {
     private String contentsCd;
     private Long contentsSeq;
     private String userId;
-    private Boolean delYn;
+    private String address;
 
     public static TFeatureView toEntity(FeatureViewDto dto) {
         return TFeatureView.builder()
@@ -23,6 +23,7 @@ public class FeatureViewDto {
                 .contentsCd(dto.contentsCd)
                 .contentsSeq(dto.contentsSeq)
                 .userId(dto.userId)
+                .address(dto.address)
                 .build();
     }
 
@@ -32,7 +33,7 @@ public class FeatureViewDto {
                 .contentsCd(tFeatureView.getContentsCd())
                 .contentsSeq(tFeatureView.getContentsSeq())
                 .userId(tFeatureView.getUserId())
-                .delYn(tFeatureView.getDelYn())
+                .address(tFeatureView.getAddress())
                 .build();
     }
 

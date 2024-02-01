@@ -1,12 +1,10 @@
 package com.gsm.platfra.api.services.feature.rest;
 
+import com.gsm.platfra.api.dto.feature.FeatureViewDto;
 import com.gsm.platfra.api.services.feature.service.FeatureViewService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -16,9 +14,10 @@ public class FeatureViewController {
 
     private final FeatureViewService featureViewService;
 
-    @GetMapping("/{contentsCd}/{contentsSeq}")
-    public void viewCount(@PathVariable String contentsCd, @PathVariable Long contentsSeq) {
-        String userId = "";
-        featureViewService.viewCount(contentsCd, contentsSeq, userId);
+    @PostMapping()
+    public void viewCount(HttpServletRequest request, @RequestBody FeatureViewDto featureViewDto) {
+        String address = request.getRemoteAddr();
+        featureViewDto.setAddress(address);
+        featureViewService.viewCount(featureViewDto);
     }
 }

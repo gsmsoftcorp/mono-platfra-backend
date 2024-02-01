@@ -1,10 +1,7 @@
 package com.gsm.platfra.api.entity.feature;
 
 import com.gsm.platfra.api.entity.base.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -18,6 +15,7 @@ import lombok.*;
 @Table(name = "T_FEATURE_VIEW")
 public class TFeatureView extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FEATURE_VIEW_SEQ", nullable = false)
     private Long featureViewSeq;
     
@@ -34,5 +32,10 @@ public class TFeatureView extends BaseEntity {
     @NotNull
     @Column(name = "USER_ID", nullable = false, length = 64)
     private String userId;
-    
+
+    @Size(max = 15)
+    @NotNull
+    @Column(name = "ADDRESS", nullable = false, length = 15)
+    private String address;
+
 }

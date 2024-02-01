@@ -4,7 +4,7 @@ import com.gsm.platfra.api.dto.platfra.PlatfraDto;
 import com.gsm.platfra.api.entity.common.TCommonFile;
 import com.gsm.platfra.api.entity.platfra.TPlatfra;
 import com.gsm.platfra.api.services.file.dto.FileDownloadDto;
-import com.gsm.platfra.api.dto.file.CommonFileDto;
+import com.gsm.platfra.api.dto.common.CommonFileDto;
 import com.gsm.platfra.api.services.file.repository.TCommonFileRepository;
 import com.gsm.platfra.api.services.file.repository.query.TCommonFileQueryRepository;
 import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;

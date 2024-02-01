@@ -6,13 +6,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "T_COMMON_CODE")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TCommonCode extends BaseEntity {
     @Id
     @Size(max = 16)

@@ -41,7 +41,11 @@ public class TPlatfraContent extends BaseEntity {
     @Lob
     @Column(name = "CONTENT", nullable = false)
     private String content;
-    
+
+    @NotNull
+    @Column(name = "VIEW", nullable = false)
+    private Long view;
+
     public void update(PlatfraContentDto platfraContentDto) {
         this.title = platfraContentDto.getTitle();
         this.content = platfraContentDto.getContent();
