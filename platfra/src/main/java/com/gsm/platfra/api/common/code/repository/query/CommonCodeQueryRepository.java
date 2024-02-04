@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static com.gsm.platfra.api.data.common.code.QTCommonCode.tCommonCode;
 import static com.gsm.platfra.api.data.feature.like.QTFeatureLike.tFeatureLike;
 import static com.gsm.platfra.api.data.feature.view.QTFeatureView.tFeatureView;
 import static com.gsm.platfra.api.data.platfra.QTPlatfra.tPlatfra;
@@ -135,7 +136,16 @@ public class CommonCodeQueryRepository {
             .execute()
         ;
     }
-    
+    public List<String> getContentsInfo() {
+        return queryFactory
+                .select(
+                        tCommonCode.commonCd
+                )
+                .from(tCommonCode)
+                .where(
+                        tCommonCode.commonCd.contains("CONTENT")
+                ).fetch();
+    }
 }
 
 
