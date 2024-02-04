@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FeatureLikeDto {
     private Long featureLikeSeq;
-    private String contentCd;
-    private Long contentSeq;
+    private String contentsCd;
+    private Long contentsSeq;
     private String userId;
     private Boolean likeYn;
+    private String regUserId;
+    private String modUserId;
 }
