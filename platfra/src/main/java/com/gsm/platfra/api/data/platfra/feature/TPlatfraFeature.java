@@ -1,6 +1,7 @@
-package com.gsm.platfra.api.data.platfra;
+package com.gsm.platfra.api.data.platfra.feature;
 
 import com.gsm.platfra.api.data.base.BaseEntity;
+import com.gsm.platfra.api.data.platfra.TPlatfra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
