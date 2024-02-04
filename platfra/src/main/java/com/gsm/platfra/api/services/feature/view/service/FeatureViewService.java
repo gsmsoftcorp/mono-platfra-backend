@@ -1,13 +1,13 @@
-package com.gsm.platfra.api.services.feature.service;
+package com.gsm.platfra.api.services.feature.view.service;
 
 import com.gsm.platfra.api.dto.feature.FeatureViewDto;
 import com.gsm.platfra.api.entity.feature.TFeatureView;
-import com.gsm.platfra.api.services.feature.dto.FeatureViewCountDto;
-import com.gsm.platfra.api.services.feature.repository.TFeatureViewRepository;
-import com.gsm.platfra.api.services.feature.repository.query.TCommonCodeQueryRepository;
-import com.gsm.platfra.api.services.feature.repository.query.TFeatureViewQueryRepository;
-import com.gsm.platfra.api.services.feature.repository.query.TPlatfraBoardContentQueryRepository;
-import com.gsm.platfra.api.services.feature.repository.query.TPlatfraContentQueryRepository;
+import com.gsm.platfra.api.services.feature.view.dto.FeatureViewCountDto;
+import com.gsm.platfra.api.services.feature.view.repository.TFeatureViewRepository;
+import com.gsm.platfra.api.services.feature.view.repository.query.TCommonCodeQueryRepository;
+import com.gsm.platfra.api.services.feature.view.repository.query.TFeatureViewQueryRepository;
+import com.gsm.platfra.api.services.feature.view.repository.query.TPlatfraBoardContentQueryRepository;
+import com.gsm.platfra.api.services.feature.view.repository.query.TPlatfraContentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
