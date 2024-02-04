@@ -14,8 +14,8 @@ import java.util.List;
 import static com.gsm.platfra.api.data.feature.like.QTFeatureLike.tFeatureLike;
 import static com.gsm.platfra.api.data.feature.view.QTFeatureView.tFeatureView;
 import static com.gsm.platfra.api.data.platfra.QTPlatfra.tPlatfra;
-import static com.gsm.platfra.api.data.platfra.QTPlatfraCategory.tPlatfraCategory;
 import static com.gsm.platfra.api.data.platfra.QTPlatfraContent.tPlatfraContent;
+import static com.gsm.platfra.api.data.platfra.category.QTPlatfraCategory.tPlatfraCategory;
 
 
 /**

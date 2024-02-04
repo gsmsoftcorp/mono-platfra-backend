@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.data.platfra;
+package com.gsm.platfra.api.data.platfra.category;
 
 import com.gsm.platfra.api.data.base.BaseEntity;
 import jakarta.persistence.*;
