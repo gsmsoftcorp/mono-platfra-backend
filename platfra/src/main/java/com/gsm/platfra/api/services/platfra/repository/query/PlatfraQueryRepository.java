@@ -1,7 +1,7 @@
 package com.gsm.platfra.api.services.platfra.repository.query;
 
-import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
-import com.gsm.platfra.api.dto.platfra.PlatfraDto;
+import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberPath;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.gsm.platfra.api.entity.feature.QTFeatureLike.tFeatureLike;
-import static com.gsm.platfra.api.entity.feature.QTFeatureView.tFeatureView;
-import static com.gsm.platfra.api.entity.platfra.QTPlatfra.tPlatfra;
-import static com.gsm.platfra.api.entity.platfra.QTPlatfraCategory.tPlatfraCategory;
-import static com.gsm.platfra.api.entity.platfra.QTPlatfraContent.tPlatfraContent;
+import static com.gsm.platfra.api.data.feature.like.QTFeatureLike.tFeatureLike;
+import static com.gsm.platfra.api.data.feature.view.QTFeatureView.tFeatureView;
+import static com.gsm.platfra.api.data.platfra.QTPlatfra.tPlatfra;
+import static com.gsm.platfra.api.data.platfra.QTPlatfraCategory.tPlatfraCategory;
+import static com.gsm.platfra.api.data.platfra.QTPlatfraContent.tPlatfraContent;
 
 
 /**

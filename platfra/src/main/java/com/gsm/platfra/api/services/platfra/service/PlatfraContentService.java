@@ -1,9 +1,9 @@
 package com.gsm.platfra.api.services.platfra.service;
 
-import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
-import com.gsm.platfra.api.entity.platfra.TPlatfraContent;
+import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.data.platfra.TPlatfraContent;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraContentMainResDto;
-import com.gsm.platfra.api.services.platfra.repository.TPlatfraContentRepository;
+import com.gsm.platfra.api.data.platfra.TPlatfraContentRepository;
 import com.gsm.platfra.api.services.platfra.repository.query.PlatfraContentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

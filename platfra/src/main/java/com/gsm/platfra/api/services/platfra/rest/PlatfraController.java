@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.services.platfra.rest;
 
-import com.gsm.platfra.api.dto.platfra.PlatfraDto;
+import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraMainDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraService;
 import com.gsm.platfra.system.security.context.UserContext;
@@ -30,7 +30,6 @@ public class PlatfraController {
     @GetMapping
     public List<PlatfraDto> getList(PlatfraDto platfraDto) {
         UserContext userContext = UserContextUtil.getUserContext();
-        log.debug("userContext111111 : ", userContext);
         return platfraService.getList(platfraDto);
     }
     

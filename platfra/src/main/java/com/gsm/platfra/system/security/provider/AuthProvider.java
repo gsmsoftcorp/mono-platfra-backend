@@ -1,6 +1,6 @@
 package com.gsm.platfra.system.security.provider;
 
-import com.gsm.platfra.api.entity.account.TAccount;
+import com.gsm.platfra.api.data.account.TAccount;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

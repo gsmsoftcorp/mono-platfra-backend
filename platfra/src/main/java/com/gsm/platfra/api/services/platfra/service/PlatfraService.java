@@ -1,10 +1,10 @@
 package com.gsm.platfra.api.services.platfra.service;
 
-import com.gsm.platfra.api.dto.platfra.PlatfraContentDto;
-import com.gsm.platfra.api.dto.platfra.PlatfraDto;
-import com.gsm.platfra.api.entity.platfra.TPlatfra;
+import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.data.platfra.PlatfraDto;
+import com.gsm.platfra.api.data.platfra.TPlatfra;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraMainDto;
-import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;
+import com.gsm.platfra.api.data.platfra.TPlatfraRepository;
 import com.gsm.platfra.api.services.platfra.repository.query.PlatfraQueryRepository;
 import com.gsm.platfra.system.security.context.UserContext;
 import com.gsm.platfra.system.security.context.UserContextUtil;
@@ -28,7 +28,7 @@ public class PlatfraService {
     
     public List<PlatfraDto> getList(PlatfraDto platfraDto) {
         UserContext userContext = UserContextUtil.getUserContext();
-        log.debug("userContext : ", userContext);
+        log.debug("userContext : {}", userContext);
         List<PlatfraDto> platfraDtoList = platfraQueryRepository.getList(platfraDto);
         
         return platfraDtoList;

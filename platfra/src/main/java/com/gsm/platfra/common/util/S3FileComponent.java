@@ -2,7 +2,7 @@ package com.gsm.platfra.common.util;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
-import com.gsm.platfra.api.dto.common.CommonFileDto;
+import com.gsm.platfra.api.data.common.file.CommonFileDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

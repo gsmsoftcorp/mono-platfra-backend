@@ -1,13 +1,13 @@
 package com.gsm.platfra.api.services.board.service;
 
-import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
-import com.gsm.platfra.api.entity.platfra.TPlatfra;
-import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoard;
+import com.gsm.platfra.api.data.platfra.TPlatfra;
+import com.gsm.platfra.api.data.platfra.TPlatfraRepository;
+import com.gsm.platfra.api.data.platfraboard.PlatfraBoardDto;
+import com.gsm.platfra.api.data.platfraboard.TPlatfraBoard;
+import com.gsm.platfra.api.data.platfraboard.TPlatfraBoardRepository;
 import com.gsm.platfra.api.services.board.dto.PlatfraBoardResDto;
 import com.gsm.platfra.api.services.board.mapper.PlatfraBoardMapper;
-import com.gsm.platfra.api.services.board.repository.TPlatfraBoardRepository;
 import com.gsm.platfra.api.services.board.repository.query.PlatfraBoardQueryRepository;
-import com.gsm.platfra.api.services.platfra.repository.TPlatfraRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;

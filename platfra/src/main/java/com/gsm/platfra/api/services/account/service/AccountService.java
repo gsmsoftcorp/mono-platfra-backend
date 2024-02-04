@@ -1,10 +1,10 @@
 package com.gsm.platfra.api.services.account.service;
 
-import com.gsm.platfra.api.entity.account.TAccount;
+import com.gsm.platfra.api.data.account.TAccount;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
-import com.gsm.platfra.api.services.account.repository.TAccountRepository;
+import com.gsm.platfra.api.data.account.TAccountRepository;
 import com.gsm.platfra.common.codes.ErrorMessage;
 import com.gsm.platfra.system.security.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
