@@ -1,12 +1,8 @@
 package com.gsm.platfra.api.services.board.service;
 
-import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardContentDto;
-import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoard;
-import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoardContent;
+import com.gsm.platfra.api.data.platfraboard.*;
 import com.gsm.platfra.api.services.board.dto.PlatfraBoardContentResDto;
 import com.gsm.platfra.api.services.board.mapper.PlatfraBoardContentMapper;
-import com.gsm.platfra.api.services.board.repository.PlatfraBoardContentRepository;
-import com.gsm.platfra.api.services.board.repository.TPlatfraBoardRepository;
 import com.gsm.platfra.api.services.board.repository.query.PlatfraBoardContentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
@@ -19,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class PlatfraBoardContentService {
-    private final PlatfraBoardContentRepository boardContentRepository;
+    private final TPlatfraBoardContentRepository boardContentRepository;
     private final PlatfraBoardContentQueryRepository boardContentQueryRepository;
     private final TPlatfraBoardRepository platfraBoardRepository;
     private PlatfraBoardContentMapper boardContentMapper = Mappers.getMapper(PlatfraBoardContentMapper.class);

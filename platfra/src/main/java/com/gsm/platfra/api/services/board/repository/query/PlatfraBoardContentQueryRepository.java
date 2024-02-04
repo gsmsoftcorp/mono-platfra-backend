@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.services.board.repository.query;
 
-import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardContentDto;
+import com.gsm.platfra.api.data.platfraboard.PlatfraBoardContentDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.gsm.platfra.api.entity.platfraboard.QTPlatfraBoardContent.tPlatfraBoardContent;
+import static com.gsm.platfra.api.data.platfraboard.QTPlatfraBoardContent.tPlatfraBoardContent;
+
 @Repository
 @RequiredArgsConstructor
 public class PlatfraBoardContentQueryRepository {

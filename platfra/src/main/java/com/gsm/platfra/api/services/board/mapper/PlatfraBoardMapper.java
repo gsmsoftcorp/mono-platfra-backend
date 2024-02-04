@@ -1,7 +1,7 @@
 package com.gsm.platfra.api.services.board.mapper;
 
-import com.gsm.platfra.api.entity.platfraboard.TPlatfraBoard;
-import com.gsm.platfra.api.dto.platfraboard.PlatfraBoardDto;
+import com.gsm.platfra.api.data.platfraboard.PlatfraBoardDto;
+import com.gsm.platfra.api.data.platfraboard.TPlatfraBoard;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
