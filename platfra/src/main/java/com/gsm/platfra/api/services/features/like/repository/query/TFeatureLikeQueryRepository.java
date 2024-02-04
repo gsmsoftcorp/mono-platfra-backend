@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.services.features.like.repository.query;
 
-import static com.gsm.platfra.api.entity.feature.QTFeatureLike.tFeatureLike;
+import static com.gsm.platfra.api.data.feature.like.QTFeatureLike.tFeatureLike;
 
 import com.gsm.platfra.api.data.feature.like.TFeatureLike;
 import com.gsm.platfra.api.dto.feat.like.FeatureLikeDto;

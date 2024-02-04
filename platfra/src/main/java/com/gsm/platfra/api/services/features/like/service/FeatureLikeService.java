@@ -1,12 +1,11 @@
 package com.gsm.platfra.api.services.features.like.service;
 
+import com.gsm.platfra.api.data.feature.like.TFeatureLike;
 import com.gsm.platfra.api.dto.feat.like.FeatureLikeDto;
-import com.gsm.platfra.api.entity.feature.TFeatureLike;
 import com.gsm.platfra.api.services.features.like.dto.FeatureLikeResDto;
 import com.gsm.platfra.api.services.features.like.mapper.FeatureLikeMapper;
 import com.gsm.platfra.api.services.features.like.repository.TFeatureLikeRepository;
 import com.gsm.platfra.api.services.features.like.repository.query.TFeatureLikeQueryRepository;
-import com.gsm.platfra.system.security.context.UserContextUtil;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
