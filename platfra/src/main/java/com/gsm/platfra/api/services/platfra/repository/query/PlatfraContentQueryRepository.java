@@ -1,6 +1,7 @@
 package com.gsm.platfra.api.services.platfra.repository.query;
 
 import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.features.view.dto.FeatureViewCountDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +55,14 @@ public class PlatfraContentQueryRepository {
             )
             .execute()
         ;
+    }
+
+    public void updateCount(FeatureViewCountDto dto){
+        queryFactory
+                .update(tPlatfraContent)
+                .set(tPlatfraContent.view, tPlatfraContent.view.add(dto.getCount()))
+                .where(tPlatfraContent.contentSeq.eq(dto.getContentsSeq()))
+                .execute();
     }
 }
 
