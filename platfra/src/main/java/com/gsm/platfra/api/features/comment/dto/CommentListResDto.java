@@ -8,5 +8,6 @@ public class CommentListResDto {
     private String contentsCd;
     private Long contentsSeq;
     private String userId;
+    private String comment;
     private Long count;
 }

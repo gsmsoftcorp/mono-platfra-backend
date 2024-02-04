@@ -2,6 +2,7 @@ package com.gsm.platfra.api.features.comment.repository.query;
 
 import com.gsm.platfra.api.data.feature.comment.FeatureCommentDto;
 import com.gsm.platfra.api.data.feature.comment.QTFeatureComment;
+import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
 import com.gsm.platfra.api.features.comment.dto.CommentListResDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static com.gsm.platfra.api.data.feature.comment.QTFeatureComment.tFeatureComment;
+import static com.gsm.platfra.api.data.platfra.QTPlatfraContent.tPlatfraContent;
 
 
 @Repository
@@ -37,7 +39,7 @@ public class FeatureCommentQueryRepository {
                         )
                 )
                 .from(tFeatureComment)
-                .join(reply).on(reply.parentSeq.eq(tFeatureComment.featureCommentSeq))
+                .leftJoin(reply).on(reply.parentSeq.eq(tFeatureComment.featureCommentSeq))
                 .where(
                         tFeatureComment.contentsCd.eq(dto.getContentsCd()),
                         tFeatureComment.contentsSeq.eq(dto.getContentsSeq()),
@@ -55,10 +57,10 @@ public class FeatureCommentQueryRepository {
                         Projections.fields(
                                 FeatureCommentDto.class,
                                 tFeatureComment.featureCommentSeq,
-                                tFeatureComment.featureCommentSeq,
                                 tFeatureComment.parentSeq,
                                 tFeatureComment.contentsCd,
                                 tFeatureComment.contentsSeq,
+                                tFeatureComment.comment,
                                 tFeatureComment.userId
                         )
                 )
@@ -71,5 +73,18 @@ public class FeatureCommentQueryRepository {
                 )
                 .orderBy(tFeatureComment.regDate.desc())
                 .fetch();
+    }
+
+    public void delete(FeatureCommentDto featureCommentDto) {
+        queryFactory
+                .update(tFeatureComment)
+                .set(tFeatureComment.delYn, Boolean.TRUE)
+                .where(
+                        tFeatureComment.featureCommentSeq.eq(featureCommentDto.getFeatureCommentSeq()),
+                        tFeatureComment.contentsCd.eq(featureCommentDto.getContentsCd()),
+                        tFeatureComment.contentsSeq.eq(featureCommentDto.getContentsSeq())
+                )
+                .execute()
+        ;
     }
 }

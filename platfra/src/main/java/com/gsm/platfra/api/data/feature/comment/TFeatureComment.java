@@ -40,5 +40,8 @@ public class TFeatureComment extends BaseEntity {
     @NotNull
     @Column(name = "USER_ID", nullable = false, length = 64)
     private String userId;
-    
+
+    public void update(FeatureCommentDto featureCommentDto) {
+        this.comment = featureCommentDto.getComment();
+    }
 }
