@@ -1,30 +1,30 @@
 package com.gsm.platfra.api.entity.feature;
 
 import com.gsm.platfra.api.entity.base.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "T_FEATURE_COMMENT")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TFeatureComment extends BaseEntity {
     @Id
     @Column(name = "FEATURE_COMMENT_SEQ", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long featureCommentSeq;
     
     @Column(name = "PARENT_SEQ")
     private Long parentSeq;
     
     @Size(max = 16)
     @NotNull
-    @Column(name = "CONTENTS_CD", nullable = false, length = 16)
+    @Column(name = "CONTENTS_CD", nullable = false)
     private String contentsCd;
     
     @NotNull

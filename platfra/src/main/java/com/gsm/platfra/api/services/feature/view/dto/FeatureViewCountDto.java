@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.services.feature.dto;
+package com.gsm.platfra.api.services.feature.view.dto;
 
 import lombok.Getter;
 import lombok.ToString;

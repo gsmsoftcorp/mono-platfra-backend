@@ -1,7 +1,7 @@
-package com.gsm.platfra.api.services.feature.repository.query;
+package com.gsm.platfra.api.services.feature.view.repository.query;
 
 import com.gsm.platfra.api.dto.feature.FeatureViewDto;
-import com.gsm.platfra.api.services.feature.dto.FeatureViewCountDto;
+import com.gsm.platfra.api.services.feature.view.dto.FeatureViewCountDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,11 @@
-package com.gsm.platfra.api.services.feature.repository.query;
+package com.gsm.platfra.api.services.feature.view.repository.query;
 
-import com.gsm.platfra.api.entity.platfra.QTPlatfraContent;
-import com.gsm.platfra.api.services.feature.dto.FeatureViewCountDto;
+import com.gsm.platfra.api.services.feature.view.dto.FeatureViewCountDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import static com.gsm.platfra.api.entity.platfra.QTPlatfraContent.tPlatfraContent;
-import static com.gsm.platfra.api.entity.platfraboard.QTPlatfraBoardContent.tPlatfraBoardContent;
 
 @Repository
 @RequiredArgsConstructor
