@@ -12,7 +12,6 @@ public class AuditBaseEntityListener {
 	
 	@PreUpdate
 	public void beforeAnyUpdate(Object object) {
-
 		if(object instanceof AuditBaseEntity) {
 			Assert.notNull(object, "Entity must not be null.");
 			if(UserContextUtil.getUserContext() != null) {

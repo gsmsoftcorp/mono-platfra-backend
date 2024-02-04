@@ -11,7 +11,7 @@ import static com.gsm.platfra.api.data.common.code.QTCommonCode.tCommonCode;
 
 @Repository
 @RequiredArgsConstructor
-public class TCommonCodeQueryRepository {
+public class CommonCodeQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<String> getContentsInfo() {

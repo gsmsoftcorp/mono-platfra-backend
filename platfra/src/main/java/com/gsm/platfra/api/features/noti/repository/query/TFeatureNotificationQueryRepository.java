@@ -1,6 +1,7 @@
 package com.gsm.platfra.api.features.noti.repository.query;
 
 import com.gsm.platfra.api.features.noti.dto.NotificationDto;
+import com.gsm.platfra.system.security.context.UserContext;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class TFeatureNotificationQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<NotificationDto> getUserNotifications(String userId) {
+    public List<NotificationDto> getUserNotifications(UserContext userContext) {
         return queryFactory
                 .select(Projections.constructor(
                         NotificationDto.class,
@@ -32,7 +33,7 @@ public class TFeatureNotificationQueryRepository {
                 ))
                 .from(tFeatureNotification)
                 .where(
-                        tFeatureNotification.notiTargetUserId.eq(userId),
+                        tFeatureNotification.notiTargetUserId.eq(userContext.getUserId()),
                         tFeatureNotification.readYn.eq(false),
                         tFeatureNotification.sendYn.eq(false)
                 )

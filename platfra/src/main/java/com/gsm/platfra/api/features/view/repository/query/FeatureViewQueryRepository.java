@@ -15,7 +15,7 @@ import static com.gsm.platfra.api.data.feature.view.QTFeatureView.tFeatureView;
 
 @Repository
 @RequiredArgsConstructor
-public class TFeatureViewQueryRepository {
+public class FeatureViewQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public FeatureViewDto isDuplicateAccess(FeatureViewDto dto) {
