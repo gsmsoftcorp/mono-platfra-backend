@@ -4,6 +4,7 @@ import com.gsm.platfra.api.data.feature.noti.TFeatureNotification;
 import com.gsm.platfra.api.features.noti.dto.NotificationDto;
 import com.gsm.platfra.api.data.feature.noti.TFeatureNotificationRepository;
 import com.gsm.platfra.api.features.noti.repository.query.TFeatureNotificationQueryRepository;
+import com.gsm.platfra.system.security.context.UserContext;
 import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class TFeatureNotificationService {
 
     public List<NotificationDto> getNotifications() {
         String userId = UserContextUtil.getUserContext().getUserId();
-        List<NotificationDto> userNotifications = tFeatureNotificationQueryRepository.getUserNotifications(userId);
+        UserContext userContext = UserContextUtil.getUserContext();
+        List<NotificationDto> userNotifications = tFeatureNotificationQueryRepository.getUserNotifications(userContext);
         return userNotifications;
     }
 

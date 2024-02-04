@@ -1,10 +1,11 @@
 package com.gsm.platfra.api.features.view.dto;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
-@ToString
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class FeatureViewCountDto {
 
     private String contentsCd;

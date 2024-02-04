@@ -15,7 +15,7 @@ import static com.gsm.platfra.api.data.feature.comment.QTFeatureComment.tFeature
 
 @Repository
 @RequiredArgsConstructor
-public class TFeatureCommentQueryRepository {
+public class FeatureCommentQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<CommentListResDto> list(FeatureCommentDto dto) {

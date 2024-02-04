@@ -10,7 +10,7 @@ import static com.gsm.platfra.api.data.platfraboard.QTPlatfraBoardContent.tPlatf
 
 @Repository
 @RequiredArgsConstructor
-public class TPlatfraBoardContentQueryRepository {
+public class PlatfraBoardContentQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public void updateCount(FeatureViewCountDto dto){
