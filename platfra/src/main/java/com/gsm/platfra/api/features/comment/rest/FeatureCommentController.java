@@ -29,4 +29,14 @@ public class FeatureCommentController {
     public List<FeatureCommentDto> reply(@RequestBody FeatureCommentDto featureCommentDto) {
         return featureCommentService.reply(featureCommentDto);
     }
+
+    @PutMapping
+    public void update(@RequestBody FeatureCommentDto featureCommentDto) {
+        featureCommentService.update(featureCommentDto);
+    }
+
+    @DeleteMapping
+    public void delete(@RequestBody FeatureCommentDto featureCommentDto) {
+        featureCommentService.delete(featureCommentDto);
+    }
 }
