@@ -26,7 +26,7 @@ public record SignupDto(
 ) {
 
     public static TAccount toEntity(SignupDto dto, PasswordEncoder passwordEncoder) {
-        return TAccount.builder()
+        TAccount account = TAccount.builder()
                 .userId(dto.userId)
                 .email(dto.email)
                 .password(passwordEncoder.encode(dto.password))
@@ -36,5 +36,8 @@ public record SignupDto(
                 .birthday(DateUtils.toLocalDate(dto.birthdate))
                 .build();
 
+        account.setModUserId("ADMIN");
+        account.setRegUserId("ADMIN");
+        return account;
     }
 }

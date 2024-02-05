@@ -1,5 +1,6 @@
 package com.gsm.platfra.config.security;
 
+import com.gsm.platfra.system.security.filter.AuthExceptionHandlerFilter;
 import com.gsm.platfra.system.security.filter.AuthFilter;
 import com.gsm.platfra.system.security.provider.AuthProvider;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthProvider authProvider;
+    private final AuthExceptionHandlerFilter authExceptionHandlerFilter;
 
     private final String ROLE_ADMIN = "ADMIN";
     private final String ROLE_USER = "USER";
@@ -39,6 +41,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(new AuthFilter(authProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(authExceptionHandlerFilter, AuthFilter.class)
                 // 리소스 같은 접근 처리 불가
                 .authorizeHttpRequests(
                         auth ->
