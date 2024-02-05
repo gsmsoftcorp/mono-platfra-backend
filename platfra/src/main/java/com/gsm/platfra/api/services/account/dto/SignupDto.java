@@ -8,13 +8,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public record SignupDto(
     @NotBlank(message = "아이디를 입력해주세요.")
     String userId,
+    @NotBlank(message = "이메일을 입력해주세요")
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     String email,
     @Pattern(regexp = "\\d+(-\\d+)*", message = "핸드폰 번호가 올바르지 않습니다.")
     @Size(min = 10, max = 11, message = "핸드폰 번호가 올바르지 않습니다.")
     String phone,
 
-    @NotNull
+    @NotBlank
     @Size(min = 8, max = 64)
     String password,
     @Size(max = 64)
@@ -25,7 +26,7 @@ public record SignupDto(
 ) {
 
     public static TAccount toEntity(SignupDto dto, PasswordEncoder passwordEncoder) {
-        return TAccount.builder()
+        TAccount account = TAccount.builder()
                 .userId(dto.userId)
                 .email(dto.email)
                 .password(passwordEncoder.encode(dto.password))
@@ -35,5 +36,8 @@ public record SignupDto(
                 .birthday(DateUtils.toLocalDate(dto.birthdate))
                 .build();
 
+        account.setModUserId("ADMIN");
+        account.setRegUserId("ADMIN");
+        return account;
     }
 }

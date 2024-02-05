@@ -23,8 +23,6 @@ public class AccountController {
     @PostMapping("/login")
     public String login(@RequestBody @Valid LoginDto loginDto) {
         String token = accountService.login(loginDto);
-//        HttpHeaders httpHeaders = HttpHeaderUtils.addAuthorizationToken(token);
-        // Todo ) 김승동 : 토큰은 헤더에 담아서 보낼까요?
         return token;
     }
 

@@ -1,14 +1,15 @@
 package com.gsm.platfra.api.services.account.service;
 
 import com.gsm.platfra.api.data.account.TAccount;
+import com.gsm.platfra.api.data.account.TAccountRepository;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
-import com.gsm.platfra.api.data.account.TAccountRepository;
-import com.gsm.platfra.common.codes.ErrorMessage;
 import com.gsm.platfra.system.security.provider.AuthProvider;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +24,13 @@ public class AccountService {
 
     public String login(LoginDto loginDto) {
 
-        TAccount tAccount = TAccountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다."));
+        TAccount tAccount = TAccountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 이메일입니다."));
         if (!passwordEncoder.matches( loginDto.password(), tAccount.getPassword())) {
             log.debug("비밀번호가 일치하지 않습니다.");
-            return ErrorMessage.INVALID_PASSWORD.getMessage();
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
-        String token = tokenProvider.generateAccessToken(tAccount);
-
-        return token;
+        return tokenProvider.generateAccessToken(tAccount);
     }
 
     public void signup(SignupDto signupDto) {
@@ -43,17 +42,17 @@ public class AccountService {
     }
 
     private void isDuplicatedUserInfo(SignupDto signupDto) {
-        // todo: 예외 처리가 아닌 메세지만 던진다.
         TAccountRepository.findByUserId(signupDto.userId()).ifPresent(tAccount -> {
             log.debug("이미 존재하는 아이디입니다.");
+            throw new EntityNotFoundException("이미 존재하는 아이디입니다.");
         });
 
         TAccountRepository.findByEmail(signupDto.email()).ifPresent(tAccount -> {
             log.debug("이미 존재하는 이메일입니다.");
+            throw new EntityNotFoundException("이미 존재하는 이메일입니다.");
         });
     }
 
-    // 아이디, 이메일, 전화번호
     public String googleLogin(GoogleLoginDto googleLoginDto) {
         // Todo : 일반 회원으로 가입한 이메일인 경우 -> 예외 처리?
         TAccount tAccount = TAccountRepository.findByUserId(googleLoginDto.email()).orElseGet(
@@ -65,7 +64,7 @@ public class AccountService {
 
     private TAccount googleSignup(GoogleLoginDto googleLoginDto) {
         TAccountRepository.findByUserNm(googleLoginDto.username()).ifPresent(tAccount -> {
-            throw new IllegalArgumentException("이미 존재하는 이름입니다.");
+            throw new DuplicateKeyException("이미 존재하는 이름입니다.");
         });
 
         TAccount entity = GoogleLoginDto.toEntity(googleLoginDto);

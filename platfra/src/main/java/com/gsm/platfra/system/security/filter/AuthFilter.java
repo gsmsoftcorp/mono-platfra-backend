@@ -1,5 +1,6 @@
 package com.gsm.platfra.system.security.filter;
 
+import com.gsm.platfra.common.exception.custom.AuthTokenException;
 import com.gsm.platfra.system.security.provider.AuthProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,12 +28,15 @@ public class AuthFilter extends OncePerRequestFilter {
 
         String token = this.resolveToken(request);
 
-        if (StringUtils.hasText(token) && authProvider.validateToken(token)) {
+
+        if (StringUtils.hasText(token)) {
+            authProvider.validateToken(token);
             Authentication authentication = authProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.debug("Security Context에 '{}' 정보 저장", authentication.getName());
         } else {
             log.debug("유효한 JWT 토큰이 없습니다, {}", token);
+            throw new AuthTokenException("JWT 토큰이 없습니다");
         }
 
         filterChain.doFilter(request, response);
