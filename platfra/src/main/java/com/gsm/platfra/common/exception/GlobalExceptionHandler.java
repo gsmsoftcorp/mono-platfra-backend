@@ -1,6 +1,7 @@
 package com.gsm.platfra.common.exception;
 
 import com.gsm.platfra.common.exception.custom.BusinessLogicException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.BindException;
@@ -43,6 +44,16 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler({IllegalArgumentException.class})
+    protected ExceptionResponse handleIllegalArgumentException(IllegalArgumentException e) {
+        log.error("IllegalArgumentException", e);
+        return new ExceptionResponse(
+                VALIDATION_PARAMETER_ERROR.getCode(),
+                VALIDATION_PARAMETER_ERROR.getMessage(),
+                e.getMessage()
+        );
+    }
+
     /**
      * DB 데이터 베이스 무결성을 위반한 경우
      */
@@ -57,6 +68,19 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 엔티티가 존재하지 않을 때 오류 발생
+     */
+    @ExceptionHandler({EntityNotFoundException.class})
+    protected ExceptionResponse handleEntityNotFoundException(EntityNotFoundException e) {
+        log.error("EntityNotFoundException", e);
+        return new ExceptionResponse(
+                ENTITY_NOT_FOUND.getCode(),
+                ENTITY_NOT_FOUND.getMessage(),
+                e.getMessage()
+        );
+    }
+
+    /**
      *  이외의 비즈니스 로직 실행 중 오류 발생한 경우
      */
     @ExceptionHandler({BusinessLogicException.class})
@@ -65,6 +89,16 @@ public class GlobalExceptionHandler {
         return new ExceptionResponse(
                 BUSINESS_LOGIC_ERROR.getCode(),
                 BUSINESS_LOGIC_ERROR.getMessage(),
+                e.getMessage()
+        );
+    }
+
+    @ExceptionHandler({Exception.class})
+    protected ExceptionResponse handleException(Exception e) {
+        log.error("Exception", e);
+        return new ExceptionResponse(
+                SERVER_ERROR.getCode(),
+                SERVER_ERROR.getMessage(),
                 e.getMessage()
         );
     }

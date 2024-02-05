@@ -1,6 +1,7 @@
 package com.gsm.platfra.system.security.provider;
 
 import com.gsm.platfra.api.data.account.TAccount;
+import com.gsm.platfra.common.exception.custom.AuthTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -70,20 +71,22 @@ public class AuthProvider implements InitializingBean {
         return new UsernamePasswordAuthenticationToken(userId, token, null);
     }
 
-    public boolean validateToken(String token) {
+    public void validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.debug("잘못된 JWT 서명입니다.");
+            throw new AuthTokenException("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
             log.debug("만료된 JWT 토큰입니다.");
+            throw new AuthTokenException("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
             log.debug("지원되지 않는 JWT 토큰입니다.");
+            throw new AuthTokenException("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
             log.debug("JWT 토큰이 잘못되었습니다.");
+            throw new AuthTokenException("JWT 토큰이 잘못되었습니다.");
         }
-        return false;
     }
 
 }
