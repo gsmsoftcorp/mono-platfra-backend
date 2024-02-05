@@ -5,7 +5,7 @@ import com.gsm.platfra.common.util.DateUtils;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public record SignupDto(
+public record SignupDto( // TODO 멤버필드 접근제한자 private 설정필요, 기본타입 Wrapper 클래스로 통일
     @NotBlank(message = "아이디를 입력해주세요.")
     String userId,
     @NotBlank(message = "이메일을 입력해주세요")
@@ -26,18 +26,18 @@ public record SignupDto(
 ) {
 
     public static TAccount toEntity(SignupDto dto, PasswordEncoder passwordEncoder) {
-        TAccount account = TAccount.builder()
-                .userId(dto.userId)
-                .email(dto.email)
-                .password(passwordEncoder.encode(dto.password))
-                .phone(dto.phone)
-                .userNm(dto.username)
-                .gender(dto.gender)
-                .birthday(DateUtils.toLocalDate(dto.birthdate))
-                .build();
-
-        account.setModUserId("ADMIN");
-        account.setRegUserId("ADMIN");
-        return account;
+        TAccount tAccount = TAccount.builder()
+            .userId(dto.userId)
+            .email(dto.email)
+            .password(passwordEncoder.encode(dto.password))
+            .phone(dto.phone)
+            .userNm(dto.username)
+            .gender(dto.gender)
+            .birthday(DateUtils.toLocalDate(dto.birthdate))
+            .build();
+        
+        tAccount.setRegUserId(dto.userId);
+        tAccount.setModUserId(dto.userId);
+        return tAccount;
     }
 }

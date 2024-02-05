@@ -7,7 +7,7 @@ import com.gsm.platfra.api.data.platfraboard.TPlatfraBoard;
 import com.gsm.platfra.api.data.platfraboard.TPlatfraBoardRepository;
 import com.gsm.platfra.api.services.board.dto.PlatfraBoardResDto;
 import com.gsm.platfra.api.services.board.mapper.PlatfraBoardMapper;
-import com.gsm.platfra.api.services.board.repository.query.PlatfraBoardQueryRepository;
+import com.gsm.platfra.api.services.board.query.PlatfraBoardQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;

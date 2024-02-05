@@ -3,7 +3,7 @@ package com.gsm.platfra.api.services.board.service;
 import com.gsm.platfra.api.data.platfraboard.*;
 import com.gsm.platfra.api.services.board.dto.PlatfraBoardContentResDto;
 import com.gsm.platfra.api.services.board.mapper.PlatfraBoardContentMapper;
-import com.gsm.platfra.api.services.board.repository.query.PlatfraBoardContentQueryRepository;
+import com.gsm.platfra.api.services.board.query.PlatfraBoardContentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;

@@ -4,7 +4,7 @@ import com.gsm.platfra.api.data.feature.comment.FeatureCommentDto;
 import com.gsm.platfra.api.data.feature.comment.TFeatureComment;
 import com.gsm.platfra.api.features.comment.dto.CommentListResDto;
 import com.gsm.platfra.api.data.feature.comment.TFeatureCommentRepository;
-import com.gsm.platfra.api.features.comment.repository.query.FeatureCommentQueryRepository;
+import com.gsm.platfra.api.features.comment.query.FeatureCommentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

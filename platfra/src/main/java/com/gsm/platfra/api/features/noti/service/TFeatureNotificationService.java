@@ -3,7 +3,7 @@ package com.gsm.platfra.api.features.noti.service;
 import com.gsm.platfra.api.data.feature.noti.TFeatureNotification;
 import com.gsm.platfra.api.features.noti.dto.NotificationDto;
 import com.gsm.platfra.api.data.feature.noti.TFeatureNotificationRepository;
-import com.gsm.platfra.api.features.noti.repository.query.TFeatureNotificationQueryRepository;
+import com.gsm.platfra.api.features.noti.query.TFeatureNotificationQueryRepository;
 import com.gsm.platfra.system.security.context.UserContext;
 import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;
