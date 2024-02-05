@@ -5,7 +5,7 @@ import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.data.platfra.TPlatfra;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraMainDto;
 import com.gsm.platfra.api.data.platfra.TPlatfraRepository;
-import com.gsm.platfra.api.services.platfra.repository.query.PlatfraQueryRepository;
+import com.gsm.platfra.api.services.platfra.query.PlatfraQueryRepository;
 import com.gsm.platfra.system.security.context.UserContext;
 import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;

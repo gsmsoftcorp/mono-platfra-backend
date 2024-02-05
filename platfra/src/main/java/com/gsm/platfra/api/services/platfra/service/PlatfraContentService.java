@@ -4,7 +4,7 @@ import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
 import com.gsm.platfra.api.data.platfra.TPlatfraContent;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraContentMainResDto;
 import com.gsm.platfra.api.data.platfra.TPlatfraContentRepository;
-import com.gsm.platfra.api.services.platfra.repository.query.PlatfraContentQueryRepository;
+import com.gsm.platfra.api.services.platfra.query.PlatfraContentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

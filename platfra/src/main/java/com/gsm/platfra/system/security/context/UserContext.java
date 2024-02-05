@@ -25,7 +25,4 @@ public class UserContext extends JwtClaimsStruct {
 			+ ", userIp=" + userIp + ", toString()=" + super.toString() + "]";
 	}
 	
-	
-	
-	
 }
