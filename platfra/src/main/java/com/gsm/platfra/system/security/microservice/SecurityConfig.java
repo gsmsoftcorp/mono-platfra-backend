@@ -1,6 +1,7 @@
 package com.gsm.platfra.system.security.microservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gsm.platfra.system.security.filter.AuthExceptionHandlerFilter;
 import com.gsm.platfra.system.security.microservice.filter.AuthFilter;
 import com.gsm.platfra.system.security.microservice.provider.AuthProvider;
 import com.gsm.platfra.system.security.util.JwtUtil;
@@ -37,6 +38,7 @@ public class SecurityConfig {
     
     private final AuthProvider authProvider;
     
+    private final AuthExceptionHandlerFilter authExceptionHandlerFilter;
     @Lazy
     @Autowired(required = false)
     private SecurityIgnoreProperties securityIgnoreProperties;
@@ -75,6 +77,7 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable)// REST API 방식으로 CSRF 보안 토큰 생성 x
             .addFilterBefore(new AuthFilter(authProvider), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(authExceptionHandlerFilter, AuthFilter.class)
 //            .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler)// TODO 인증 실패 핸들링 추가 필요
             .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션 사용 x
             .authorizeHttpRequests(
