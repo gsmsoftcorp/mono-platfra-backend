@@ -5,6 +5,8 @@ import com.gsm.platfra.api.data.account.TAccountRepository;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
+import com.gsm.platfra.api.services.account.oauth.OauthMember;
+import com.gsm.platfra.api.services.account.oauth.OauthParams;
 import com.gsm.platfra.system.security.microservice.provider.AuthProvider;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class AccountService {
     private final AuthProvider tokenProvider;
     private final TAccountRepository TAccountRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RequestOauthInfoService requestOauthInfoService;
 
     public String login(LoginDto loginDto) {
 
@@ -71,4 +74,23 @@ public class AccountService {
         return TAccountRepository.save(entity);
     }
 
+    public String oauthLogin(OauthParams oauthParams){
+        OauthMember oauthMember = requestOauthInfoService.request(oauthParams);
+
+        TAccount tAccount = TAccountRepository.findByUserId(oauthMember.getEmail()).orElseGet(
+                () -> oauthSignup(oauthMember)
+        );
+
+        return tokenProvider.generateAccessToken(tAccount);
+    }
+
+    public TAccount oauthSignup(OauthMember oauthMember) {
+        // TODO : oauth 회원가입 시 가입 정보 어떻게 받을 것인지?
+        TAccountRepository.findByUserNm(oauthMember.getNickName()).ifPresent(tAccount -> {
+            throw new DuplicateKeyException("이미 존재하는 이름입니다.");
+        });
+        log.debug("전달받은 유저정보:: " + oauthMember.getEmail());
+        TAccount tAccount = oauthMember.toEntity(oauthMember);
+        return TAccountRepository.save(tAccount);
+    }
 }
