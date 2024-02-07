@@ -3,6 +3,7 @@ package com.gsm.platfra.api.features.like.rest;
 import com.gsm.platfra.api.data.feature.like.FeatureLikeDto;
 import com.gsm.platfra.api.features.like.dto.FeatureLikeResDto;
 import com.gsm.platfra.api.features.like.service.FeatureLikeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class FeatureLikeController {
     * @return
     * */
     @GetMapping
-    public FeatureLikeResDto getLikeList(FeatureLikeDto dto){
+    public FeatureLikeResDto getLikeList(@Valid FeatureLikeDto dto){
         return featureLikeService.getContentLikeList(dto);
     }
 
@@ -34,7 +35,7 @@ public class FeatureLikeController {
     * @return
     * */
     @PutMapping
-    public void like(@RequestBody FeatureLikeDto featureLikeDto){
+    public void like(@RequestBody @Valid FeatureLikeDto featureLikeDto){
         featureLikeService.like(featureLikeDto);
     }
 }

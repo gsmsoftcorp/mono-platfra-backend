@@ -6,6 +6,7 @@ import com.gsm.platfra.api.data.feature.like.TFeatureLikeRepository;
 import com.gsm.platfra.api.features.like.dto.FeatureLikeResDto;
 import com.gsm.platfra.api.features.like.mapper.FeatureLikeMapper;
 import com.gsm.platfra.api.features.like.query.TFeatureLikeQueryRepository;
+import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ public class FeatureLikeService {
 
     @Transactional
     public void like(FeatureLikeDto dto){
+        dto.setUserId(UserContextUtil.getUserContext().getUserId());
         TFeatureLike like = likeQueryRepository.getLike(dto);
 
         if(like == null){
@@ -30,7 +32,6 @@ public class FeatureLikeService {
         }
         else{
             like.update();
-            System.out.println(like);
             likeRepository.saveAndFlush(like);
         }
     }
