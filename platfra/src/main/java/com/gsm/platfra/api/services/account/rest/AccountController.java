@@ -3,8 +3,10 @@ package com.gsm.platfra.api.services.account.rest;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
+import com.gsm.platfra.api.services.account.oauth.kakao.KakaoParams;
 import com.gsm.platfra.api.services.account.service.AccountService;
 import com.gsm.platfra.api.services.account.openfeign.GoogleLogin;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,13 @@ public class AccountController {
     public String googleLogin(String accessToken) {
         GoogleLoginDto googleLoginDto = googleLogin.googleLogin(accessToken);
         String token = accountService.googleLogin(googleLoginDto);
+        return token;
+    }
+
+    @GetMapping("kakao")
+    public String oauthLogin(String code){
+        KakaoParams kakaoParams = new KakaoParams(code);
+        String token = accountService.oauthLogin(kakaoParams);
         return token;
     }
 }

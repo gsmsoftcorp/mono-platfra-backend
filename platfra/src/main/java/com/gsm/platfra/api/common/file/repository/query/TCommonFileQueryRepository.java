@@ -20,6 +20,7 @@ public class TCommonFileQueryRepository {
                 .select(
                         Projections.fields(
                                 CommonFileDto.class,
+                                tCommonFile.fileSeq,
                                 tCommonFile.contentsCd,
                                 tCommonFile.contentsSeq,
                                 tCommonFile.filePath,
