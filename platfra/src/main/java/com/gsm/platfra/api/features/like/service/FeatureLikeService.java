@@ -23,7 +23,9 @@ public class FeatureLikeService {
 
     @Transactional
     public void like(FeatureLikeDto dto){
+
         dto.setUserId(UserContextUtil.getUserContext().getUserId());
+
         TFeatureLike like = likeQueryRepository.getLike(dto);
 
         if(like == null){

@@ -28,7 +28,8 @@ public class ContentSaveService {
 
     @Transactional
     public void saveContent(String platfraId, Long platfraBoardSeq, Long contentSeq) {
-        TPlatfra tPlatfra = tPlatfraRepository.findTPlatfraByPlatfraId(platfraId).orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));
+        TPlatfra tPlatfra = tPlatfraRepository.findTPlatfraByPlatfraId(platfraId)
+            .orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));
         String userId = UserContextUtil.getUserContext().getUserId();
 
         ContentSave contentSave = ContentSave.builder()
@@ -43,7 +44,8 @@ public class ContentSaveService {
 
     @Transactional
     public void saveContent(String platfraId, Long contentSeq) {
-        TPlatfra tPlatfra = tPlatfraRepository.findTPlatfraByPlatfraId(platfraId).orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));
+        TPlatfra tPlatfra = tPlatfraRepository.findTPlatfraByPlatfraId(platfraId)
+            .orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));
         String userId = UserContextUtil.getUserContext().getUserId();
 
         ContentSave contentSave = ContentSave.builder()
