@@ -1,4 +1,4 @@
-package com.gsm.platfra.api.common.code.repository;
+package com.gsm.platfra.api.data.common.code;
 
 import com.gsm.platfra.api.data.common.code.TCommonCode;
 import org.springframework.data.jpa.repository.JpaRepository;
