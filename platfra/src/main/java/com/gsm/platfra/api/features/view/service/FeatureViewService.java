@@ -43,7 +43,7 @@ public class FeatureViewService {
             // 1. contentCd 가져오기
             // 2. contentCd 별로 seq groupBy해서 count 가져오기
             // 3. 받은 값들에 해당하는 content에 viewCount Update
-            List<String> contentList = commonCodeQueryRepository.getContentsInfo(); // TODO api.common 패키지에서 호출 해당파일 삭제
+            List<String> contentList = commonCodeQueryRepository.getContentsInfo();
             contentList.forEach(contentCd -> {
                 List<FeatureViewCountDto> viewCountDtoList = featureViewQueryRepository.getAddViewList(contentCd);
                 // 컨텐츠별 조회수 증가
