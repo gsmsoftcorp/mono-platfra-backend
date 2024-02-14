@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.common.code.service;
 
-import com.gsm.platfra.api.common.code.repository.TCommonCodeRepository;
+import com.gsm.platfra.api.data.common.code.TCommonCodeRepository;
 import com.gsm.platfra.api.data.common.code.CommonCodeDto;
 import com.gsm.platfra.api.data.common.code.TCommonCode;
 import lombok.RequiredArgsConstructor;
