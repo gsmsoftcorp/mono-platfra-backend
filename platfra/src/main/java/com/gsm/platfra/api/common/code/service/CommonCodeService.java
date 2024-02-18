@@ -1,8 +1,14 @@
 package com.gsm.platfra.api.common.code.service;
 
+import com.gsm.platfra.api.data.common.code.CommonCodeEnum;
 import com.gsm.platfra.api.data.common.code.TCommonCodeRepository;
 import com.gsm.platfra.api.data.common.code.CommonCodeDto;
 import com.gsm.platfra.api.data.common.code.TCommonCode;
+import com.gsm.platfra.api.data.platfra.TPlatfraContentRepository;
+import com.gsm.platfra.api.data.platfra.TPlatfraRepository;
+import com.gsm.platfra.api.data.platfraboard.TPlatfraBoardContentRepository;
+import com.gsm.platfra.api.data.platfraboard.TPlatfraBoardRepository;
+import com.gsm.platfra.api.features.dto.FeatureDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +27,11 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true) // 필수!! 실수방지
 public class CommonCodeService {
     private final TCommonCodeRepository tCommonCodeRepository;
+
+    private final TPlatfraRepository tPlatfraRepository;
+    private final TPlatfraContentRepository tPlatfraContentRepository;
+    private final TPlatfraBoardRepository tPlatfraBoardRepository;
+    private final TPlatfraBoardContentRepository tPlatfraBoardContentRepository;
     
     public List<CommonCodeDto> getList(String code, String type) {
         List<TCommonCode> commonCodeList = tCommonCodeRepository.findAllByParentCdAndTypeAndDelYn(code, type, false);
@@ -54,5 +65,38 @@ public class CommonCodeService {
         
         return commonCodeDto;
     }
+
+    public boolean checkUsableFeat(FeatureDto featureDto){
+
+        String commonCd = featureDto.getCommonCd();
+        if(commonCd.equals(CommonCodeEnum.CONTENTS.getCommonCd())){
+            return !tPlatfraContentRepository.existsById(featureDto.getFeatureSeq());
+        }else if(commonCd.equals(CommonCodeEnum.PLATFRA.getCommonCd())){
+            return tPlatfraRepository.existsByPlatfraId(featureDto.getFeatureNo());
+        }else if(commonCd.equals(CommonCodeEnum.PLATFRA_BOARD.getCommonCd())){
+            return tPlatfraBoardRepository.existsById(featureDto.getFeatureSeq());
+        }else if(commonCd.equals(CommonCodeEnum.PLATFRA_BOARD_CONTENT.getCommonCd())){
+            return tPlatfraBoardContentRepository.existsById(featureDto.getFeatureSeq());
+        } else if(commonCd.equals(CommonCodeEnum.PLATFRA_BOARD_COMMENT.getCommonCd())){
+            // 여기부터 작업 해
+        }else if(commonCd.equals(CommonCodeEnum.PLATFRA_COMMENT.getCommonCd())){
+
+        }else if(commonCd.equals(CommonCodeEnum.PLATFRA_CONTENT.getCommonCd())){
+
+        }
+        return false;
+    }
+    /*  CONTENTS("CONTENTS","ROOT"),
+  PLATFRA("PLATFRA","CONTENTS"),
+  PLATFRA_BOARD("PLATFRA_BOARD","PLATFRA"),
+  PLATFRA_BOARD_COMMENT("PLATFRA_BOARD_COMMENT","PLATFRA_BOARD"),
+  PLATFRA_BOARD_CONTENT("PLATFRA_BOARD_CONTENT","PLATFRA_BOARD"),
+  PLATFRA_COMMENT("PLATFRA_COMMENT","PLATFRA"),
+  PLATFRA_CONTENT("PLATFRA_CONTENT","PLATFRA"),
+  ROLE("ROLE","ROOT"),
+  ROLE_ADMIN("ROLE_ADMIN","ROLE"),
+  ROLE_GUEST("ROLE_GUEST","ROLE"),
+  ROLE_USER("ROLE_USER","ROLE"),
+  ROOT("ROOT","");*/
     
 }
