@@ -15,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlatfraMainDto {
+public class PlatfraMainDto  {
+    private String message;
     private PlatfraDto platfraDto; //플랫폼 마스터
     private List<PlatfraContentDto> latestContentList;  //최신 컨텐츠 리스트
     private List<PlatfraContentDto> hotContentList;  //인기 컨텐츠 리스트

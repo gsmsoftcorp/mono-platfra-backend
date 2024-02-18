@@ -1,6 +1,6 @@
 package com.gsm.platfra.system.security.filter;
 
-import com.gsm.platfra.common.exception.custom.AuthTokenException;
+import com.gsm.platfra.exception.custom.AuthTokenException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,8 +10,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static com.gsm.platfra.common.exception.ExceptionCode.AUTHENTICATION_FAILED;
-import static com.gsm.platfra.common.util.ErrorMessageUtil.makeErrorJson;
+import static com.gsm.platfra.exception.ExceptionCode.AUTHENTICATION_FAILED;
+import static com.gsm.platfra.util.ErrorMessageUtil.makeErrorJson;
 
 @Component
 public class AuthExceptionHandlerFilter extends OncePerRequestFilter {

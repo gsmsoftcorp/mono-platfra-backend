@@ -1,6 +1,6 @@
 package com.gsm.platfra.system.security.microservice.filter;
 
-import com.gsm.platfra.common.exception.custom.AuthTokenException;
+import com.gsm.platfra.exception.custom.AuthTokenException;
 import com.gsm.platfra.system.security.microservice.provider.AuthProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

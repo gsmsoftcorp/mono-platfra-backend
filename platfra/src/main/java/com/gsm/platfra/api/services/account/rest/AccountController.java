@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.gsm.platfra.common.codes.ResponseCode.SUCCESS;
+import static com.gsm.platfra.codes.ResponseCode.SUCCESS;
 
 @Slf4j
 @RequiredArgsConstructor

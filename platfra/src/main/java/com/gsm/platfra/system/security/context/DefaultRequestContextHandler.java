@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsm.platfra.system.security.util.BeanUtils;
 import com.gsm.platfra.system.security.util.JwtUtil;
-import com.gsm.platfra.common.util.NetworkUtils;
+import com.gsm.platfra.util.NetworkUtils;
 import com.gsm.platfra.system.security.util.uid.TimeBaseUID;
 import com.gsm.platfra.system.security.util.uid.UID;
 import io.jsonwebtoken.Claims;

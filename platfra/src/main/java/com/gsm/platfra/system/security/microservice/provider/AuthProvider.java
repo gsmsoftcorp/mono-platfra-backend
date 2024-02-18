@@ -1,7 +1,7 @@
 package com.gsm.platfra.system.security.microservice.provider;
 
 import com.gsm.platfra.api.data.account.TAccount;
-import com.gsm.platfra.common.exception.custom.AuthTokenException;
+import com.gsm.platfra.exception.custom.AuthTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
