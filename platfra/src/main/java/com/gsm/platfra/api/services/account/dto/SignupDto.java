@@ -1,7 +1,7 @@
 package com.gsm.platfra.api.services.account.dto;
 
 import com.gsm.platfra.api.data.account.TAccount;
-import com.gsm.platfra.common.util.DateUtils;
+import com.gsm.platfra.util.DateUtils;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

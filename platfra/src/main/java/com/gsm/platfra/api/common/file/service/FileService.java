@@ -8,7 +8,7 @@ import com.gsm.platfra.api.common.file.dto.FileDownloadDto;
 import com.gsm.platfra.api.data.common.file.CommonFileDto;
 import com.gsm.platfra.api.common.file.repository.query.TCommonFileQueryRepository;
 import com.gsm.platfra.api.data.platfra.TPlatfraRepository;
-import com.gsm.platfra.common.util.S3FileComponent;
+import com.gsm.platfra.util.S3FileComponent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

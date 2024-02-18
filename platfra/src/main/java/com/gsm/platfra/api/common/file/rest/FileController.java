@@ -3,7 +3,7 @@ package com.gsm.platfra.api.common.file.rest;
 import com.gsm.platfra.api.common.file.dto.FileDownloadDto;
 import com.gsm.platfra.api.common.file.service.FileService;
 import com.gsm.platfra.api.data.common.file.CommonFileDto;
-import com.gsm.platfra.common.util.CommonUtils;
+import com.gsm.platfra.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
