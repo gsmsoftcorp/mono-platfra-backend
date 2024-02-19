@@ -77,26 +77,11 @@ public class CommonCodeService {
             return tPlatfraBoardRepository.existsById(featureDto.getFeatureSeq());
         }else if(commonCd.equals(CommonCodeEnum.PLATFRA_BOARD_CONTENT.getCommonCd())){
             return tPlatfraBoardContentRepository.existsById(featureDto.getFeatureSeq());
-        } else if(commonCd.equals(CommonCodeEnum.PLATFRA_BOARD_COMMENT.getCommonCd())){
-            // 여기부터 작업 해
-        }else if(commonCd.equals(CommonCodeEnum.PLATFRA_COMMENT.getCommonCd())){
-
         }else if(commonCd.equals(CommonCodeEnum.PLATFRA_CONTENT.getCommonCd())){
-
+            return tPlatfraContentRepository.existsById(featureDto.getFeatureSeq());
         }
         return false;
     }
-    /*  CONTENTS("CONTENTS","ROOT"),
-  PLATFRA("PLATFRA","CONTENTS"),
-  PLATFRA_BOARD("PLATFRA_BOARD","PLATFRA"),
-  PLATFRA_BOARD_COMMENT("PLATFRA_BOARD_COMMENT","PLATFRA_BOARD"),
-  PLATFRA_BOARD_CONTENT("PLATFRA_BOARD_CONTENT","PLATFRA_BOARD"),
-  PLATFRA_COMMENT("PLATFRA_COMMENT","PLATFRA"),
-  PLATFRA_CONTENT("PLATFRA_CONTENT","PLATFRA"),
-  ROLE("ROLE","ROOT"),
-  ROLE_ADMIN("ROLE_ADMIN","ROLE"),
-  ROLE_GUEST("ROLE_GUEST","ROLE"),
-  ROLE_USER("ROLE_USER","ROLE"),
-  ROOT("ROOT","");*/
+
     
 }

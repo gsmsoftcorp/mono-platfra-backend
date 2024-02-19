@@ -2,7 +2,6 @@ package com.gsm.platfra.api.features.like.query;
 
 
 import com.gsm.platfra.api.data.feature.like.FeatureLikeDto;
-import com.gsm.platfra.api.data.feature.like.TFeatureLike;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -39,11 +38,11 @@ public class TFeatureLikeQueryRepository {
                 ).fetch();
     }
 
-    public TFeatureLike getLike(FeatureLikeDto dto){
+    public FeatureLikeDto getLike(FeatureLikeDto dto){
         return queryFactory
             .select(
                 Projections.fields(
-                    TFeatureLike.class, //TODO DTO로 조회 바랍니다
+                    FeatureLikeDto.class,
                 tFeatureLike.featureLikeSeq,
                 tFeatureLike.contentsCd,
                 tFeatureLike.contentsSeq,
@@ -57,7 +56,6 @@ public class TFeatureLikeQueryRepository {
         )
             .from(tFeatureLike)
             .where(
-                tFeatureLike.userId.eq(dto.getUserId()),
                 tFeatureLike.contentsCd.eq(dto.getContentsCd()),
                 tFeatureLike.contentsSeq.eq(dto.getContentsSeq())
             ).fetchOne();

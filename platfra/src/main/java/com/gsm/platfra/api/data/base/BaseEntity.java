@@ -27,6 +27,7 @@ public abstract class BaseEntity implements AuditBaseEntity {
     
     @Column(name = "REG_DATE", nullable = false)
     @CreatedDate
+    @Setter
     private LocalDateTime regDate;
     
     @Column(name = "MOD_USER_ID", nullable = false, length = 64)
@@ -35,5 +36,6 @@ public abstract class BaseEntity implements AuditBaseEntity {
     
     @Column(name = "MOD_DATE", nullable = false)
     @LastModifiedDate
+    @Setter
     private LocalDateTime modDate;
 }
