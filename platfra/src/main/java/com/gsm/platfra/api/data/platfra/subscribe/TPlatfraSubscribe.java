@@ -16,6 +16,8 @@ public class TPlatfraSubscribe extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PLATFRA_ID", nullable = false)
     private TPlatfra platfra;
+
+    private String userId;
     
     //TODO [JPA Buddy] generate columns from DB
 }

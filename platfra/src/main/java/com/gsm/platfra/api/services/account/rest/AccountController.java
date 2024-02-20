@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.account.rest;
 
+import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
@@ -7,10 +8,13 @@ import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.oauth.kakao.KakaoParams;
 import com.gsm.platfra.api.services.account.openfeign.GoogleLogin;
 import com.gsm.platfra.api.services.account.service.AccountService;
+import com.gsm.platfra.api.services.platfra.dto.ContentDto;
+import com.gsm.platfra.api.services.platfra.dto.SubscribedPlatfraDto;
 import com.gsm.platfra.api.services.platfra.service.ContentSaveService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,5 +68,20 @@ public class AccountController {
             @PathVariable Long contentSeq) {
         contentSaveService.deleteContent(userId, contentSeq);
         return SUCCESS.toString();
+    }
+
+    @GetMapping("/user/{userId}/platfra")
+    public List<PlatfraDto> getMyPlatfra(@PathVariable String userId) {
+        return accountService.getMyPlatfra();
+    }
+
+    @GetMapping("/user/{userId}/subscribe")
+    public SubscribedPlatfraDto getMySubscribe(@PathVariable String userId) {
+        return accountService.getSubscribedPlatfra();
+    }
+
+    @GetMapping("/user/{userId}contents")
+    public ContentDto getContents(@PathVariable String userId, Pageable contentsPageable, Pageable boardContentsPageable) {
+        return accountService.getContents(contentsPageable, boardContentsPageable);
     }
 }

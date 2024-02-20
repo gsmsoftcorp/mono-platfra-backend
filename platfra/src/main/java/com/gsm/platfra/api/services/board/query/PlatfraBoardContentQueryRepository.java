@@ -5,6 +5,7 @@ import com.gsm.platfra.api.features.view.dto.FeatureViewCountDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,6 +42,30 @@ public class PlatfraBoardContentQueryRepository {
                 contentDto.getContent() == null ? null : tPlatfraBoardContent.content.like("%"+contentDto.getContent()+"%")
             )
             .fetch();
+  }
+
+  public List<PlatfraBoardContentDto> getMyBoardContent(String userId, Pageable pageable) {
+      return
+              queryFactory
+                      .select(Projections.fields(
+                                      PlatfraBoardContentDto.class,
+                                      tPlatfraBoardContent.platfraBoardSeq,
+                                      tPlatfraBoardContent.contentSeq,
+                                      tPlatfraBoardContent.contentNo,
+                                      tPlatfraBoardContent.title,
+                                      tPlatfraBoardContent.content,
+                                      tPlatfraBoardContent.regUserId,
+                                      tPlatfraBoardContent.regDate,
+                                      tPlatfraBoardContent.modUserId,
+                                      tPlatfraBoardContent.modDate
+                              )
+                      ).from(tPlatfraBoardContent)
+                      .where(
+                                tPlatfraBoardContent.regUserId.eq(userId)
+                      )
+                      .offset(pageable.getOffset())
+                      .limit(pageable.getPageSize())
+                      .fetch();
   }
 
   public long delete (Long contentSeq){
