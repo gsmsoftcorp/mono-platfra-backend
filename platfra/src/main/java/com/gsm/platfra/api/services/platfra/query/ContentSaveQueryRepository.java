@@ -16,7 +16,7 @@ public class ContentSaveQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<ContentSaveDto> getMyContentList(String userId) {
+    public List<ContentSaveDto> getMySavedContentList(String userId) {
         List<ContentSaveDto> list = queryFactory.select(
                         Projections.fields(
                                 ContentSaveDto.class,

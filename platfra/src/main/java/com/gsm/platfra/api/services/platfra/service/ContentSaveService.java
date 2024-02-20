@@ -1,17 +1,13 @@
 package com.gsm.platfra.api.services.platfra.service;
 
 import com.gsm.platfra.api.data.account.TAccount;
-import com.gsm.platfra.api.data.account.TAccountDto;
 import com.gsm.platfra.api.data.account.TAccountRepository;
-import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.data.platfra.TPlatfra;
 import com.gsm.platfra.api.data.platfra.TPlatfraRepository;
 import com.gsm.platfra.api.data.platfra.saved.ContentSave;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveRepository;
-import com.gsm.platfra.api.services.platfra.dto.SubscribedPlatfraDto;
 import com.gsm.platfra.api.services.platfra.query.ContentSaveQueryRepository;
-import com.gsm.platfra.api.services.platfra.query.PlatfraSubscribeQueryRepository;
 import com.gsm.platfra.exception.ExceptionCode;
 import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +25,6 @@ public class ContentSaveService {
 
     private final ContentSaveRepository contentSaveRepository;
     private final TAccountRepository tAccountRepository;
-    private final PlatfraSubscribeQueryRepository platfraSubscribeQueryRepository;
     private final Long DEFAULT_BOARD_SEQ = 0L;
 
     @Transactional
@@ -70,7 +65,7 @@ public class ContentSaveService {
             throw new IllegalCallerException(ExceptionCode.AUTHORIZATION_FAILED.getMessage());
         }
 
-        return contentSaveQueryRepository.getMyContentList(userId);
+        return contentSaveQueryRepository.getMySavedContentList(userId);
     }
 
     @Transactional
@@ -82,23 +77,4 @@ public class ContentSaveService {
         contentSaveQueryRepository.deleteContent(contentSaveSeq);
     }
 
-    public List<PlatfraDto> getMyPlatfra() {
-        String userId = UserContextUtil.getUserContext().getUserId();
-        TAccount tAccount = tAccountRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException(ExceptionCode.NOT_FOUND_USER.getMessage()));
-
-        List<TPlatfra> myPlatforms = tPlatfraRepository.findAllByOwnerId(userId);
-        List<PlatfraDto> response = myPlatforms.stream()
-                .map(PlatfraDto::of)
-                .toList();
-
-        return response;
-    }
-
-    public SubscribedPlatfraDto getSubscribedPlatfra() {
-        String userId = UserContextUtil.getUserContext().getUserId();
-        TAccount tAccount = tAccountRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException(ExceptionCode.NOT_FOUND_USER.getMessage()));
-
-        List<PlatfraDto> subscribedPlatfra = platfraSubscribeQueryRepository.getSubscribedPlatfra(userId);
-        return SubscribedPlatfraDto.of(TAccountDto.of(tAccount), subscribedPlatfra);
-    }
 }

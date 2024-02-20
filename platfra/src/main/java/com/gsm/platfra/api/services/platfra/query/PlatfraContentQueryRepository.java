@@ -5,6 +5,7 @@ import com.gsm.platfra.api.features.view.dto.FeatureViewCountDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,6 +43,32 @@ public class PlatfraContentQueryRepository {
         
         return list;
         
+    }
+
+    public List<PlatfraContentDto> getMyContents(String userId, Pageable pageable) {
+        List<PlatfraContentDto> list = queryFactory
+                .select(
+                        Projections.fields(
+                                PlatfraContentDto.class,
+                                tPlatfraContent.contentSeq,
+                                tPlatfraContent.platfraId,
+                                tPlatfraContent.title,
+                                tPlatfraContent.content
+                        )
+                )
+                .from(tPlatfraContent)
+                .where(
+                        tPlatfraContent.regUserId.eq(userId),
+                        tPlatfraContent.delYn.eq(Boolean.FALSE)
+                )
+                .orderBy(tPlatfraContent.regDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch()
+                ;
+
+        return list;
+
     }
     
     public void delete(PlatfraContentDto platfraContentDto) {
