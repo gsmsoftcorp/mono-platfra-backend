@@ -32,7 +32,7 @@ public class FeatureCommentController {
      * @return
      */
     @GetMapping
-    public List<CommentListResDto> list(@RequestBody FeatureCommentDto featureCommentDto) {
+    public List<CommentListResDto> list(FeatureCommentDto featureCommentDto) {
         return featureCommentService.list(featureCommentDto);
     }
 
@@ -42,7 +42,7 @@ public class FeatureCommentController {
      * @return
      */
     @GetMapping("/reply")
-    public List<FeatureCommentDto> reply(@RequestBody FeatureCommentDto featureCommentDto) {
+    public List<FeatureCommentDto> reply(FeatureCommentDto featureCommentDto) {
         return featureCommentService.reply(featureCommentDto);
     }
 

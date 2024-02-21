@@ -38,6 +38,10 @@ public class TAccount extends BaseEntity {
     @Size(max = 64)
     @Column(name = "USER_NM", length = 64)
     private String userNm;
+
+    @Size(max = 100)
+    @Column(name = "NICKNAME", length = 100)
+    private String nickname;
     
     @Column(name = "AGE")
     private Integer age;
