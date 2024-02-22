@@ -93,4 +93,11 @@ public class AccountController {
         accountService.addInfo(accountDto);
     }
 
+    @GetMapping("/account/{userId}")
+    public AccountDto getAccount(@PathVariable String userId){
+        //TODO : 토큰 정보에 맞는 유저가 접근하는 지 확인 로직 필요
+        return accountService.getAccount(userId);
+    }
+
+
 }

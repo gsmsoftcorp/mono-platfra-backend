@@ -149,4 +149,8 @@ public class AccountService {
     public void addInfo(@Valid AccountDto accountDto) {
         accountQueryRepository.updateInfo(accountDto);
     }
+
+    public AccountDto getAccount(String userId) {
+        return accountQueryRepository.findById(userId);
+    }
 }
