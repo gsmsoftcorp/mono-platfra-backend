@@ -153,4 +153,15 @@ public class AccountService {
     public AccountDto getAccount(String userId) {
         return accountQueryRepository.findById(userId);
     }
+
+    @Transactional
+    public void resetPw(AccountDto accountDto){
+        TAccount account = tAccountRepository.findByUserId(accountDto.getUserId())
+            .orElseThrow(()->new EntityNotFoundException("존재하지 않는 아이디 입니다."));
+
+        account.update(accountDto, passwordEncoder);
+
+        tAccountRepository.saveAndFlush(account);
+    }
+
 }

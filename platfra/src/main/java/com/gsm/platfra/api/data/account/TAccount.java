@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -55,15 +56,15 @@ public class TAccount extends BaseEntity {
     @Column(name = "BANNED_YN")
     private Boolean bannedYn;
 
-    private void update(String userId, String email, String phone, String password, String userNm, Integer age, Character gender, LocalDate birthday) {
-        this.userId = userId;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.userNm = userNm;
-        this.age = age;
-        this.gender = gender;
-        this.birthday = birthday;
+    public void update(AccountDto accountDto, PasswordEncoder passwordEncoder) {
+        this.userId = accountDto.getUserId();
+        this.email = accountDto.getEmail();
+        this.phone = accountDto.getPhone();
+        this.password = passwordEncoder.encode(accountDto.getPassword());
+        this.userNm = accountDto.getUserNm();
+        this.age = accountDto.getAge();
+        this.gender = accountDto.getGender();
+        this.birthday = accountDto.getBirthday();
     }
     
 }
