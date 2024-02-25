@@ -1,6 +1,10 @@
 package com.gsm.platfra.api.services.account.rest;
 
+<<<<<<< HEAD
 import com.gsm.platfra.api.data.platfra.PlatfraDto;
+=======
+import com.gsm.platfra.api.data.account.AccountDto;
+>>>>>>> ce0605e (OAuth 가입 이후 추가정보 입력)
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
@@ -84,4 +88,16 @@ public class AccountController {
     public ContentDto getContents(@PathVariable String userId, Pageable contentsPageable, Pageable boardContentsPageable) {
         return accountService.getContents(contentsPageable, boardContentsPageable);
     }
+    @PostMapping("/addinfo")
+    public void addInfo(@RequestBody AccountDto accountDto) {
+        accountService.addInfo(accountDto);
+    }
+
+    @GetMapping("/account/{userId}")
+    public AccountDto getAccount(@PathVariable String userId){
+        //TODO : 토큰 정보에 맞는 유저가 접근하는 지 확인 로직 필요
+        return accountService.getAccount(userId);
+    }
+
+
 }

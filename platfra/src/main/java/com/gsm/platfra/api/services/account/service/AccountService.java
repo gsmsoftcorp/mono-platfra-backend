@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.account.service;
 
+import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.account.TAccount;
 import com.gsm.platfra.api.data.account.TAccountDto;
 import com.gsm.platfra.api.data.account.TAccountRepository;
@@ -17,14 +18,17 @@ import com.gsm.platfra.api.services.platfra.query.PlatfraContentQueryRepository;
 import com.gsm.platfra.api.services.platfra.query.PlatfraSubscribeQueryRepository;
 import com.gsm.platfra.exception.ExceptionCode;
 import com.gsm.platfra.system.security.context.UserContextUtil;
+import com.gsm.platfra.api.services.account.query.AccountQueryRepository;
 import com.gsm.platfra.system.security.microservice.provider.AuthProvider;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -41,6 +45,7 @@ public class AccountService {
     private final PlatfraContentQueryRepository platfraContentQueryRepository;
     private final PlatfraBoardContentQueryRepository platfraBoardContentQueryRepository;
     private final PlatfraSubscribeQueryRepository platfraSubscribeQueryRepository;
+    private final AccountQueryRepository accountQueryRepository;
 
     public String login(LoginDto loginDto) {
 
@@ -138,5 +143,14 @@ public class AccountService {
         List<PlatfraBoardContentDto> myBoardContent = platfraBoardContentQueryRepository.getMyBoardContent(userId, boardContentsPageable);
 
         return ContentDto.of(myContents, myBoardContent);
+    }
+
+    @Transactional
+    public void addInfo(@Valid AccountDto accountDto) {
+        accountQueryRepository.updateInfo(accountDto);
+    }
+
+    public AccountDto getAccount(String userId) {
+        return accountQueryRepository.findById(userId);
     }
 }

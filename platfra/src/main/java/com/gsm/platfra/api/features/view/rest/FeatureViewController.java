@@ -17,10 +17,16 @@ public class FeatureViewController {
 
     private final FeatureViewService featureViewService;
 
+    /**
+     * 조회수 증가
+     * 배치로 따로 분리해야할 로직이 들어 있음
+     * @param request
+     * @param featureViewDto
+     */
     @PostMapping
     public void viewCount(HttpServletRequest request, @RequestBody FeatureViewDto featureViewDto) {
-        String address = request.getRemoteAddr();
-        featureViewDto.setAddress(address);
+        // IP 주소 set
+        featureViewDto.setAddress(request.getRemoteAddr());
         featureViewService.viewCount(featureViewDto);
     }
 
