@@ -15,9 +15,7 @@ public class AuditBaseEntityListener {
 		if(object instanceof AuditBaseEntity) {
 			Assert.notNull(object, "Entity must not be null.");
 			if(UserContextUtil.getUserContext() != null) {
-//				((AuditBaseEntity)object).setModUserId(UserContextUtil.getUserContext().getUserId());
-				((AuditBaseEntity)object).setModUserId("test");
-				((AuditBaseEntity)object).setRegUserId("test");
+				((AuditBaseEntity)object).setModUserId(UserContextUtil.getUserContext().getUserId());
 			}else {
 				if(log.isDebugEnabled()) {
 					log.debug("UserContext is null.");
@@ -31,10 +29,8 @@ public class AuditBaseEntityListener {
 		if(object instanceof AuditBaseEntity) {
 			Assert.notNull(object, "Entity must not be null.");
 			if(UserContextUtil.getUserContext() != null) {
-//				((AuditBaseEntity)object).setRegUserId(UserContextUtil.getUserContext().getUserId());
-//				((AuditBaseEntity)object).setModUserId(UserContextUtil.getUserContext().getUserId());
-				((AuditBaseEntity)object).setRegUserId("test");
-				((AuditBaseEntity)object).setModUserId("test");
+				((AuditBaseEntity)object).setRegUserId(UserContextUtil.getUserContext().getUserId());
+				((AuditBaseEntity)object).setModUserId(UserContextUtil.getUserContext().getUserId());
 			}else {
 				if (log.isDebugEnabled()) {
 					log.debug("UserContext is null.");
