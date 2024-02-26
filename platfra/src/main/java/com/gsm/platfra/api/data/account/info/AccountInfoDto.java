@@ -15,15 +15,17 @@ import java.time.LocalDate;
 public class AccountInfoDto {
 
     private Long accountInfoSeq;
-    private TAccount user;
-    private TCommonFile profile;
+    private TAccount tAccount;
+    private String userId;
+    private TCommonFile tCommonFile;
+    private Long fileSeq;
     private String message;
 
     public static TAccountInfo toEntity(AccountInfoDto dto) {
         return TAccountInfo.builder()
                 .accountInfoSeq(dto.accountInfoSeq)
-                .user(dto.user)
-                .profile(dto.profile)
+                .userId(dto.userId)
+                .fileSeq(dto.fileSeq)
                 .message(dto.message)
                 .build();
     }
@@ -31,9 +33,14 @@ public class AccountInfoDto {
     public static AccountInfoDto of(TAccountInfo tAccountInfo) {
         return AccountInfoDto.builder()
                 .accountInfoSeq(tAccountInfo.getAccountInfoSeq())
-                .user(tAccountInfo.getUser())
-                .profile(tAccountInfo.getProfile())
+                .userId(tAccountInfo.getUserId())
+                .fileSeq(tAccountInfo.getFileSeq())
                 .message(tAccountInfo.getMessage())
                 .build();
+    }
+
+    public void setUserInfo(TAccount tAccount, TCommonFile tCommonFile) {
+        this.tAccount = tAccount;
+        this.tCommonFile = tCommonFile;
     }
 }
