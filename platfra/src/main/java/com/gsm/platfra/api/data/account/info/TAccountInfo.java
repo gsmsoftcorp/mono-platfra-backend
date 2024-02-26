@@ -21,12 +21,18 @@ public class TAccountInfo extends BaseEntity {
     
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    private TAccount user;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false)
+    private TAccount tAccount;
+
+    @Column(name = "USER_ID", nullable = false, length = 64, insertable = false, updatable = false)
+    private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FILE_SEQ")
-    private TCommonFile profile;
+    @JoinColumn(name = "FILE_SEQ", referencedColumnName = "FILE_SEQ", nullable = false)
+    private TCommonFile tCommonFile;
+
+    @Column(name = "FILE_SEQ", nullable = false, length = 64, insertable = false, updatable = false)
+    private Long fileSeq;
 
     @Column(name = "MESSAGE")
     private String message;

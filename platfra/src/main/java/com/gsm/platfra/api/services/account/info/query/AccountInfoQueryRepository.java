@@ -22,14 +22,14 @@ public class AccountInfoQueryRepository {
                     Projections.fields(
                             AccountInfoDto.class,
                             tAccountInfo.accountInfoSeq,
-                            tAccountInfo.user,
-                            tAccountInfo.profile,
+                            tAccountInfo.tAccount,
+                            tAccountInfo.tCommonFile,
                             tAccountInfo.message,
                             tAccountInfo.type
                     ))
                 .from(tAccountInfo)
                 .where(
-                        tAccountInfo.user.userId.eq(userId),
+                        tAccountInfo.tAccount.userId.eq(userId),
                         tAccountInfo.type.eq(type)
                 )
                 .fetchOne();
@@ -38,15 +38,15 @@ public class AccountInfoQueryRepository {
     public void update(AccountInfoDto accountInfoDto) {
         JPAUpdateClause updateClause = queryFactory
                 .update(tAccountInfo)
-                .where(tAccountInfo.user.userId.eq(accountInfoDto.getUser().getUserId()));
+                .where(tAccountInfo.tAccount.userId.eq(accountInfoDto.getUserId()));
         if (accountInfoDto.getMessage() != null) {
             updateClause.set(tAccountInfo.message, accountInfoDto.getMessage());
         }
-        if (accountInfoDto.getUser() != null) {
-            updateClause.set(tAccountInfo.user, accountInfoDto.getUser());
+        if (accountInfoDto.getTAccount() != null) {
+            updateClause.set(tAccountInfo.tAccount, accountInfoDto.getTAccount());
         }
-        if (accountInfoDto.getMessage() != null) {
-            updateClause.set(tAccountInfo.message, accountInfoDto.getMessage());
+        if (accountInfoDto.getTCommonFile() != null) {
+            updateClause.set(tAccountInfo.tCommonFile, accountInfoDto.getTCommonFile());
         }
         updateClause.execute();
     }
