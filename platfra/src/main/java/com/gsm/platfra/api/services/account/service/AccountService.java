@@ -4,13 +4,17 @@ import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.account.TAccount;
 import com.gsm.platfra.api.data.account.TAccountDto;
 import com.gsm.platfra.api.data.account.TAccountRepository;
+import com.gsm.platfra.api.data.account.otp.TAccountOTP;
+import com.gsm.platfra.api.data.account.otp.TAccountOTPRepository;
 import com.gsm.platfra.api.data.platfra.*;
 import com.gsm.platfra.api.data.platfraboard.PlatfraBoardContentDto;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
+import com.gsm.platfra.api.services.account.dto.ResetPasswordDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.oauth.OauthMember;
 import com.gsm.platfra.api.services.account.oauth.OauthParams;
+import com.gsm.platfra.api.services.account.query.AccountOTPQueryRepository;
 import com.gsm.platfra.api.services.board.query.PlatfraBoardContentQueryRepository;
 import com.gsm.platfra.api.services.platfra.dto.ContentDto;
 import com.gsm.platfra.api.services.platfra.dto.SubscribedPlatfraDto;
@@ -46,6 +50,8 @@ public class AccountService {
     private final PlatfraBoardContentQueryRepository platfraBoardContentQueryRepository;
     private final PlatfraSubscribeQueryRepository platfraSubscribeQueryRepository;
     private final AccountQueryRepository accountQueryRepository;
+    private final TAccountOTPRepository tAccountOTPRepository;
+    private final AccountOTPQueryRepository accountOTPQueryRepository;
 
     public String login(LoginDto loginDto) {
 
@@ -162,6 +168,17 @@ public class AccountService {
         account.update(accountDto, passwordEncoder);
 
         tAccountRepository.saveAndFlush(account);
+    }
+
+
+    @Transactional
+    public boolean checkPasswordOTP(ResetPasswordDto resetPasswordDto){
+        TAccount account = tAccountRepository.findByUserId(resetPasswordDto.getUserId())
+            .orElseThrow(()->new EntityNotFoundException("존재하지 않는 아이디 입니다."));
+
+
+
+        return false;
     }
 
 }

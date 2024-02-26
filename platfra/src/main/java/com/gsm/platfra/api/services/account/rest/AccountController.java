@@ -5,6 +5,7 @@ import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
+import com.gsm.platfra.api.services.account.dto.ResetPasswordDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.oauth.kakao.KakaoParams;
 import com.gsm.platfra.api.services.account.openfeign.GoogleLogin;
@@ -94,6 +95,16 @@ public class AccountController {
     public AccountDto getAccount(@PathVariable String userId){
         //TODO : 토큰 정보에 맞는 유저가 접근하는 지 확인 로직 필요
         return accountService.getAccount(userId);
+    }
+
+    @PutMapping("/password")
+    public Boolean checkResetPasswordOTPCode(@RequestBody ResetPasswordDto resetPasswordDto){
+        return false;
+    }
+
+    @PatchMapping("/password")
+    public void resetPassword(@RequestBody AccountDto accountDto){
+        accountService.resetPw(accountDto);
     }
 
 
