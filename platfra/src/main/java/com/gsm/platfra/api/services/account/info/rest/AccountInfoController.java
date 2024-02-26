@@ -23,7 +23,7 @@ public class AccountInfoController {
         // 사업자 등록 시 사용? type 설정
         accountInfoService.create(accountInfoDto);
     }
-    @PostMapping
+    @PutMapping
     public void update(@RequestBody AccountInfoDto accountInfoDto) {
         // 프로필 사진은 common file 등록 후 seq 받아오기?
         accountInfoService.update(accountInfoDto);
