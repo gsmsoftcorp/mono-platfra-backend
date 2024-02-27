@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.account.rest;
 
+import com.gsm.platfra.api.data.account.otp.AccountOTPDto;
 import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
@@ -95,6 +96,11 @@ public class AccountController {
     public AccountDto getAccount(@PathVariable String userId){
         //TODO : 토큰 정보에 맞는 유저가 접근하는 지 확인 로직 필요
         return accountService.getAccount(userId);
+    }
+
+    @PostMapping("/password")
+    public void sendResetPasswordCode(@RequestBody AccountOTPDto accountOTPDto){
+        accountService.sendCode(accountOTPDto);
     }
 
     @PutMapping("/password")

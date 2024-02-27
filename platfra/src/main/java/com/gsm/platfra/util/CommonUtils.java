@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Random;
 import org.springframework.http.MediaType;
 
 import java.io.IOException;
@@ -63,5 +64,16 @@ public class CommonUtils {
             default:
                 return MediaType.APPLICATION_OCTET_STREAM;
         }
+    }
+
+    public static String getGenerateCode(){
+
+        Random random = new Random();
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < 6 ; i ++){
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
     }
 }

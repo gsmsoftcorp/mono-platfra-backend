@@ -4,6 +4,7 @@ import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.account.TAccount;
 import com.gsm.platfra.api.data.account.TAccountDto;
 import com.gsm.platfra.api.data.account.TAccountRepository;
+import com.gsm.platfra.api.data.account.otp.AccountOTPDto;
 import com.gsm.platfra.api.data.account.otp.TAccountOTP;
 import com.gsm.platfra.api.data.account.otp.TAccountOTPRepository;
 import com.gsm.platfra.api.data.platfra.*;
@@ -11,6 +12,7 @@ import com.gsm.platfra.api.data.platfraboard.PlatfraBoardContentDto;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
 import com.gsm.platfra.api.services.account.dto.ResetPasswordDto;
+import com.gsm.platfra.api.services.account.dto.SendCodeDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.oauth.OauthMember;
 import com.gsm.platfra.api.services.account.oauth.OauthParams;
@@ -24,6 +26,7 @@ import com.gsm.platfra.exception.ExceptionCode;
 import com.gsm.platfra.system.security.context.UserContextUtil;
 import com.gsm.platfra.api.services.account.query.AccountQueryRepository;
 import com.gsm.platfra.system.security.microservice.provider.AuthProvider;
+import com.gsm.platfra.util.CommonUtils;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -168,6 +171,31 @@ public class AccountService {
         account.update(accountDto, passwordEncoder);
 
         tAccountRepository.saveAndFlush(account);
+    }
+
+    public void sendCode(AccountOTPDto accountOTPDto){
+
+        if(this.getAccount(accountOTPDto.getUserId()) == null)
+            throw new EntityNotFoundException("존재하지 않는 아이디 입니다.");
+
+        String otp = CommonUtils.getGenerateCode();
+
+        SendCodeDto sendCodeDto = SendCodeDto
+            .builder()
+            .otp(otp)
+            .userId(accountOTPDto.getUserId())
+            .email(accountOTPDto.getEmail())
+            .build();
+
+        // Todo: 이메일 발송을 구현해야 하나, 구글 메일발송의 경우 2차인증이 필요해 임시 중지.
+
+        TAccountOTP tAccountOTP = TAccountOTP.builder()
+            .otp(otp)
+            .userId(accountOTPDto.getUserId())
+            .email(accountOTPDto.getEmail())
+            .build();
+
+        tAccountOTPRepository.save(tAccountOTP);
     }
 
 
