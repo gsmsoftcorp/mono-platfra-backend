@@ -37,6 +37,7 @@ public class SecurityIgnoreProperties implements InitializingBean{
 		path.add("/login");
 		path.add("/signup");
 		path.add("/kakao");
+		path.add("/password");
 	}
 
 

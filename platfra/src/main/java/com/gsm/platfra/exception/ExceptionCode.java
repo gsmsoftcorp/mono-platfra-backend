@@ -22,6 +22,11 @@ public enum ExceptionCode {
     NOT_FOUND_CONTENT("TC", "해당 컨텐츠가 존재하지 않습니다."),
     NOT_FOUND_BOARD("TB", "해당 게시판이 존재하지 않습니다."),
 
+    MESSAGING_FAIL("MS001","메일 발송에 문제가 생겼습니다."),
+    TEMPLATE_NOT_FOUND("MS002", "템플릿을 찾지 못하였습니다."),
+    IO_ERROR("MS003","입출력 시 문제가 발생하였습니다."),
+    TEMPLATE_ERROR("MS004","템플릿 에러가 발생하였습니다.")
+
 
     ;
     private final String code;

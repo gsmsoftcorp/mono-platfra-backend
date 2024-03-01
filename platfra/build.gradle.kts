@@ -30,12 +30,16 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation ("org.springframework.boot:spring-boot-starter-mail")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
+	// Freemaker
+	implementation("org.springframework.boot:spring-boot-starter-freemarker")
 
 	// MapStruct
 	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor

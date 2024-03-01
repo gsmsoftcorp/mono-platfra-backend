@@ -1,6 +1,8 @@
 package com.gsm.platfra.exception;
 
+import com.gsm.platfra.api.services.send.service.MailSendService;
 import com.gsm.platfra.exception.custom.BusinessLogicException;
+import com.gsm.platfra.exception.custom.MailSendException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -98,6 +100,23 @@ public class GlobalExceptionHandler {
                                 e.getMessage()
                         )
                 );
+    }
+
+    /**
+     *  MailSendException
+     */
+    @ExceptionHandler(MailSendException.class)
+    protected ResponseEntity<ExceptionResponse> handleMailSendException(MailSendException e){
+        log.error(e.getClass().getName());
+        return ResponseEntity
+            .internalServerError()
+            .body(
+                new ExceptionResponse(
+                    e.getCode(),
+                    e.getMessage(),
+                    e.getMessage()
+                )
+            );
     }
 
     /**
