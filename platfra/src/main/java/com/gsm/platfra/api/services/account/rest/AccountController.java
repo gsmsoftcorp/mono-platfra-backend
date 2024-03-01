@@ -6,6 +6,7 @@ import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
 import com.gsm.platfra.api.services.account.dto.GoogleLoginDto;
 import com.gsm.platfra.api.services.account.dto.LoginDto;
+import com.gsm.platfra.api.services.account.dto.CheckOTPDto;
 import com.gsm.platfra.api.services.account.dto.ResetPasswordDto;
 import com.gsm.platfra.api.services.account.dto.SignupDto;
 import com.gsm.platfra.api.services.account.oauth.kakao.KakaoParams;
@@ -14,6 +15,7 @@ import com.gsm.platfra.api.services.account.service.AccountService;
 import com.gsm.platfra.api.services.platfra.dto.ContentDto;
 import com.gsm.platfra.api.services.platfra.dto.SubscribedPlatfraDto;
 import com.gsm.platfra.api.services.platfra.service.ContentSaveService;
+import com.gsm.platfra.exception.custom.MailSendException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -98,19 +100,34 @@ public class AccountController {
         return accountService.getAccount(userId);
     }
 
+    /**
+    * 비밀번호 초기화를 위한 otp 이메일 발송
+    * @param accountOTPDto
+    * @return void
+    * */
     @PostMapping("/password")
-    public void sendResetPasswordCode(@RequestBody AccountOTPDto accountOTPDto){
+    public void sendResetPasswordCode(@RequestBody AccountOTPDto accountOTPDto) throws MailSendException {
         accountService.sendCode(accountOTPDto);
     }
 
+    /**
+    * 비밀번호 초기화를 위한 이메일 otp 인증
+    * @param checkOTPDto
+    * @return boolean
+    * */
     @PutMapping("/password")
-    public Boolean checkResetPasswordOTPCode(@RequestBody ResetPasswordDto resetPasswordDto){
-        return false;
+    public Boolean checkResetPasswordOTPCode(@RequestBody CheckOTPDto checkOTPDto){
+         return accountService.checkPasswordOTP(checkOTPDto);
     }
 
+    /**
+    * 비밀번호 초기화
+    * @param resetPasswordDto
+    * @return boolean
+    * */
     @PatchMapping("/password")
-    public void resetPassword(@RequestBody AccountDto accountDto){
-        accountService.resetPw(accountDto);
+    public Boolean resetPassword(@RequestBody ResetPasswordDto resetPasswordDto){
+        return accountService.resetPw(resetPasswordDto);
     }
 
 

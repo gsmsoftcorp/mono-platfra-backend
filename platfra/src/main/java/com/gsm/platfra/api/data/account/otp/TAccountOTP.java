@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,6 +31,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Entity
 @DynamicInsert
 @Table(name = "T_ACCOUNT_OTP")
+@ToString
 public class TAccountOTP{
 
   @Id

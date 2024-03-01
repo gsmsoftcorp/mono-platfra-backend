@@ -12,9 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResetPasswordDto {
 
-  @NotBlank(message="아이디를 입력해주세요.")
+  @NotBlank(message = "아이디를 입력해 주세요.")
   private String userId;
+  @NotBlank(message = "바꾸고 싶은 비밀번호를 입력해 주세요.")
+  private String password;
+  @NotBlank(message = "두 번호가 틀립니다.")
+  private String checkPassword;
 
-  @NotBlank(message="OTP 번호를 입력하세요.")
-  private String otp;
+  public boolean samePwCheck(){
+    return this.password.equals(checkPassword);
+  }
 }

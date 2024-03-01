@@ -56,15 +56,8 @@ public class TAccount extends BaseEntity {
     @Column(name = "BANNED_YN")
     private Boolean bannedYn;
 
-    public void update(AccountDto accountDto, PasswordEncoder passwordEncoder) {
-        this.userId = accountDto.getUserId();
-        this.email = accountDto.getEmail();
-        this.phone = accountDto.getPhone();
-        this.password = passwordEncoder.encode(accountDto.getPassword());
-        this.userNm = accountDto.getUserNm();
-        this.age = accountDto.getAge();
-        this.gender = accountDto.getGender();
-        this.birthday = accountDto.getBirthday();
+    public void update(String newPassword, PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(newPassword);
     }
     
 }

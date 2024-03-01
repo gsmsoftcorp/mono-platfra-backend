@@ -19,6 +19,8 @@ spring:
     username: admin
     password: platfradev
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+  freemarker:
+    template-loader-path: classpath:/templates/mail
 
 decorator:
   datasource:
@@ -32,6 +34,27 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: error
+
+  # 메일 설정
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gsm.platfra@gmail.com
+    password: widynnbsksgznwjn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+
+  # 프리마커 템플릿 설정
+  freemarker:
+    content-type: text/html
+    charset: UTF-8
+
+
 # AWS S3 연결 정보
 cloud:
   aws:
@@ -66,3 +89,6 @@ security:
     refresh-token-validity-in-milliseconds: 43200000
     access-token-expired-time-ms: 43200000
 
+# Custom Value
+custom:
+  defaultFrom: help@platfra.com
