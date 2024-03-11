@@ -21,7 +21,17 @@ import java.util.List;
 @RequestMapping("/platfra")
 public class PlatfraController {
     private final PlatfraService platfraService;
-
+    
+    /**
+     * 플랫폼 메인
+     * @param platfraId
+     * @return
+     */
+    @GetMapping("/{platfraId}")
+    public PlatfraMainDto get(@PathVariable(required = true) String platfraId) {
+        return platfraService.get(platfraId);
+    }
+    
     /**
      * 플랫폼 리스트 조회
      * @param platfraDto
@@ -34,12 +44,12 @@ public class PlatfraController {
     }
     
     /**
-     * 플랫폼 메인(상세) 조회
+     * 플랫폼 상세(메인) 조회
      * @param platfraSeq
      * @return
      */
     @GetMapping("/{platfraSeq}")
-    public PlatfraMainDto get(@PathVariable(required = true) Long platfraSeq) {
+    public PlatfraMainDto getDetail(@RequestParam(required = true) Long platfraSeq) {
         return platfraService.get(platfraSeq);
     }
     
