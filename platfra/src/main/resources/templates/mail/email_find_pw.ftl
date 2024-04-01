@@ -8,6 +8,6 @@
 <body>
 <h1>메일 인증을 합니다.</h1>
 </br>
-인증 번호 : ${userID}
+인증 번호 : ${otp}
 </body>
 </html>

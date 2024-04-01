@@ -30,11 +30,26 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation ("org.springframework.boot:spring-boot-starter-mail")
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
+	// Freemaker
+	implementation("org.springframework.boot:spring-boot-starter-freemarker")
+
+	// MapStruct
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor
+	testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+	implementation("org.mapstruct:mapstruct:1.5.3.Final")
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding
+	implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
 	// QueryDSL Implementation
 	implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
@@ -57,6 +72,9 @@ dependencies {
 
 	// For Feign Client
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0")
+
+	// Spring AOP
+	implementation("org.springframework.boot:spring-boot-starter-aop")
 
 }
 /**

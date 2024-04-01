@@ -4,3 +4,14 @@ google:
   scope:
     - email
     - profile
+kakao:
+  auth:
+    grant-type: authorization_code
+    token:
+      url: https://kauth.kakao.com/oauth/token
+    user:
+      url: https://kapi.kakao.com/v2/user/me
+  client:
+    id: 99e465922f3b95d7b02faeb91bf54db9
+  redirect:
+    uri: http://localhost:8080/api/kakao

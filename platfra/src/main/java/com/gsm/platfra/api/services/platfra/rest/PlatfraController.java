@@ -1,21 +1,10 @@
-/*
- * Copyright (C) Hanwha Systems Ltd., 2021. All rights reserved.
- *
- * This software is covered by the license agreement between
- * the end user and Hanwha Systems Ltd., and may be
- * used and copied only in accordance with the terms of the
- * said agreement.
- *
- * Hanwha Systems Ltd., assumes no responsibility or
- * liability for any errors or inaccuracies in this software,
- * or any consequential, incidental or indirect damage arising
- * out of the use of the software.
- */
 package com.gsm.platfra.api.services.platfra.rest;
 
-import com.gsm.platfra.api.services.platfra.dto.PlatfraMainResDto;
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraDto;
+import com.gsm.platfra.api.data.platfra.PlatfraDto;
+import com.gsm.platfra.api.services.platfra.dto.PlatfraMainDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraService;
+import com.gsm.platfra.system.security.context.UserContext;
+import com.gsm.platfra.system.security.context.UserContextUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,16 +13,25 @@ import java.util.List;
 
 
 /**
- * 플랫프라 마스터 컨트롤러
+ * 플랫폼 마스터 컨트롤러
  */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/platfra")
 public class PlatfraController {
-    
     private final PlatfraService platfraService;
-
+    
+    /**
+     * 플랫폼 메인
+     * @param platfraId
+     * @return
+     */
+    @GetMapping("/{platfraId}")
+    public PlatfraMainDto get(@PathVariable(required = true) String platfraId) {
+        return platfraService.get(platfraId);
+    }
+    
     /**
      * 플랫폼 리스트 조회
      * @param platfraDto
@@ -41,16 +39,17 @@ public class PlatfraController {
      */
     @GetMapping
     public List<PlatfraDto> getList(PlatfraDto platfraDto) {
+        UserContext userContext = UserContextUtil.getUserContext();
         return platfraService.getList(platfraDto);
     }
     
     /**
-     * 플랫폼 메인(상세) 조회
+     * 플랫폼 상세(메인) 조회
      * @param platfraSeq
      * @return
      */
     @GetMapping("/{platfraSeq}")
-    public PlatfraMainResDto get(@PathVariable(required = true) Long platfraSeq) {
+    public PlatfraMainDto getDetail(@RequestParam(required = true) Long platfraSeq) {
         return platfraService.get(platfraSeq);
     }
     

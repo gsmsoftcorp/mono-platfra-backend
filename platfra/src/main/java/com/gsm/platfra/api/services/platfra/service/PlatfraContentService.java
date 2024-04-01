@@ -1,24 +1,10 @@
-/*
- * Copyright (C) Hanwha Systems Ltd., 2021. All rights reserved.
- *
- * This software is covered by the license agreement between
- * the end user and Hanwha Systems Ltd., and may be
- * used and copied only in accordance with the terms of the
- * said agreement.
- *
- * Hanwha Systems Ltd., assumes no responsibility or
- * liability for any errors or inaccuracies in this software,
- * or any consequential, incidental or indirect damage arising
- * out of the use of the software.
- */
-
 package com.gsm.platfra.api.services.platfra.service;
 
-import com.gsm.platfra.api.entity.platfra.TPlatfraContent;
+import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
+import com.gsm.platfra.api.data.platfra.TPlatfraContent;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraContentMainResDto;
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraContentDto;
-import com.gsm.platfra.api.services.platfra.repository.TPlatfraContentRepository;
-import com.gsm.platfra.api.services.platfra.repository.query.PlatfraContentQueryRepository;
+import com.gsm.platfra.api.data.platfra.TPlatfraContentRepository;
+import com.gsm.platfra.api.services.platfra.query.PlatfraContentQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,10 +15,11 @@ import java.util.List;
 /**
  *
  */
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-@Slf4j
 public class PlatfraContentService {
     private final TPlatfraContentRepository tPlatfraContentRepository;
     private final PlatfraContentQueryRepository platfraContentQueryRepository;

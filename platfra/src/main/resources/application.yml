@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: local
+  application:
+    name: platfra-core
   mvc:
     hiddenmethod:
       filter:
@@ -21,6 +23,25 @@ spring:
 #    auth: true
 #    starttls:
 #      enable: true
+# 메일 설정
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gsm.platfra@gmail.com
+    password: widynnbsksgznwjn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+
+# 프리마커 템플릿 설정
+  freemarker:
+    template-loader-path: classpath:/templates/mail
+    content-type: text/html
+    charset: UTF-8
 
 server:
   port: 8080
@@ -34,3 +55,7 @@ server:
 #    key: raondanmi
 #
 #restApiKey: adc470e1945ce26d54c2c1052d0a36ba
+
+# Custom Value
+custom:
+  defaultFrom: help@platfra.com

@@ -1,6 +1,6 @@
 package com.gsm.platfra.api.services.platfra.dto;
 
-import com.gsm.platfra.api.services.platfra.dto.table.PlatfraContentDto;
+import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
