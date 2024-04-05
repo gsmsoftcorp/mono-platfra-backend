@@ -127,13 +127,13 @@ public class SecurityConfig {
     
     
     @Configuration
-    @Profile({"dev", "local"})
+    @Profile({"development", "local"})
     class DevSecurityConfiguration {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:8080"
+                "http://localhost:3000"
             ));
             configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
             configuration.setAllowCredentials(true);
@@ -146,7 +146,7 @@ public class SecurityConfig {
     
     
     @Configuration
-    @Profile("prod")
+    @Profile("production")
     class ProdSecurityConfiguration {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
