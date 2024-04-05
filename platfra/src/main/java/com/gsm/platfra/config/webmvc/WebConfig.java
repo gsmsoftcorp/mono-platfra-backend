@@ -31,12 +31,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
     }
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // 모든 경로에 대해
-                .allowedOrigins("http://localhost:3000") // Nuxt 앱의 주소
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .allowCredentials(true);
-    }
+
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/api/**") // API 경로 패턴
+//            .allowedOrigins("http://localhost:3000/**") // 허용할 오리진(출처)
+//            .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 HTTP 메소드
+//            .allowedHeaders("*") // 허용할 헤더
+//            .allowCredentials(true); // 크레덴셜 허용
+//    }
 }

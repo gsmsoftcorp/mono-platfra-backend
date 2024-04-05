@@ -23,11 +23,10 @@ public class AuthFilter extends OncePerRequestFilter {
     private final AuthProvider authProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.debug(":::::::::::::::: AuthFilter ::::::::::::::::");
 
         String token = this.resolveToken(request);
-
 
         if (StringUtils.hasText(token)) {
             authProvider.validateToken(token);
