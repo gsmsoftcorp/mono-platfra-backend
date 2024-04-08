@@ -88,6 +88,12 @@ security:
     access-token-validity-in-milliseconds: 43200000
     refresh-token-validity-in-milliseconds: 43200000
     access-token-expired-time-ms: 43200000
+  ignore:
+    path:
+      - /favicon.ico
+      - /error
+    resource:
+      - exe
 
 # Custom Value
 custom:

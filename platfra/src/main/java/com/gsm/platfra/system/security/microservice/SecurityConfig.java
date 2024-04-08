@@ -35,97 +35,81 @@ import java.util.List;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig {
-    
-    private final AuthProvider authProvider;
-    
-    private final AuthExceptionHandlerFilter authExceptionHandlerFilter;
-    @Lazy
-    @Autowired(required = false)
-    private SecurityIgnoreProperties securityIgnoreProperties;
-    
-//    @Lazy
-//    @Autowired(required = false)
-//    private ServiceAuthenticationFailureHandler authenticationFailureHandler;
-//
-//    @Lazy
-//    @Autowired(required = false)
-//    private ServiceAuthenticationEntryPoint authenticationEntryPoint;
-//
-    @Lazy
-    @Autowired(required = false)
-    private ServiceAccessDeniedHandler accessDeniedHandler;
 
-    @Lazy
-    @Autowired(required = false)
-    private JwtUtil jwtUtil;
-    
-    @Lazy
-    @Autowired(required = false)
-    private ObjectMapper objectMapper;
-    
+    private final AuthProvider authProvider;
+
+    private final AuthExceptionHandlerFilter authExceptionHandlerFilter;
+
+    private final ObjectMapper objectMapper;
+
     private final String ROLE_ADMIN = "ADMIN";
     private final String ROLE_USER = "USER";
-    
-    
+
+    @Lazy
+    @Autowired
+    private CorsConfigurationSource corsConfigurationSource; // DevSecurityConfiguration 또는 ProdSecurityConfiguration에서 정의한 CorsConfigurationSource 빈을 주입받습니다.
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        List<String> permitAllEndpointList = Arrays.asList(
-            URIPrefix.AUTH_AUTHENTICATION//, URIPrefix.AUTH_REFRESH
-        );
-        
+
         http
-            .cors(Customizer.withDefaults())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource)) // CORS 설정을 명시적으로 적용
             .csrf(AbstractHttpConfigurer::disable)// REST API 방식으로 CSRF 보안 토큰 생성 x
-            .addFilterBefore(new AuthFilter(authProvider), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(authExceptionHandlerFilter, AuthFilter.class)
-//            .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler)// TODO 인증 실패 핸들링 추가 필요
-            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션 사용 x
+            .sessionManagement((session) -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션 사용 x
             .authorizeHttpRequests(
                 auth -> auth
-                    .requestMatchers(URIPrefix.AUTH_AUTHENTICATION, URIPrefix.AUTH_REFRESH)
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated()
-            ); // 리소스 같은 접근 처리 불가
-        
+                    .anyRequest().authenticated()
+            ) // 리소스 같은 접근 처리 불가
+            .addFilterBefore(new AuthFilter(authProvider), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(authExceptionHandlerFilter, AuthFilter.class)
+            .exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint(this.authenticationEntryPoint())
+                .accessDeniedHandler(this.accessDeniedHandler())
+            )
+
+        ;
         return http.build();
     }
-    
+
+
+    /** 각 마이크로서비스 yml의 security.ignore.path에 ignore 대상 url을 array형식으로 입력한다(예정) **/
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        /** 각 마이크로서비스 yml의 gsm.security.ignore.path에 ignore 대상 url을 array형식으로 입력한다(예정) **/
-        String[] ignorePath = securityIgnoreProperties.getPath().stream().toArray(String[]::new);
-        
+        String[] ignorePath = securityIgnoreProperties().getPath().stream().toArray(String[]::new);
+
         return (web) -> web
             .ignoring()
-            .requestMatchers(
-                PathRequest.toStaticResources().atCommonLocations() // 정적 리소스는 무시
-            )
-            // AuthFilter를 적용하지 않을 URL
-            .requestMatchers(ignorePath);
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations())   // 정적 리소스는 무시
+            .requestMatchers(ignorePath)    // AuthFilter를 적용하지 않을 URL
+            ;
     }
-    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public ServiceAuthenticationEntryPoint authenticationEntryPoint() {
         return new ServiceAuthenticationEntryPoint(objectMapper);
     }
-    
+
     @Bean
     public ServiceAccessDeniedHandler accessDeniedHandler() {
         return new ServiceAccessDeniedHandler(objectMapper);
     }
-    
+
     @Bean
     public SecurityIgnoreProperties securityIgnoreProperties() {
         return new SecurityIgnoreProperties();
     }
-    
-    
+
+    @Bean
+    public ServiceAuthenticationFailureHandler authenticationFailureHandler() {
+        return new ServiceAuthenticationFailureHandler(objectMapper);
+    }
+
     @Configuration
     @Profile({"dev", "local"})
     class DevSecurityConfiguration {
@@ -133,7 +117,7 @@ public class SecurityConfig {
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:8080"
+                "http://localhost:3000"
             ));
             configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
             configuration.setAllowCredentials(true);
@@ -143,8 +127,8 @@ public class SecurityConfig {
             return source;
         }
     }
-    
-    
+
+
     @Configuration
     @Profile("prod")
     class ProdSecurityConfiguration {
@@ -154,7 +138,7 @@ public class SecurityConfig {
             configuration.setAllowedOrigins(Arrays.asList(
                 "http://www.platfra.com"
                 , "https://www.platfra.com"
-            
+
             ));
             configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
             configuration.setAllowCredentials(true);
@@ -163,6 +147,6 @@ public class SecurityConfig {
             source.registerCorsConfiguration("/**", configuration);
             return source;
         }
-        
+
     }
 }

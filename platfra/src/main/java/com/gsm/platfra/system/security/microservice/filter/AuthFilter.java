@@ -18,16 +18,13 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthFilter extends OncePerRequestFilter {
-
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private final AuthProvider authProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.debug(":::::::::::::::: AuthFilter ::::::::::::::::");
-
         String token = this.resolveToken(request);
-
 
         if (StringUtils.hasText(token)) {
             authProvider.validateToken(token);

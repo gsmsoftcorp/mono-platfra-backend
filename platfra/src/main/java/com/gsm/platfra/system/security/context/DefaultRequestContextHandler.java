@@ -41,7 +41,7 @@ public class DefaultRequestContextHandler implements RequestContextHandler, Init
     
     private UID uid;
     
-    @Value("${spring.application.name:xpt}")
+    @Value("${spring.application.name:platfra-core}")
     private String instanceId;
     
     public void afterPropertiesSet() throws Exception {

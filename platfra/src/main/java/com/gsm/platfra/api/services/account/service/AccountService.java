@@ -52,8 +52,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class AccountService {
-
-    private final AuthProvider tokenProvider;
+    private final AuthProvider authProvider;
     private final TAccountRepository tAccountRepository;
     private final TPlatfraRepository tPlatfraRepository;
     private final PasswordEncoder passwordEncoder;
@@ -70,14 +69,13 @@ public class AccountService {
     private String DEFAULT_FROM;
 
     public String login(LoginDto loginDto) {
-
         TAccount tAccount = tAccountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 이메일입니다."));
         if (!passwordEncoder.matches( loginDto.password(), tAccount.getPassword())) {
             log.debug("비밀번호가 일치하지 않습니다.");
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
-        return tokenProvider.generateAccessToken(tAccount);
+        return authProvider.generateAccessToken(tAccount);
     }
 
     public void signup(SignupDto signupDto) {
@@ -106,7 +104,7 @@ public class AccountService {
                 () -> googleSignup(googleLoginDto)
         );
 
-        return tokenProvider.generateAccessToken(tAccount);
+        return authProvider.generateAccessToken(tAccount);
     }
 
     private TAccount googleSignup(GoogleLoginDto googleLoginDto) {
@@ -125,7 +123,7 @@ public class AccountService {
                 () -> oauthSignup(oauthMember)
         );
 
-        return tokenProvider.generateAccessToken(tAccount);
+        return authProvider.generateAccessToken(tAccount);
     }
 
     public TAccount oauthSignup(OauthMember oauthMember) {

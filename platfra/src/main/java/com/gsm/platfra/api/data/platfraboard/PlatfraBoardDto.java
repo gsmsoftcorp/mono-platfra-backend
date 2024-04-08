@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.data.platfraboard;
 
+import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.data.platfra.TPlatfra;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,9 +17,9 @@ import java.util.List;
 public class PlatfraBoardDto {
 
     private Long platfraBoardSeq;
-    private TPlatfra tPlatfra;
+    private PlatfraDto platfraDto;
     private String platfraId;
     private String subject;
     private String description;
-    private List<TPlatfraBoardContent> tPlatfraBoardContentList = new ArrayList<>();
+    private List<PlatfraBoardContentDto> platfraBoardContentDtoList;
 }

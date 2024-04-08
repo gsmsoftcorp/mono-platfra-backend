@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity implements AuditBaseEntity {
     @Column(name = "DEL_YN", nullable = false, length = 1)
     @Setter
-    @Builder.Default
     private Boolean delYn = false;
     
     @Column(name = "REG_USER_ID", nullable = false, length = 64)
