@@ -183,6 +183,7 @@ public class JwtUtil implements Serializable, InitializingBean {
 
 	
 	public Claims getAllClaimsFromToken(String token) {
+		log.info("secret : ", secret);
 		return Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody();
 	}
 
