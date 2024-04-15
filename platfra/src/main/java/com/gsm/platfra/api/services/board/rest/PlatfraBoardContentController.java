@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.board.rest;
 
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.platfraboard.PlatfraBoardContentDto;
 import com.gsm.platfra.api.services.board.dto.PlatfraBoardContentResDto;
 import com.gsm.platfra.api.services.board.service.PlatfraBoardContentService;
@@ -23,10 +24,15 @@ public class PlatfraBoardContentController {
   * @return List<PlatfraBoardContentDto>
   * */
   @GetMapping
-  private List<PlatfraBoardContentDto> getList(PlatfraBoardContentDto boardContentDto){
+  private BaseResponse getList(PlatfraBoardContentDto boardContentDto){
     log.info("GetBoardContentList start.");
     log.info("Request : {}",boardContentDto);
-    return boardContentService.getList(boardContentDto);
+    return BaseResponse.builder()
+            .data(boardContentService.getList(boardContentDto))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
   }
 
   /**
@@ -35,10 +41,15 @@ public class PlatfraBoardContentController {
   * @return PlatfraBoardContentResDto
   * */
   @PostMapping
-  public PlatfraBoardContentResDto create(@RequestBody PlatfraBoardContentDto platfraBoardContentDto){
+  public BaseResponse create(@RequestBody PlatfraBoardContentDto platfraBoardContentDto){
     log.info("Create Board Conent start.");
     log.info("Request : {}",platfraBoardContentDto);
-    return boardContentService.create(platfraBoardContentDto);
+    return BaseResponse.builder()
+            .data(boardContentService.create(platfraBoardContentDto))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
   }
 
   /**
@@ -47,10 +58,15 @@ public class PlatfraBoardContentController {
   * @return PlatfraBoardContentResDto
   * */
   @PatchMapping
-  public PlatfraBoardContentResDto update(@RequestBody PlatfraBoardContentDto platfraBoardContentDto){
+  public BaseResponse update(@RequestBody PlatfraBoardContentDto platfraBoardContentDto){
     log.info("Update Board Content start.");
     log.info("Request : {}",platfraBoardContentDto);
-    return boardContentService.update(platfraBoardContentDto);
+    return BaseResponse.builder()
+            .data(boardContentService.update(platfraBoardContentDto))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
   }
 
   /**
@@ -59,10 +75,15 @@ public class PlatfraBoardContentController {
   * @return
   * */
   @DeleteMapping
-  public boolean delete(@RequestBody PlatfraBoardContentDto platfraBoardContentDto){
+  public BaseResponse delete(@RequestBody PlatfraBoardContentDto platfraBoardContentDto){
     log.info("Delete Board Content start.");
     log.info("Request : {}",platfraBoardContentDto);
-    return boardContentService.delete(platfraBoardContentDto);
+    return BaseResponse.builder()
+            .data(boardContentService.delete(platfraBoardContentDto))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
   }
 
 }

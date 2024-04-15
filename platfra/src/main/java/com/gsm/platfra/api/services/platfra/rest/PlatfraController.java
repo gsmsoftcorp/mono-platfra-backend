@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.platfra.rest;
 
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.services.platfra.dto.PlatfraMainDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraService;
@@ -28,8 +29,13 @@ public class PlatfraController {
      * @return
      */
     @GetMapping("/{platfraId}")
-    public PlatfraMainDto get(@PathVariable(required = true) String platfraId) {
-        return platfraService.get(platfraId);
+    public BaseResponse get(@PathVariable(required = true) String platfraId) {
+        return BaseResponse.builder()
+                .data(platfraService.get(platfraId))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
     /**
@@ -38,9 +44,14 @@ public class PlatfraController {
      * @return
      */
     @GetMapping
-    public List<PlatfraDto> getList(PlatfraDto platfraDto) {
+    public BaseResponse getList(PlatfraDto platfraDto) {
         UserContext userContext = UserContextUtil.getUserContext();
-        return platfraService.getList(platfraDto);
+        return BaseResponse.builder()
+                .data(platfraService.getList(platfraDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
     /**
@@ -49,8 +60,13 @@ public class PlatfraController {
      * @return
      */
     @GetMapping("/{platfraSeq}")
-    public PlatfraMainDto getDetail(@RequestParam(required = true) Long platfraSeq) {
-        return platfraService.get(platfraSeq);
+    public BaseResponse getDetail(@RequestParam(required = true) Long platfraSeq) {
+        return BaseResponse.builder()
+                .data(platfraService.get(platfraSeq))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
     /**
@@ -58,8 +74,14 @@ public class PlatfraController {
      * @param platfraDto
      */
     @PostMapping
-    public void create(@RequestBody PlatfraDto platfraDto) {
+    public BaseResponse create(@RequestBody PlatfraDto platfraDto) {
         platfraService.create(platfraDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
     /**
@@ -67,8 +89,14 @@ public class PlatfraController {
      * @param platfraDto
      */
     @PutMapping
-    public void update(@RequestBody PlatfraDto platfraDto) {
+    public BaseResponse update(@RequestBody PlatfraDto platfraDto) {
         platfraService.update(platfraDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
     /**
@@ -76,8 +104,14 @@ public class PlatfraController {
      * @param platfraDto
      */
     @DeleteMapping
-    public void delete(@RequestBody PlatfraDto platfraDto) {
+    public BaseResponse delete(@RequestBody PlatfraDto platfraDto) {
         platfraService.delete(platfraDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 }
 

@@ -2,6 +2,7 @@ package com.gsm.platfra.api.common.file.rest;
 
 import com.gsm.platfra.api.common.file.dto.FileDownloadDto;
 import com.gsm.platfra.api.common.file.service.FileService;
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.common.file.CommonFileDto;
 import com.gsm.platfra.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
@@ -24,18 +25,35 @@ public class FileController {
 
     // TODO: 특정 확장자만 받을 수 있도록 추가 구현
     @PostMapping(value = "/upload", consumes = "multipart/*")
-    public void upload(@RequestPart("file") List<MultipartFile> file, @RequestPart("dto") CommonFileDto commonFileDto) throws IOException {
+    public BaseResponse upload(@RequestPart("file") List<MultipartFile> file, @RequestPart("dto") CommonFileDto commonFileDto) throws IOException {
         fileService.upload(file, commonFileDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     @GetMapping("/{contentsCd}/{contentsSeq}")
-    public List<CommonFileDto> list(@PathVariable String contentsCd, @PathVariable Long contentsSeq) {
-        return fileService.list(contentsCd, contentsSeq);
+    public BaseResponse list(@PathVariable String contentsCd, @PathVariable Long contentsSeq) {
+        return BaseResponse.builder()
+                .data(fileService.list(contentsCd, contentsSeq))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     @DeleteMapping
-    public void delete(@RequestBody CommonFileDto commonFileDto) {
+    public BaseResponse delete(@RequestBody CommonFileDto commonFileDto) {
         fileService.delete(commonFileDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     @GetMapping(value = "/download")
