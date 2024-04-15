@@ -99,9 +99,8 @@ public class PlatfraBoardController {
     public BaseResponse delete(@RequestBody PlatfraBoardDto platfraBoardDto){
         log.info("Delete board start.");
         log.info("Request : {}",platfraBoardDto);
-        return platfraBoardService.delete(platfraBoardDto);
         return BaseResponse.builder()
-                .data(boardContentService.delete(platfraBoardContentDto))
+                .data(platfraBoardService.delete(platfraBoardDto))
                 .code(null)
                 .message(null)
                 .error(null)
