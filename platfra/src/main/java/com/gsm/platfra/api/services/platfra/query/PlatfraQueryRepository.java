@@ -16,6 +16,7 @@ import static com.gsm.platfra.api.data.feature.view.QTFeatureView.tFeatureView;
 import static com.gsm.platfra.api.data.platfra.QTPlatfra.tPlatfra;
 import static com.gsm.platfra.api.data.platfra.QTPlatfraContent.tPlatfraContent;
 import static com.gsm.platfra.api.data.platfra.category.QTPlatfraCategory.tPlatfraCategory;
+import static org.apache.http.util.TextUtils.isBlank;
 
 
 /**
@@ -54,6 +55,38 @@ public class PlatfraQueryRepository {
         
         return list;
     }
+
+    public List<PlatfraDto> getSearchList(String searchValue) {
+        List<PlatfraDto> list = queryFactory
+            .select(
+                Projections.fields(
+                    PlatfraDto.class,
+                    tPlatfra.platfraSeq,
+                    tPlatfra.platfraId,
+                    tPlatfra.subject,
+                    tPlatfra.description,
+                    tPlatfra.introduction,
+                    tPlatfraCategory.id.categoryCd
+                )
+            )
+            .from(tPlatfra)
+            .leftJoin(tPlatfraCategory)
+            .on(tPlatfra.platfraId.eq(tPlatfraCategory.id.platfraId))
+            .where(
+                isBlank(searchValue)
+                    ? null
+                    : tPlatfra.platfraId.contains(searchValue)
+                    .or(tPlatfra.subject.contains(searchValue))
+                    .or(tPlatfra.description.contains(searchValue))
+                    .or(tPlatfra.introduction.contains(searchValue))
+                ,
+                tPlatfra.delYn.eq(Boolean.FALSE)
+            )
+            .fetch()
+            ;
+
+        return list;
+    }
     public List<PlatfraContentDto> getLatestContentList(String platfraId) {
         List<PlatfraContentDto> list = queryFactory
             .select(
@@ -69,7 +102,6 @@ public class PlatfraQueryRepository {
             .where(
                 tPlatfraContent.platfraId.eq(platfraId),
                 tPlatfraContent.delYn.eq(Boolean.FALSE)
-                
             )
             .orderBy(tPlatfraContent.regDate.desc())
             .fetch()
@@ -135,7 +167,7 @@ public class PlatfraQueryRepository {
             .execute()
         ;
     }
-    
+
 }
 
 

@@ -53,6 +53,14 @@ public class PlatfraService {
         
         return platfraDtoList;
     }
+
+    public List<PlatfraDto> getSearchList(String searchValue) {
+        UserContext userContext = UserContextUtil.getUserContext();
+        log.debug("userContext : {}", userContext);
+        List<PlatfraDto> platfraDtoList = platfraQueryRepository.getSearchList(searchValue);
+
+        return platfraDtoList;
+    }
     
     public PlatfraMainDto get(Long platfraSeq) {
         // note : 여러개의 데이터를 조합하여 응답할때는 [테이블명]DTO 즉, 테이블용 DTO로 조회하여 service 단에서 화면출력용 DTO에 세팅한다.
@@ -99,5 +107,5 @@ public class PlatfraService {
     public void delete(PlatfraDto platfraDto) {
         platfraQueryRepository.delete(platfraDto.getPlatfraSeq());
     }
-    
+
 }

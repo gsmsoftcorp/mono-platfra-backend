@@ -39,6 +39,22 @@ public class PlatfraController {
     }
     
     /**
+     * 플랫폼 검색 리스트 조회
+     * @param searchValue
+     * @return
+     */
+    @GetMapping("/search")
+    public BaseResponse getSearchList(@RequestParam(required = false) String searchValue) {
+        UserContext userContext = UserContextUtil.getUserContext();
+        return BaseResponse.builder()
+                .data(platfraService.getSearchList(searchValue))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
+    }
+
+    /**
      * 플랫폼 리스트 조회
      * @param platfraDto
      * @return
@@ -53,7 +69,7 @@ public class PlatfraController {
                 .error(null)
                 .build();
     }
-    
+
     /**
      * 플랫폼 상세(메인) 조회
      * @param platfraSeq
