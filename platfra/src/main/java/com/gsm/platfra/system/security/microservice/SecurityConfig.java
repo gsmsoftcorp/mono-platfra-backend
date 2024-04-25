@@ -45,17 +45,13 @@ public class SecurityConfig {
     private final String ROLE_ADMIN = "ADMIN";
     private final String ROLE_USER = "USER";
 
-    @Lazy
-    @Autowired
-    private CorsConfigurationSource corsConfigurationSource; // DevSecurityConfiguration 또는 ProdSecurityConfiguration에서 정의한 CorsConfigurationSource 빈을 주입받습니다.
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         AuthFilter authFilter = new AuthFilter(authProvider);
         String[] ignorePath = securityIgnoreProperties().getPath().stream().toArray(String[]::new);
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource)) // CORS 설정을 명시적으로 적용
+            .cors(Customizer.withDefaults()) // CORS 설정을 명시적으로 적용
             .csrf(AbstractHttpConfigurer::disable)// REST API 방식으로 CSRF 보안 토큰 생성 x
             .sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))// 세션 사용 x
@@ -67,24 +63,11 @@ public class SecurityConfig {
             )
             .authorizeHttpRequests(
                 auth -> auth
-//                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()   // 정적 리소스는 무시
-//                    .requestMatchers(ignorePath).permitAll()    // AuthFilter를 적용하지 않을 URL
+                    .requestMatchers(ignorePath).permitAll()    // AuthFilter를 적용하지 않을 URL
                     .anyRequest().authenticated()
             ) // 리소스 같은 접근 처리 불가
         ;
         return http.build();
-    }
-
-    /** 각 마이크로서비스 yml의 security.ignore.path에 ignore 대상 url을 array형식으로 입력한다(예정) **/
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        String[] ignorePath = securityIgnoreProperties().getPath().stream().toArray(String[]::new);
-
-        return (web) -> web
-            .ignoring()
-            .requestMatchers(PathRequest.toStaticResources().atCommonLocations())   // 정적 리소스는 무시
-            .requestMatchers(ignorePath)    // AuthFilter를 적용하지 않을 URL
-            ;
     }
 
     @Bean
@@ -110,45 +93,5 @@ public class SecurityConfig {
     @Bean
     public ServiceAuthenticationFailureHandler authenticationFailureHandler() {
         return new ServiceAuthenticationFailureHandler(objectMapper);
-    }
-
-    @Configuration
-    @Profile({"dev", "local"})
-    class DevSecurityConfiguration {
-        @Bean
-        public CorsConfigurationSource corsConfigurationSource() {
-            CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000"
-            ));
-            configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-            configuration.setAllowCredentials(true);
-            configuration.setMaxAge(3600L);
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration);
-            return source;
-        }
-    }
-
-
-    @Configuration
-    @Profile("prod")
-    class ProdSecurityConfiguration {
-        @Bean
-        public CorsConfigurationSource corsConfigurationSource() {
-            CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(Arrays.asList(
-                "http://www.platfra.com"
-                , "https://www.platfra.com"
-
-            ));
-            configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
-            configuration.setAllowCredentials(true);
-            configuration.setMaxAge(3600L);
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration);
-            return source;
-        }
-
     }
 }

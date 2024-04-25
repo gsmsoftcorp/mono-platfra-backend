@@ -31,7 +31,7 @@ public class PlatfraContentController {
     }
     
     /**
-     * 컨텐츠 메인(상세) 조회
+     * 컨텐츠 상세 조회
      * @param contentSeq
      * @return
      */
