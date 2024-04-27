@@ -22,22 +22,6 @@ import java.util.List;
 @RequestMapping("/platfra")
 public class PlatfraController {
     private final PlatfraService platfraService;
-    
-    /**
-     * 플랫폼 메인
-     * @param platfraId
-     * @return
-     */
-    @GetMapping("/{platfraId}")
-    public BaseResponse get(@PathVariable(required = true) String platfraId) {
-        return BaseResponse.builder()
-                .data(platfraService.get(platfraId))
-                .code(null)
-                .message(null)
-                .error(null)
-                .build();
-    }
-    
     /**
      * 플랫폼 검색 리스트 조회
      * @param searchValue
@@ -72,19 +56,34 @@ public class PlatfraController {
 
     /**
      * 플랫폼 상세(메인) 조회
+     * @param platfraId
+     * @return
+     */
+    @GetMapping("/{platfraId}")
+    public BaseResponse get(@PathVariable(required = true) String platfraId) {
+        return BaseResponse.builder()
+            .data(platfraService.get(platfraId))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
+    }
+
+    /**
+     * 플랫폼 상세(메인) 조회
      * @param platfraSeq
      * @return
      */
     @GetMapping("/{platfraSeq}")
     public BaseResponse getDetail(@RequestParam(required = true) Long platfraSeq) {
         return BaseResponse.builder()
-                .data(platfraService.get(platfraSeq))
-                .code(null)
-                .message(null)
-                .error(null)
-                .build();
+            .data(platfraService.get(platfraSeq))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
-    
+
     /**
      * 플랫폼 등록
      * @param platfraDto

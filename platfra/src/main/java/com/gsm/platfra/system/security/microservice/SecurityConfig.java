@@ -65,7 +65,7 @@ public class SecurityConfig {
                 auth -> auth
                     .requestMatchers(ignorePath).permitAll()    // AuthFilter를 적용하지 않을 URL
                     .anyRequest().authenticated()
-            ) // 리소스 같은 접근 처리 불가
+            )
         ;
         return http.build();
     }
