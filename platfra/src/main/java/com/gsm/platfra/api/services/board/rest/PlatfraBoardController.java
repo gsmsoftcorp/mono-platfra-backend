@@ -23,7 +23,7 @@ public class PlatfraBoardController {
     private final PlatfraBoardService platfraBoardService;
 
     /**
-    * 플랫폼 리스트 조회
+    * Board 리스트 조회
     * @param platfraBoardDto
     * @return platfraBoardDtoList
     **/
