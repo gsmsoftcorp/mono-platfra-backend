@@ -1,10 +1,7 @@
 package com.gsm.platfra.api.data.account;
 
 import com.gsm.platfra.api.data.base.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -59,5 +56,16 @@ public class TAccount extends BaseEntity {
     public void update(String newPassword, PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(newPassword);
     }
-    
+
+    @PrePersist
+    public void setModRegId(){
+        super.setModUserId(userId);
+        super.setRegUserId(userId);
+    }
+
+    @PreUpdate
+    public void updateModRegId(){
+        super.setModUserId(userId);
+        super.setRegUserId(userId);
+    }
 }
