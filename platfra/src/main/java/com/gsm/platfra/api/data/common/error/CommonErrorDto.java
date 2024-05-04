@@ -26,12 +26,15 @@ public class CommonErrorDto {
     private String resData;
 
     public static TCommonError toEntity(CommonErrorDto dto) {
-        return TCommonError.builder()
-                .url(dto.url)
-                .location(dto.location)
-                .reqData(dto.reqData)
-                .errorMsg(dto.errorMsg)
-                .resData(dto.resData)
-                .build();
+        TCommonError tCommonError = TCommonError.builder()
+            .url(dto.url)
+            .location(dto.location)
+            .reqData(dto.reqData)
+            .errorMsg(dto.errorMsg)
+            .resData(dto.resData)
+            .build();
+        tCommonError.setRegUserId("SYSTEM_ADMIN");
+        tCommonError.setModUserId("SYSTEM_ADMIN");
+        return tCommonError;
     }
 }

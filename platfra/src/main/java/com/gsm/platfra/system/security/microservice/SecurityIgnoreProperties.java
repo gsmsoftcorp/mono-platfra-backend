@@ -36,7 +36,8 @@ public class SecurityIgnoreProperties implements InitializingBean{
 		}
 		path.add(URIPrefix.AUTH_AUTHENTICATION);
 		path.add(URIPrefix.AUTH_REFRESH);
-		path.add("/platfra/search");
+		path.add("/main");
+		path.add("/platfra/**");
 		path.add("/login");
 		path.add("/signup");
 		path.add("/kakao");

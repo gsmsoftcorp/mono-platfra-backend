@@ -79,10 +79,8 @@ public class AccountService {
     }
 
     public void signup(SignupDto signupDto) {
-        isDuplicatedUserInfo(signupDto);
-
+        this.isDuplicatedUserInfo(signupDto);
         TAccount entity = SignupDto.toEntity(signupDto, passwordEncoder);
-
         tAccountRepository.save(entity);
     }
 
