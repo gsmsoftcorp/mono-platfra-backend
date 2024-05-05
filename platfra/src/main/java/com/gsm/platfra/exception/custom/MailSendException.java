@@ -1,12 +1,11 @@
 package com.gsm.platfra.exception.custom;
 
+import com.gsm.platfra.exception.BaseException;
 import com.gsm.platfra.exception.ExceptionCode;
-import com.gsm.platfra.exception.ExceptionResponse;
-import jakarta.mail.MessagingException;
 import lombok.Getter;
 
 @Getter
-public class MailSendException extends MessagingException {
+public class MailSendException extends BaseException {
   private String code;
   private String message;
 
