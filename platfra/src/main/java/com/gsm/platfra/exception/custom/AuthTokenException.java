@@ -1,17 +1,13 @@
 package com.gsm.platfra.exception.custom;
 
-import io.jsonwebtoken.JwtException;
+import com.gsm.platfra.exception.BaseException;
 import lombok.Getter;
 
 @Getter
-public class AuthTokenException extends JwtException {
+public class AuthTokenException extends BaseException {
 
     public AuthTokenException(String message) {
         super(message);
-    }
-
-    public AuthTokenException(String message, Throwable cause) {
-        super(message, cause);
     }
 
 }
