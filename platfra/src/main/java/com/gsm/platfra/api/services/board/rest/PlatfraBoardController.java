@@ -15,11 +15,10 @@ import java.util.List;
 * 플랫프라 보드 컨트롤러
 **/
 @Slf4j
-@RestController
 @RequiredArgsConstructor
 @RequestMapping("/platfra/board")
+@RestController
 public class PlatfraBoardController {
-
     private final PlatfraBoardService platfraBoardService;
 
     /**
@@ -45,7 +44,7 @@ public class PlatfraBoardController {
     * @return PlatfraBoardResDto
     * */
     @GetMapping("/{platfraBoardSeq}")
-    public BaseResponse getBoardDetail(@PathVariable(value = "platfraBoardSeq")long platfraBoardSeq){
+    public BaseResponse getBoardDetail(@PathVariable(name = "platfraBoardSeq") Long platfraBoardSeq){
         log.info("GetBoardDetail start. {}",platfraBoardSeq);
         log.info("Path : {}",platfraBoardSeq);
         return BaseResponse.builder()

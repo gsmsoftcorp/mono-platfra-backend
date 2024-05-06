@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface TPlatfraBoardRepository extends JpaRepository<TPlatfraBoard, Long> {
-  Optional<TPlatfraBoard> findByPlatfraBoardSeq(Long platfraBoardId);
 }

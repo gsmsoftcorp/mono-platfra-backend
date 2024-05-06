@@ -3,11 +3,13 @@ package com.gsm.platfra.api.services.platfra.rest;
 import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.services.platfra.service.ContentSaveService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/platfra/{platfraId}")
-@RestController
 public class ContentSaveController {
 
     private final ContentSaveService contentSaveService;

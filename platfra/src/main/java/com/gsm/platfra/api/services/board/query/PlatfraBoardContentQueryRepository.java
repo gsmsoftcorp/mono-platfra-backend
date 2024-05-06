@@ -18,28 +18,25 @@ import static com.gsm.platfra.api.data.platfraboard.QTPlatfraBoardContent.tPlatf
 public class PlatfraBoardContentQueryRepository {
   private final JPAQueryFactory queryFactory;
 
-  public List<PlatfraBoardContentDto> getList (PlatfraBoardContentDto contentDto){
+  public List<PlatfraBoardContentDto> getList(PlatfraBoardContentDto contentDto){
     return
         queryFactory
             .select(Projections.fields(
                 PlatfraBoardContentDto.class,
-                tPlatfraBoardContent.platfraBoardSeq,
                 tPlatfraBoardContent.contentSeq,
+                tPlatfraBoardContent.platfraBoardSeq,
                 tPlatfraBoardContent.contentNo,
                 tPlatfraBoardContent.title,
                 tPlatfraBoardContent.content,
-                tPlatfraBoardContent.regUserId,
-                tPlatfraBoardContent.regDate,
-                tPlatfraBoardContent.modUserId,
-                tPlatfraBoardContent.modDate
+                tPlatfraBoardContent.view
               )
             ).from(tPlatfraBoardContent)
             .where(
-                contentDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoardContent.platfraBoardSeq.eq(contentDto.getPlatfraBoardSeq()),
-                contentDto.getContentSeq() == null ? null : tPlatfraBoardContent.contentSeq.eq(contentDto.getContentSeq()),
-                contentDto.getContentNo() == null ? null : tPlatfraBoardContent.contentNo.eq(contentDto.getContentNo()),
-                contentDto.getTitle() == null ? null : tPlatfraBoardContent.title.like("%"+contentDto.getTitle()+"%"),
-                contentDto.getContent() == null ? null : tPlatfraBoardContent.content.like("%"+contentDto.getContent()+"%")
+                contentDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoardContent.platfraBoardSeq.eq(contentDto.getPlatfraBoardSeq())
+//                contentDto.getContentSeq() == null ? null : tPlatfraBoardContent.contentSeq.eq(contentDto.getContentSeq()),
+//                contentDto.getContentNo() == null ? null : tPlatfraBoardContent.contentNo.eq(contentDto.getContentNo()),
+//                contentDto.getTitle() == null ? null : tPlatfraBoardContent.title.like("%"+contentDto.getTitle()+"%"),
+//                contentDto.getContent() == null ? null : tPlatfraBoardContent.content.like("%"+contentDto.getContent()+"%")
             )
             .fetch();
   }
