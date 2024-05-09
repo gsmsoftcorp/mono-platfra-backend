@@ -71,8 +71,8 @@ public class AccountService {
 
     public String login(LoginDto loginDto) {
 
-        TAccount tAccount = tAccountRepository.findByUserId(loginDto.userId()).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 이메일입니다."));
-        if (!passwordEncoder.matches( loginDto.password(), tAccount.getPassword())) {
+        TAccount tAccount = tAccountRepository.findByUserId(loginDto.getUserId()).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 이메일입니다."));
+        if (!passwordEncoder.matches( loginDto.getPassword(), tAccount.getPassword())) {
             log.debug("비밀번호가 일치하지 않습니다.");
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
@@ -89,12 +89,12 @@ public class AccountService {
     }
 
     private void isDuplicatedUserInfo(SignupDto signupDto) {
-        tAccountRepository.findByUserId(signupDto.userId()).ifPresent(tAccount -> {
+        tAccountRepository.findByUserId(signupDto.getUserId()).ifPresent(tAccount -> {
             log.debug("이미 존재하는 아이디입니다.");
             throw new EntityNotFoundException("이미 존재하는 아이디입니다.");
         });
 
-        tAccountRepository.findByEmail(signupDto.email()).ifPresent(tAccount -> {
+        tAccountRepository.findByEmail(signupDto.getEmail()).ifPresent(tAccount -> {
             log.debug("이미 존재하는 이메일입니다.");
             throw new EntityNotFoundException("이미 존재하는 이메일입니다.");
         });
@@ -102,7 +102,7 @@ public class AccountService {
 
     public String googleLogin(GoogleLoginDto googleLoginDto) {
         // Todo : 일반 회원으로 가입한 이메일인 경우 -> 예외 처리?
-        TAccount tAccount = tAccountRepository.findByUserId(googleLoginDto.email()).orElseGet(
+        TAccount tAccount = tAccountRepository.findByUserId(googleLoginDto.getEmail()).orElseGet(
                 () -> googleSignup(googleLoginDto)
         );
 
@@ -110,7 +110,7 @@ public class AccountService {
     }
 
     private TAccount googleSignup(GoogleLoginDto googleLoginDto) {
-        tAccountRepository.findByUserNm(googleLoginDto.username()).ifPresent(tAccount -> {
+        tAccountRepository.findByUserNm(googleLoginDto.getUsername()).ifPresent(tAccount -> {
             throw new DuplicateKeyException("이미 존재하는 이름입니다.");
         });
 
