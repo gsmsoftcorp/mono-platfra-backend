@@ -31,6 +31,7 @@ import static com.gsm.platfra.codes.ResponseCode.SUCCESS;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/account")
 public class AccountController {
 
     private final AccountService accountService;
