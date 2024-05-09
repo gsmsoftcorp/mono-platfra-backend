@@ -27,8 +27,6 @@ public class ContentSaveController {
                 .message(null)
                 .error(null)
                 .build();
-
-        // Todo : return data
     }
 
     @PostMapping("/{contentSeq}")
@@ -40,7 +38,5 @@ public class ContentSaveController {
                 .message(null)
                 .error(null)
                 .build();
-
-        // Todo : return data
     }
 }
