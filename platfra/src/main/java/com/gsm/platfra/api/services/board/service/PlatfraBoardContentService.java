@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -26,6 +27,10 @@ public class PlatfraBoardContentService {
     public List<PlatfraBoardContentDto> getList(PlatfraBoardContentDto platfraBoardContentDto) {
         List<PlatfraBoardContentDto> platfraBoardContentDtoList = platfraBoardContentQueryRepository.getList(platfraBoardContentDto);
         return platfraBoardContentDtoList;
+    }
+    public PlatfraBoardContentDto get(Long platfraBoardContentSeq) {
+        TPlatfraBoardContent tPlatfraBoardContent = tPlatfraBoardContentRepository.findById(platfraBoardContentSeq).orElseThrow();
+        return platfraBoardContentMapper.entityToDto(tPlatfraBoardContent);
     }
 
     @Transactional
@@ -68,6 +73,7 @@ public class PlatfraBoardContentService {
 
         return platfraBoardContentQueryRepository.delete(platfraBoardContentDto.getContentSeq()) > 0;
     }
+
 
 
 }

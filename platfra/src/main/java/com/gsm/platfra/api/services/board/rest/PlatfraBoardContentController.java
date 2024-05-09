@@ -34,7 +34,23 @@ public class PlatfraBoardContentController {
             .error(null)
             .build();
     }
-
+    /**
+     * 컨텐츠 검색
+     *
+     * @param platfraBoardContentSeq
+     * @return List<PlatfraBoardContentDto>
+     */
+    @GetMapping("/{platfraBoardContentSeq}")
+    public BaseResponse get(@PathVariable Long platfraBoardContentSeq) {
+        log.info("GetBoardContentList start.");
+        log.info("Request : {}", platfraBoardContentSeq);
+        return BaseResponse.builder()
+            .data(platfraBoardContentService.get(platfraBoardContentSeq))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
+    }
     /**
      * 컨텐츠 생성
      *
