@@ -55,7 +55,7 @@ public class AccountController {
         return token;
     }
 
-    @GetMapping("kakao")
+    @GetMapping("/kakao")
     public String oauthLogin(String code){
         KakaoParams kakaoParams = new KakaoParams(code);
         String token = accountService.oauthLogin(kakaoParams);
