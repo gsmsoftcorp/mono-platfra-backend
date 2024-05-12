@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.services.board.rest;
 
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.platfraboard.PlatfraBoardDto;
 import com.gsm.platfra.api.services.board.dto.PlatfraBoardResDto;
 import com.gsm.platfra.api.services.board.service.PlatfraBoardService;
@@ -14,23 +15,27 @@ import java.util.List;
 * 플랫프라 보드 컨트롤러
 **/
 @Slf4j
-@RestController
 @RequiredArgsConstructor
 @RequestMapping("/platfra/board")
+@RestController
 public class PlatfraBoardController {
-
     private final PlatfraBoardService platfraBoardService;
 
     /**
-    * 플랫폼 리스트 조회
+    * Board 리스트 조회
     * @param platfraBoardDto
     * @return platfraBoardDtoList
     **/
     @GetMapping
-    public List<PlatfraBoardDto> getList(PlatfraBoardDto platfraBoardDto){
+    public BaseResponse getList(PlatfraBoardDto platfraBoardDto){
         log.info("GetAllBoardList start. {}",platfraBoardDto);
         log.info("Request : {}",platfraBoardDto);
-        return platfraBoardService.getList(platfraBoardDto);
+        return BaseResponse.builder()
+                .data(platfraBoardService.getList(platfraBoardDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -39,10 +44,15 @@ public class PlatfraBoardController {
     * @return PlatfraBoardResDto
     * */
     @GetMapping("/{platfraBoardSeq}")
-    public PlatfraBoardResDto getBoardDetail(@PathVariable(value = "platfraBoardSeq")long platfraBoardSeq){
+    public BaseResponse getBoardDetail(@PathVariable(name = "platfraBoardSeq") Long platfraBoardSeq){
         log.info("GetBoardDetail start. {}",platfraBoardSeq);
         log.info("Path : {}",platfraBoardSeq);
-        return platfraBoardService.getPlatfraBoardDetail(platfraBoardSeq);
+        return BaseResponse.builder()
+                .data(platfraBoardService.getPlatfraBoardDetail(platfraBoardSeq))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -51,10 +61,15 @@ public class PlatfraBoardController {
     * @return platfraBoardResDto
     * */
     @PostMapping
-    public PlatfraBoardResDto create(@RequestBody PlatfraBoardDto platfraBoardDto){
+    public BaseResponse create(@RequestBody PlatfraBoardDto platfraBoardDto){
         log.info("Create board start.");
         log.info("Request : {}",platfraBoardDto);
-        return platfraBoardService.create(platfraBoardDto);
+        return BaseResponse.builder()
+                .data(platfraBoardService.create(platfraBoardDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -63,10 +78,15 @@ public class PlatfraBoardController {
     * @return platfraBoardResDto
     * */
     @PatchMapping
-    public PlatfraBoardResDto update(@RequestBody PlatfraBoardDto platfraBoardDto){
+    public BaseResponse update(@RequestBody PlatfraBoardDto platfraBoardDto){
         log.info("Update board start.");
         log.info("Request : {}",platfraBoardDto);
-        return platfraBoardService.update(platfraBoardDto);
+        return BaseResponse.builder()
+                .data(platfraBoardService.update(platfraBoardDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -75,9 +95,15 @@ public class PlatfraBoardController {
     * @return
     * */
     @DeleteMapping
-    public boolean delete(@RequestBody PlatfraBoardDto platfraBoardDto){
+    public BaseResponse delete(@RequestBody PlatfraBoardDto platfraBoardDto){
         log.info("Delete board start.");
         log.info("Request : {}",platfraBoardDto);
-        return platfraBoardService.delete(platfraBoardDto);
+        return BaseResponse.builder()
+                .data(platfraBoardService.delete(platfraBoardDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
+
     }
 }

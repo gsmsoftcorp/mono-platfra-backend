@@ -1,6 +1,7 @@
 package com.gsm.platfra.api.common.code.rest;
 
 import com.gsm.platfra.api.common.code.service.CommonCodeService;
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.common.code.CommonCodeDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +30,16 @@ public class CommonCodeController {
      * @return
      */
     @GetMapping
-    public List<CommonCodeDto> getList(
+    public BaseResponse getList(
         @RequestParam(required = true) String code,
         @RequestParam(required = true) String type
     ) {
-        return commonCodeService.getList(code, type);
+        return BaseResponse.builder()
+                .data(commonCodeService.getList(code, type))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
     /**
@@ -42,8 +48,13 @@ public class CommonCodeController {
      * @return
      */
     @GetMapping("/all")
-    public CommonCodeDto getAll(@RequestParam(required = true) String code) {
-        return commonCodeService.getAll(code);
+    public BaseResponse getAll(@RequestParam(required = true) String code) {
+        return BaseResponse.builder()
+                .data(commonCodeService.getAll(code))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
     
 }

@@ -33,10 +33,10 @@ public class PlatfraBoardQueryRepository {
                 )
                 .from(tPlatfraBoard)
                 .where(
-                        platfraBoardDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoard.platfraBoardSeq.eq(platfraBoardDto.getPlatfraBoardSeq()),
-                        platfraBoardDto.getPlatfraId().isBlank() ? null : tPlatfraBoard.platfraId.eq(platfraBoardDto.getPlatfraId()),
-                        platfraBoardDto.getSubject().isBlank() ? null : tPlatfraBoard.subject.like("%"+platfraBoardDto.getSubject()+"%"),
-                        platfraBoardDto.getDescription().isBlank() ? null : tPlatfraBoard.description.like("%"+platfraBoardDto.getDescription()+"%")
+//                        platfraBoardDto.getPlatfraBoardSeq() == null ? null : tPlatfraBoard.platfraBoardSeq.eq(platfraBoardDto.getPlatfraBoardSeq()),
+                        platfraBoardDto.getPlatfraId().isBlank() ? null : tPlatfraBoard.platfraId.eq(platfraBoardDto.getPlatfraId())
+//                        platfraBoardDto.getSubject().isBlank() ? null : tPlatfraBoard.subject.like("%"+platfraBoardDto.getSubject()+"%"),
+//                        platfraBoardDto.getDescription().isBlank() ? null : tPlatfraBoard.description.like("%"+platfraBoardDto.getDescription()+"%")
                 )
             .fetch();
     }

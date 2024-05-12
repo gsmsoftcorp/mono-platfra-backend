@@ -29,16 +29,12 @@ public class PlatfraContentService {
         
         return platfraContentDtoList;
     }
-    public PlatfraContentMainResDto get(Long contentSeq) {
-        // note : 여러개의 데이터를 조합하여 응답할때는 [테이블명]DTO 즉, 테이블용 DTO로 조회하여 service 단에서 화면출력용 DTO에 세팅한다.
-        PlatfraContentMainResDto platfraContentMainResDto = new PlatfraContentMainResDto();
-        
+    public PlatfraContentDto get(Long contentSeq) {
         //1. 컨텐츠 조회
         TPlatfraContent tPlatfraContent = tPlatfraContentRepository.findById(contentSeq).orElseThrow(/*DataNotFoundException::new*/);
         PlatfraContentDto platfraContentDto = PlatfraContentDto.of(tPlatfraContent);
-        platfraContentMainResDto.setPlatfraContenDto(platfraContentDto);
-        
-        return platfraContentMainResDto;
+
+        return platfraContentDto;
     }
     
     @Transactional

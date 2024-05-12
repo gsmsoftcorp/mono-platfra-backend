@@ -34,7 +34,7 @@ public class PlatfraBoardService {
 
     public PlatfraBoardResDto getPlatfraBoardDetail(Long platfraBoardSeq){
 
-        TPlatfraBoard platfraBoard = tPlatfraBoardRepository.findByPlatfraBoardSeq(platfraBoardSeq)
+        TPlatfraBoard platfraBoard = tPlatfraBoardRepository.findById(platfraBoardSeq)
             .orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));;
 
         PlatfraBoardDto platfraBoardDto = platfraBoardMapper.boardToDto(platfraBoard);
@@ -67,7 +67,7 @@ public class PlatfraBoardService {
     @Transactional
     public PlatfraBoardResDto update (PlatfraBoardDto platfraBoardDto){
 
-        TPlatfraBoard platfraBoard = tPlatfraBoardRepository.findByPlatfraBoardSeq(platfraBoardDto.getPlatfraBoardSeq())
+        TPlatfraBoard platfraBoard = tPlatfraBoardRepository.findById(platfraBoardDto.getPlatfraBoardSeq())
             .orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));;
 
         if(platfraBoard == null){

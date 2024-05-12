@@ -18,30 +18,34 @@ import java.util.List;
 * 
 */
 @Component
-@ConfigurationProperties(ignoreInvalidFields = true, prefix = "gsm.security.ignore" )
+@ConfigurationProperties(ignoreInvalidFields = true, prefix = "security.ignore" )
 public class SecurityIgnoreProperties implements InitializingBean{
 	
-	private Logger log = (Logger) LoggerFactory.getLogger(SecurityIgnoreProperties.class);
+	private Logger log = LoggerFactory.getLogger(SecurityIgnoreProperties.class);
 
 	private List<String> path;
 
 	
 	@Override
 	public void afterPropertiesSet() {
-		log.info("[gsm.security.ignore] loaded.");
+		log.info("[security.ignore] loaded.");
 		log.info("path : {}", path);
 		
 		if(path == null) {
 			path = new ArrayList<>();
 		}
-//		path.add("/login");
-//		path.add("/signup");
-//		path.add("/kakao");
-//		path.add("/password");
 		path.add("/account/login");
 		path.add("/account/signup");
 		path.add("/account/kakao");
 		path.add("/account/password");
+		path.add(URIPrefix.AUTH_AUTHENTICATION);
+		path.add(URIPrefix.AUTH_REFRESH);
+		path.add("/main");
+		path.add("/platfra/**");
+		path.add("/login");
+		path.add("/signup");
+		path.add("/kakao");
+		path.add("/password");
 	}
 
 

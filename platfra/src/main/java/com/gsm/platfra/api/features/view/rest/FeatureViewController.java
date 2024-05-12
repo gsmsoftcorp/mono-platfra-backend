@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.features.view.rest;
 
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.feature.view.FeatureViewDto;
 import com.gsm.platfra.api.features.view.service.FeatureViewService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,10 +25,16 @@ public class FeatureViewController {
      * @param featureViewDto
      */
     @PostMapping
-    public void viewCount(HttpServletRequest request, @RequestBody FeatureViewDto featureViewDto) {
+    public BaseResponse viewCount(HttpServletRequest request, @RequestBody FeatureViewDto featureViewDto) {
         // IP 주소 set
         featureViewDto.setAddress(request.getRemoteAddr());
         featureViewService.viewCount(featureViewDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
 }

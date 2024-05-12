@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PlatfraBoardContentDto {
   private Long contentSeq;
-  private TPlatfraBoard tPlatfraBoard;
   private Long platfraBoardSeq;
   private Long contentNo;
   private String title;
   private String content;
+  private Long view;
 }

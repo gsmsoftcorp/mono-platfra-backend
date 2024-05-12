@@ -77,27 +77,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-aop")
 
 }
-/**
- * QueryDSL Build Options
- */
-val querydslDir = "$buildDir/generated/querydsl"
-
-sourceSets {
-	getByName("main").java.srcDirs(querydslDir)
-}
-
-tasks.withType<JavaCompile> {
-	options.generatedSourceOutputDirectory = file(querydslDir)
-
-	// 위의 설정이 안되면 아래 설정 사용
-	// options.generatedSourceOutputDirectory.set(file(querydslDir))
-}
-
-tasks.named("clean") {
-	doLast {
-		file(querydslDir).deleteRecursively()
-	}
-}
 
 tasks.withType<Test> {
 	useJUnitPlatform()

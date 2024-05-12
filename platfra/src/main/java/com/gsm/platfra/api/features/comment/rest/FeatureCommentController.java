@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.features.comment.rest;
 
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.feature.comment.FeatureCommentDto;
 import com.gsm.platfra.api.features.comment.dto.CommentListResDto;
 import com.gsm.platfra.api.features.comment.service.FeatureCommentService;
@@ -21,8 +22,14 @@ public class FeatureCommentController {
      * @param featureCommentDto
      */
     @PostMapping
-    public void create(@RequestBody FeatureCommentDto featureCommentDto) {
+    public BaseResponse create(@RequestBody FeatureCommentDto featureCommentDto) {
         featureCommentService.create(featureCommentDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -32,8 +39,13 @@ public class FeatureCommentController {
      * @return
      */
     @GetMapping
-    public List<CommentListResDto> list(FeatureCommentDto featureCommentDto) {
-        return featureCommentService.list(featureCommentDto);
+    public BaseResponse list(FeatureCommentDto featureCommentDto) {
+        return BaseResponse.builder()
+                .data(featureCommentService.list(featureCommentDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -42,8 +54,13 @@ public class FeatureCommentController {
      * @return
      */
     @GetMapping("/reply")
-    public List<FeatureCommentDto> reply(FeatureCommentDto featureCommentDto) {
-        return featureCommentService.reply(featureCommentDto);
+    public BaseResponse reply(FeatureCommentDto featureCommentDto) {
+        return BaseResponse.builder()
+                .data(featureCommentService.reply(featureCommentDto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -51,8 +68,14 @@ public class FeatureCommentController {
      * @param featureCommentDto
      */
     @PutMapping
-    public void update(@RequestBody FeatureCommentDto featureCommentDto) {
+    public BaseResponse update(@RequestBody FeatureCommentDto featureCommentDto) {
         featureCommentService.update(featureCommentDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -60,7 +83,13 @@ public class FeatureCommentController {
      * @param featureCommentDto
      */
     @DeleteMapping
-    public void delete(@RequestBody FeatureCommentDto featureCommentDto) {
+    public BaseResponse delete(@RequestBody FeatureCommentDto featureCommentDto) {
         featureCommentService.delete(featureCommentDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 }

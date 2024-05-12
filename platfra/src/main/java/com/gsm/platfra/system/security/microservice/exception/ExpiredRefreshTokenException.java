@@ -9,13 +9,11 @@ public class ExpiredRefreshTokenException extends AuthenticationException {
 
 	public ExpiredRefreshTokenException(String msg) {
 		super(msg);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
 	public ExpiredRefreshTokenException(String msg, Throwable t) {
 		super(msg, t);
-		// TODO Auto-generated constructor stub
 	}
 
 

@@ -1,10 +1,14 @@
 package com.gsm.platfra.system.security.context;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class UserContext extends JwtClaimsStruct {
 	
 	private String accessToken; //Access Token

@@ -20,7 +20,7 @@ public class ContextConfig implements InitializingBean {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		if(log.isDebugEnabled()) {
 			log.debug("[core-fwk]ContextConfig constructed.");
 		}
@@ -32,7 +32,7 @@ public class ContextConfig implements InitializingBean {
 	}
 
 	@Bean
-	public RequestContextFilter fwkRequestContextFilter() {
+	public RequestContextFilter requestContextFilter() {
 		List<RequestContextHandler> handlers = new ArrayList();
 		handlers.add(requestContextHandler());
 

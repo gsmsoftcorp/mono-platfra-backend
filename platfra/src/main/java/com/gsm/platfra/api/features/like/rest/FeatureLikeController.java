@@ -1,5 +1,6 @@
 package com.gsm.platfra.api.features.like.rest;
 
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.feature.like.FeatureLikeDto;
 import com.gsm.platfra.api.features.like.dto.FeatureLikeResDto;
 import com.gsm.platfra.api.features.like.service.FeatureLikeService;
@@ -25,8 +26,13 @@ public class FeatureLikeController {
     * @return
     * */
     @GetMapping
-    public FeatureLikeResDto getLikeList(@Valid FeatureLikeDto dto){
-        return featureLikeService.getContentLikeList(dto);
+    public BaseResponse getLikeList(@Valid FeatureLikeDto dto){
+        return BaseResponse.builder()
+                .data(featureLikeService.getContentLikeList(dto))
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 
     /**
@@ -35,7 +41,13 @@ public class FeatureLikeController {
     * @return
     * */
     @PutMapping
-    public void like(@RequestBody @Valid FeatureLikeDto featureLikeDto){
+    public BaseResponse like(@RequestBody @Valid FeatureLikeDto featureLikeDto){
         featureLikeService.like(featureLikeDto);
+        return BaseResponse.builder()
+                .data(null)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
     }
 }

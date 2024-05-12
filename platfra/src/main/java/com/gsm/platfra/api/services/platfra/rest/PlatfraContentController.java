@@ -1,13 +1,11 @@
 package com.gsm.platfra.api.services.platfra.rest;
 
-import com.gsm.platfra.api.services.platfra.dto.PlatfraContentMainResDto;
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.platfra.PlatfraContentDto;
 import com.gsm.platfra.api.services.platfra.service.PlatfraContentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /**
@@ -26,18 +24,22 @@ public class PlatfraContentController {
      * @return
      */
     @GetMapping
-    public List<PlatfraContentDto> getList(@RequestParam(required = true) String platfraId) {
-        return platfraContentService.getList(platfraId);
+    public BaseResponse getList(@RequestParam(required = true) String platfraId) {
+        return BaseResponse.builder()
+            .data(platfraContentService.getList(platfraId))
+            .build();
     }
     
     /**
-     * 컨텐츠 메인(상세) 조회
+     * 컨텐츠 상세 조회
      * @param contentSeq
      * @return
      */
     @GetMapping("/{contentSeq}")
-    public PlatfraContentMainResDto get(@PathVariable(required = true) Long contentSeq) {
-        return platfraContentService.get(contentSeq);
+    public BaseResponse get(@PathVariable(required = true) Long contentSeq) {
+        return BaseResponse.builder()
+            .data(platfraContentService.get(contentSeq))
+            .build();
     }
     
     /**
@@ -45,8 +47,10 @@ public class PlatfraContentController {
      * @param platfraContentDto
      */
     @PostMapping
-    public void create(@RequestBody PlatfraContentDto platfraContentDto) {
+    public BaseResponse create(@RequestBody PlatfraContentDto platfraContentDto) {
         platfraContentService.create(platfraContentDto);
+        return BaseResponse.builder()
+            .build();
     }
     
     /**
@@ -54,8 +58,10 @@ public class PlatfraContentController {
      * @param platfraContentDto
      */
     @PutMapping
-    public void update(@RequestBody PlatfraContentDto platfraContentDto) {
+    public BaseResponse update(@RequestBody PlatfraContentDto platfraContentDto) {
         platfraContentService.update(platfraContentDto);
+        return BaseResponse.builder()
+            .build();
     }
     
     /**
@@ -63,8 +69,10 @@ public class PlatfraContentController {
      * @param platfraContentDto
      */
     @DeleteMapping
-    public void delete(@RequestBody PlatfraContentDto platfraContentDto) {
+    public BaseResponse delete(@RequestBody PlatfraContentDto platfraContentDto) {
         platfraContentService.delete(platfraContentDto);
+        return BaseResponse.builder()
+            .build();
     }
 }
 

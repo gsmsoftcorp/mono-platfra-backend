@@ -9,13 +9,11 @@ public class AuthorizationTokentNotFoundException extends AuthenticationExceptio
 
 	public AuthorizationTokentNotFoundException(String msg) {
 		super(msg);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
 	public AuthorizationTokentNotFoundException(String msg, Throwable t) {
 		super(msg, t);
-		// TODO Auto-generated constructor stub
 	}
 
 

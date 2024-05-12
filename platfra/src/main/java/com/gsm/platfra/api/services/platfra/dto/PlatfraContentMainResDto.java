@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class PlatfraContentMainResDto {
-    private PlatfraContentDto platfraContenDto; // 컨텐츠
+    private PlatfraContentDto content; // 컨텐츠
 }

@@ -41,29 +41,15 @@ public class DefaultRequestContextHandler implements RequestContextHandler, Init
     
     private UID uid;
     
-    @Value("${spring.application.name:xpt}")
+    @Value("${spring.application.name:platfra}")
     private String instanceId;
     
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         if (uid == null) {
             uid = new TimeBaseUID(instanceId == null ? DEF_SYSTEM_PROP_INST_NAME : instanceId);
         }
     }
-    
-    
-    public void setUid(UID uid) {
-        this.uid = uid;
-    }
-    
-    
-    /*
-     * spring boot 의 application name을 기본 instanceId로 사용. 없을경우 XPT
-     */
-    public void setInstanceId(String instanceId) {
-        this.instanceId = instanceId;
-    }
-    
-    
+
     public void handle(RequestContext requestContext, HttpServletRequest request, HttpServletResponse response) {
         
         long requestTime = System.currentTimeMillis();
@@ -83,60 +69,52 @@ public class DefaultRequestContextHandler implements RequestContextHandler, Init
         
         String accessToken = JwtUtil.resolveToken(request);
         log.info("accessToken = " + accessToken);
-        if (StringUtils.isEmpty(accessToken)) {
-            
-            if (log.isDebugEnabled()) {
-                log.debug("accessToken is empty.");
-            }
-            userContext.setUserIp(Optional.ofNullable(NetworkUtils.getClientIP(request)).orElse(""));
-            userContext.setUserId("");
-            
-            // 인증정보 없을 때 RequestContext에 기본정보 세팅
-            ObjectMapper mapper = new ObjectMapper();
-            
-            Map<String, Object> loginRequest;
-            
-            String requestURI = request.getRequestURI();
-            log.info("reqestURI = " + requestURI);
-            
-            if (requestURI.equals("/auth/sloReady")) { // slo 최초 진입
-            } else if (requestURI.equals("/auth/slo")) {
-                // slo tenantCd, corpCd 주입
-                String tenantCd = request.getParameter("tenantCd");
-                String corpCd = request.getParameter("corpCd");
-            } else { // slo 진입시 pass
-                try {
-                    loginRequest = mapper.readValue(request.getReader(), new TypeReference<Map>() {
-                    });
-                    String username = Optional.ofNullable(loginRequest.get(FIELD_NAME_LOGIN_USER)).map(o -> o.toString()).orElseThrow(() -> new UsernameNotFoundException("Username NotFound"));
-                    String otpCertNo = Optional.ofNullable(loginRequest.get(FIELD_NAME_OTP_CERT_NO)).map(o -> o.toString()).orElse("");
-                    String twoFactorCertNo = Optional.ofNullable(loginRequest.get(FIELD_NAME_TWO_FACTOR_CERT_NO)).map(o -> o.toString()).orElse("");
-                    String password = Optional.ofNullable(loginRequest.get(FIELD_NAME_LOGIN_PASSWORD)).map(o -> o.toString()).orElse("");
-                    String deviceId = Optional.ofNullable(loginRequest.get(FIELD_NAME_LOGIN_DEVICE_ID)).map(o -> o.toString()).orElse("");
-                    String mobileTokenNo = Optional.ofNullable(loginRequest.get("mobileTokenNo")).map(o -> o.toString()).orElse("");
-                    String userAgent = Optional.ofNullable(request.getHeader(this.FIELD_NAME_USER_AGENT)).map(o -> o.toString()).orElse("");
-                    
-                    RequestContextUtil.put(FIELD_NAME_LOGIN_USER, username);
-                    
-                    if (!StringUtils.isEmpty(otpCertNo)) {
-                        RequestContextUtil.put(FIELD_NAME_OTP_CERT_NO, otpCertNo);
-                    }
-                    
-                    if (!StringUtils.isEmpty(twoFactorCertNo)) {
-                        RequestContextUtil.put(FIELD_NAME_TWO_FACTOR_CERT_NO, twoFactorCertNo);
-                    }
-                    
-                    RequestContextUtil.put(FIELD_NAME_LOGIN_PASSWORD, password);
-                    // 모바일
-                    RequestContextUtil.put(FIELD_NAME_LOGIN_DEVICE_ID, deviceId);
-                    RequestContextUtil.put(FIELD_MOBILE_TOKEN_NO, mobileTokenNo);
-                    RequestContextUtil.put(FIELD_NAME_USER_AGENT, userAgent);
-                    
-                } catch (IOException e) {
-                    log.error("request readValue failed : {}", e);
-                }
-            }
-        } else {
+//        if (StringUtils.isEmpty(accessToken)) {
+//            if (log.isDebugEnabled()) {
+//                log.debug("accessToken is empty.");
+//            }
+//            userContext.setUserIp(Optional.ofNullable(NetworkUtils.getClientIP(request)).orElse(""));
+//            userContext.setUserId("");
+//
+//            // 인증정보 없을 때 RequestContext에 기본정보 세팅
+//            ObjectMapper mapper = new ObjectMapper();
+//
+//            Map<String, Object> loginRequest;
+//
+//            String requestURI = request.getRequestURI();
+//            log.info("reqestURI = " + requestURI);
+//
+//            try {
+//                loginRequest = mapper.readValue(request.getReader(), new TypeReference<Map>() {
+//                });
+//                String username = Optional.ofNullable(loginRequest.get(FIELD_NAME_LOGIN_USER)).map(o -> o.toString()).orElseThrow(() -> new UsernameNotFoundException("Username NotFound"));
+//                String otpCertNo = Optional.ofNullable(loginRequest.get(FIELD_NAME_OTP_CERT_NO)).map(o -> o.toString()).orElse("");
+//                String twoFactorCertNo = Optional.ofNullable(loginRequest.get(FIELD_NAME_TWO_FACTOR_CERT_NO)).map(o -> o.toString()).orElse("");
+//                String password = Optional.ofNullable(loginRequest.get(FIELD_NAME_LOGIN_PASSWORD)).map(o -> o.toString()).orElse("");
+//                String deviceId = Optional.ofNullable(loginRequest.get(FIELD_NAME_LOGIN_DEVICE_ID)).map(o -> o.toString()).orElse("");
+//                String mobileTokenNo = Optional.ofNullable(loginRequest.get("mobileTokenNo")).map(o -> o.toString()).orElse("");
+//                String userAgent = Optional.ofNullable(request.getHeader(this.FIELD_NAME_USER_AGENT)).map(o -> o.toString()).orElse("");
+//
+//                RequestContextUtil.put(FIELD_NAME_LOGIN_USER, username);
+//
+//                if (!StringUtils.isEmpty(otpCertNo)) {
+//                    RequestContextUtil.put(FIELD_NAME_OTP_CERT_NO, otpCertNo);
+//                }
+//
+//                if (!StringUtils.isEmpty(twoFactorCertNo)) {
+//                    RequestContextUtil.put(FIELD_NAME_TWO_FACTOR_CERT_NO, twoFactorCertNo);
+//                }
+//
+//                RequestContextUtil.put(FIELD_NAME_LOGIN_PASSWORD, password);
+//                // 모바일
+//                RequestContextUtil.put(FIELD_NAME_LOGIN_DEVICE_ID, deviceId);
+//                RequestContextUtil.put(FIELD_MOBILE_TOKEN_NO, mobileTokenNo);
+//                RequestContextUtil.put(FIELD_NAME_USER_AGENT, userAgent);
+//
+//            } catch (IOException e) {
+//                log.error("request readValue failed : {}", e);
+//            }
+//        } else {
             //JwtAuthenticationInfo
             try {
                 JwtUtil jwtUtil = (JwtUtil) BeanUtils.getBean(JwtUtil.class);
@@ -145,13 +123,13 @@ public class DefaultRequestContextHandler implements RequestContextHandler, Init
                         Claims claims = jwtUtil.getAllClaimsFromToken(accessToken);
                         userContext.setAccessToken(accessToken);
                         userContext.setUserId((String) claims.get("userId"));
-                        userContext.setSub((String) claims.getSubject());
+                        userContext.setSub(claims.getSubject());
                         userContext.setIat(claims.getIssuedAt());
                         userContext.setExp(claims.getExpiration());
                         userContext.setUserIp(Optional.ofNullable(NetworkUtils.getClientIP(request)).orElse(""));
                         
                         if (log.isDebugEnabled()) {
-                            log.debug("userContext : {}", userContext.toString());
+                            log.debug("userContext : {}", userContext);
                             log.debug("from claims");
                         }
                         claims.forEach((key, value) -> {
@@ -168,7 +146,7 @@ public class DefaultRequestContextHandler implements RequestContextHandler, Init
                 }
             }
             
-        }
+//        }
         UserContextUtil.setUserContext(userContext);
         
     }

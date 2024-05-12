@@ -1,6 +1,7 @@
 package com.gsm.platfra.api.services.account.rest;
 
 import com.gsm.platfra.api.data.account.otp.AccountOTPDto;
+import com.gsm.platfra.api.data.base.BaseResponse;
 import com.gsm.platfra.api.data.platfra.PlatfraDto;
 import com.gsm.platfra.api.data.account.AccountDto;
 import com.gsm.platfra.api.data.platfra.saved.ContentSaveDto;
@@ -20,6 +21,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,69 +38,147 @@ public class AccountController {
     private final ContentSaveService contentSaveService;
     private final GoogleLogin googleLogin;
 
+//    @PostMapping("/login")
+//    public String login(@RequestBody @Valid LoginDto loginDto) {
+//        String token = accountService.login(loginDto);
+//        return token;
+//    }
     @PostMapping("/login")
-    public String login(@RequestBody @Valid LoginDto loginDto) {
-        String token = accountService.login(loginDto);
-        return token;
-    }
+    public BaseResponse login(@RequestBody @Valid LoginDto loginDto) {
+        try {
+            String token = accountService.login(loginDto);
+            return BaseResponse.builder()
+                .data(token)
+                .code(null)
+                .message(null)
+                .error(null)
+                .build();
 
+        } catch (AuthenticationException e) {
+            return BaseResponse.builder()
+                .data(null)
+                .code("업무처리결과코드(공통코드 또는 공통프로퍼티)")
+                .message(null)
+                .error(e)
+                .build();
+
+        } catch (Exception e) {
+            return BaseResponse.builder()
+                .data(null)
+                .code("업무처리결과코드(공통코드 또는 공통프로퍼티)")
+                .message(null)
+                .error(e)
+                .build();
+        }
+    }
     @PostMapping("/signup")
-    public String signup(@RequestBody @Valid SignupDto signupDto) {
+    public BaseResponse signup(@RequestBody @Valid SignupDto signupDto) {
         accountService.signup(signupDto);
-        return SUCCESS.toString();
+        return BaseResponse.builder()
+            .data(SUCCESS.toString())
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/google")
-    public String googleLogin(String accessToken) {
+    public BaseResponse googleLogin(String accessToken) {
         GoogleLoginDto googleLoginDto = googleLogin.googleLogin(accessToken);
         String token = accountService.googleLogin(googleLoginDto);
-        return token;
+        return BaseResponse.builder()
+            .data(token)
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/kakao")
-    public String oauthLogin(String code){
+    public BaseResponse oauthLogin(String code){
         KakaoParams kakaoParams = new KakaoParams(code);
         String token = accountService.oauthLogin(kakaoParams);
-        return token;
+        return BaseResponse.builder()
+            .data(token)
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/user/{userId}/content")
-    public List<ContentSaveDto> getContentList(@PathVariable String userId) {
-        return contentSaveService.getMyContentList(userId);
+    public BaseResponse getContentList(@PathVariable String userId) {
+        return BaseResponse.builder()
+            .data(contentSaveService.getMyContentList(userId))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
 
     @DeleteMapping("/user/{userId}/{contentSeq}")
-    public String deleteContent(
+    public BaseResponse deleteContent(
             @PathVariable String userId,
             @PathVariable Long contentSeq) {
         contentSaveService.deleteContent(userId, contentSeq);
-        return SUCCESS.toString();
+        return BaseResponse.builder()
+            .data(SUCCESS.toString())
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/user/{userId}/platfra")
-    public List<PlatfraDto> getMyPlatfra(@PathVariable String userId) {
-        return accountService.getMyPlatfra();
+    public BaseResponse getMyPlatfra(@PathVariable String userId) {
+        return BaseResponse.builder()
+            .data(accountService.getMyPlatfra())
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/user/{userId}/subscribe")
-    public SubscribedPlatfraDto getMySubscribe(@PathVariable String userId) {
-        return accountService.getSubscribedPlatfra();
+    public BaseResponse getMySubscribe(@PathVariable String userId) {
+        return BaseResponse.builder()
+            .data(accountService.getSubscribedPlatfra())
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/user/{userId}contents")
-    public ContentDto getContents(@PathVariable String userId, Pageable contentsPageable, Pageable boardContentsPageable) {
-        return accountService.getContents(contentsPageable, boardContentsPageable);
+    public BaseResponse getContents(@PathVariable String userId, Pageable contentsPageable, Pageable boardContentsPageable) {
+        return BaseResponse.builder()
+            .data(accountService.getContents(contentsPageable, boardContentsPageable))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
     @PostMapping("/addinfo")
-    public void addInfo(@RequestBody AccountDto accountDto) {
+    public BaseResponse addInfo(@RequestBody AccountDto accountDto) {
         accountService.addInfo(accountDto);
+        return BaseResponse.builder()
+            .data(null)
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     @GetMapping("/account/{userId}")
-    public AccountDto getAccount(@PathVariable String userId){
+    public BaseResponse getAccount(@PathVariable String userId){
         //TODO : 토큰 정보에 맞는 유저가 접근하는 지 확인 로직 필요
-        return accountService.getAccount(userId);
+        return BaseResponse.builder()
+            .data(accountService.getAccount(userId))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     /**
@@ -107,8 +187,14 @@ public class AccountController {
     * @return void
     * */
     @PostMapping("/password")
-    public void sendResetPasswordCode(@RequestBody AccountOTPDto accountOTPDto) throws MailSendException {
+    public BaseResponse sendResetPasswordCode(@RequestBody AccountOTPDto accountOTPDto) throws MailSendException {
         accountService.sendCode(accountOTPDto);
+        return BaseResponse.builder()
+            .data(null)
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     /**
@@ -117,8 +203,13 @@ public class AccountController {
     * @return boolean
     * */
     @PutMapping("/password")
-    public Boolean checkResetPasswordOTPCode(@RequestBody CheckOTPDto checkOTPDto){
-         return accountService.checkPasswordOTP(checkOTPDto);
+    public BaseResponse checkResetPasswordOTPCode(@RequestBody CheckOTPDto checkOTPDto){
+        return BaseResponse.builder()
+            .data(accountService.checkPasswordOTP(checkOTPDto))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
     /**
@@ -127,8 +218,13 @@ public class AccountController {
     * @return boolean
     * */
     @PatchMapping("/password")
-    public Boolean resetPassword(@RequestBody ResetPasswordDto resetPasswordDto){
-        return accountService.resetPw(resetPasswordDto);
+    public BaseResponse resetPassword(@RequestBody ResetPasswordDto resetPasswordDto){
+        return BaseResponse.builder()
+            .data(accountService.resetPw(resetPasswordDto))
+            .code(null)
+            .message(null)
+            .error(null)
+            .build();
     }
 
 

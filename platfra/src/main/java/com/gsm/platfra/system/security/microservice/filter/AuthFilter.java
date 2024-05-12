@@ -18,14 +18,12 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthFilter extends OncePerRequestFilter {
-
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private final AuthProvider authProvider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.debug(":::::::::::::::: AuthFilter ::::::::::::::::");
-
         String token = this.resolveToken(request);
 
         if (StringUtils.hasText(token)) {
@@ -33,9 +31,6 @@ public class AuthFilter extends OncePerRequestFilter {
             Authentication authentication = authProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.debug("Security Context에 '{}' 정보 저장", authentication.getName());
-        } else {
-            log.debug("유효한 JWT 토큰이 없습니다, {}", token);
-            throw new AuthTokenException("JWT 토큰이 없습니다");
         }
 
         filterChain.doFilter(request, response);
