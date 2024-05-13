@@ -75,7 +75,7 @@ public class PlatfraBoardContentController {
      * @param platfraBoardContentDto
      * @return PlatfraBoardContentResDto
      */
-    @PatchMapping
+    @PutMapping
     public BaseResponse update(@RequestBody PlatfraBoardContentDto platfraBoardContentDto) {
         log.info("Update Board Content start.");
         log.info("Request : {}", platfraBoardContentDto);
