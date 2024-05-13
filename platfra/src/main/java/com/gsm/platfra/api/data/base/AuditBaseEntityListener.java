@@ -1,6 +1,7 @@
 package com.gsm.platfra.api.data.base;
 
 import com.gsm.platfra.api.data.account.TAccount;
+import com.gsm.platfra.api.data.common.error.TCommonError;
 import com.gsm.platfra.system.security.context.UserContextUtil;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -20,10 +21,12 @@ public class AuditBaseEntityListener {
             Assert.notNull(object, "Entity must not be null.");
             AuditBaseEntity auditBaseEntity = (AuditBaseEntity) object;
             if (UserContextUtil.getUserContext() != null) {
-                String regUserId = (StringUtils.hasText(auditBaseEntity.getRegUserId()) && object instanceof TAccount)
+                String regUserId = StringUtils.hasText(auditBaseEntity.getRegUserId())
+                    && (object instanceof TAccount || object instanceof TCommonError) // 직접 audit user id를 setter 로 설정하는 경우
                     ? auditBaseEntity.getRegUserId()
                     : UserContextUtil.getUserContext().getUserId();
-                String modUserId = (StringUtils.hasText(auditBaseEntity.getModUserId()) && object instanceof TAccount)
+                String modUserId = StringUtils.hasText(auditBaseEntity.getModUserId())
+                    && (object instanceof TAccount || object instanceof TCommonError) // 직접 audit user id를 setter 로 설정하는 경우
                     ? auditBaseEntity.getModUserId()
                     : UserContextUtil.getUserContext().getUserId();
                 auditBaseEntity.setRegUserId(regUserId);
