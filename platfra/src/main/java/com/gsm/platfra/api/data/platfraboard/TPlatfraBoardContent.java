@@ -46,8 +46,8 @@ public class TPlatfraBoardContent extends BaseEntity {
     private Long view;
     
     public void update(PlatfraBoardContentDto platfraBoardContentDto){
-        this.content = platfraBoardContentDto.getContent();
         this.title = platfraBoardContentDto.getTitle();
+        this.content = platfraBoardContentDto.getContent();
     }
     
 }

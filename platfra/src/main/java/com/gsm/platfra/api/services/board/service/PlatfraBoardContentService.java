@@ -44,8 +44,8 @@ public class PlatfraBoardContentService {
             .tPlatfraBoard(tPlatfraBoard)
             .contentSeq(boardContentDto.getContentSeq())
             .contentNo(boardContentDto.getContentNo())
-            .content(boardContentDto.getContent())
             .title(boardContentDto.getTitle())
+            .content(boardContentDto.getContent())
             .build();
 
         PlatfraBoardContentDto platfraBoardContentDto = platfraBoardContentMapper.entityToDto(tPlatfraBoardContentRepository.save(tPlatfraBoardContent));
@@ -59,7 +59,7 @@ public class PlatfraBoardContentService {
             .orElseThrow(() -> new IllegalArgumentException("해당 플랫폼이 존재하지 않습니다."));
 
         tPlatfraBoardContent.update(boardContentDto);
-        tPlatfraBoardContentRepository.flush();
+        tPlatfraBoardContentRepository.save(tPlatfraBoardContent);
 
         PlatfraBoardContentDto platfraBoardContentDto = platfraBoardContentMapper.entityToDto(tPlatfraBoardContent);
         return PlatfraBoardContentResDto.builder().platfraBoardContentDto(platfraBoardContentDto).build();

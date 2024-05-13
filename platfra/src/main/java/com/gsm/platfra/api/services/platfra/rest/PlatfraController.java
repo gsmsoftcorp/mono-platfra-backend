@@ -70,7 +70,7 @@ public class PlatfraController {
     }
 
     /**
-     * 플랫폼 상세(메인) 조회
+     * 플랫폼 상세(메인) 조회 (플랫폼 간접 조회 추후 구현)
      * @param platfraSeq
      * @return
      */
